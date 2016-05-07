@@ -23,7 +23,7 @@ make mocables all
 
 ### Step 2: Link
 
-I'll start by showing an example of what I have to include in my .pro file on my machine to get the link working.
+I'll start by showing an example of what I have to include in the .pro file on my machine to get the link working.
 ```
 CONFIG += C++11
 INCLUDEPATH += "/home/user/git/QDiscord/QDiscord"
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     return a.exec();
 }
 ```
-#### application.h
+#### application.hpp
 ```cpp
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
