@@ -1,0 +1,6 @@
+<map id="QObject" name="QObject">
+<area shape="rect" id="node2" href="$classQDiscord.html" title="This class represents a single connection to the Discord API. " alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node3" href="$classQDiscordRestComponent.html" title="The REST component of QDiscord. " alt="" coords="116,80,307,107"/>
+<area shape="rect" id="node4" href="$classQDiscordStateComponent.html" title="The state component of QDiscord. " alt="" coords="331,80,529,107"/>
+<area shape="rect" id="node5" href="$classQDiscordWsComponent.html" title="The WebSocket component of QDiscord. " alt="" coords="553,80,728,107"/>
+</map>
