@@ -9,6 +9,5 @@ var searchData=
   ['qdiscordstatecomponent',['QDiscordStateComponent',['../classQDiscordStateComponent.html',1,'QDiscordStateComponent'],['../classQDiscordStateComponent.html#a5d304f724b2b0468f391dcb61a66aff1',1,'QDiscordStateComponent::QDiscordStateComponent()']]],
   ['qdiscorduser',['QDiscordUser',['../classQDiscordUser.html',1,'QDiscordUser'],['../classQDiscordUser.html#ac49f7902450cb367524e994cee3408d5',1,'QDiscordUser::QDiscordUser()']]],
   ['qdiscordutilities',['QDiscordUtilities',['../structQDiscordUtilities.html',1,'']]],
-  ['qdiscordwscomponent',['QDiscordWsComponent',['../classQDiscordWsComponent.html',1,'QDiscordWsComponent'],['../classQDiscordWsComponent.html#a2d5d519936c53f4bb5dda9e1ea905d35',1,'QDiscordWsComponent::QDiscordWsComponent()']]],
-  ['qobject',['QObject',['../classQObject.html',1,'']]]
+  ['qdiscordwscomponent',['QDiscordWsComponent',['../classQDiscordWsComponent.html',1,'QDiscordWsComponent'],['../classQDiscordWsComponent.html#a2d5d519936c53f4bb5dda9e1ea905d35',1,'QDiscordWsComponent::QDiscordWsComponent()']]]
 ];

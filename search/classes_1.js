@@ -9,6 +9,5 @@ var searchData=
   ['qdiscordstatecomponent',['QDiscordStateComponent',['../classQDiscordStateComponent.html',1,'']]],
   ['qdiscorduser',['QDiscordUser',['../classQDiscordUser.html',1,'']]],
   ['qdiscordutilities',['QDiscordUtilities',['../structQDiscordUtilities.html',1,'']]],
-  ['qdiscordwscomponent',['QDiscordWsComponent',['../classQDiscordWsComponent.html',1,'']]],
-  ['qobject',['QObject',['../classQObject.html',1,'']]]
+  ['qdiscordwscomponent',['QDiscordWsComponent',['../classQDiscordWsComponent.html',1,'']]]
 ];

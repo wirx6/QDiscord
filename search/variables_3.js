@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['endpoints',['endPoints',['../structQDiscordUtilities.html#a0006365e253afb2ef822ab485fef68ad',1,'QDiscordUtilities']]]
+  ['gateway',['gateway',['../structQDiscordUtilities.html#a929531b132f7dc6f8ba028ec22bdb74d',1,'QDiscordUtilities::EndPoints']]]
 ];

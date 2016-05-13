@@ -6,5 +6,7 @@ var searchData=
   ['guildavailable',['guildAvailable',['../classQDiscordStateComponent.html#afef04f90ab8b4f8f95971398ce0a61ce',1,'QDiscordStateComponent']]],
   ['guildcreated',['guildCreated',['../classQDiscordStateComponent.html#a5ba0381a2ad1dedea14b8a3e87a794fd',1,'QDiscordStateComponent']]],
   ['guilddeleted',['guildDeleted',['../classQDiscordStateComponent.html#af91c34089faea753c47606078e4a8812',1,'QDiscordStateComponent']]],
+  ['guildmemberadded',['guildMemberAdded',['../classQDiscordStateComponent.html#afdcdb78bd09b69d169d0ba8e8c812e9c',1,'QDiscordStateComponent']]],
+  ['guildmemberremoved',['guildMemberRemoved',['../classQDiscordStateComponent.html#aa8df0eaa027e4fd58daefe8154e51a02',1,'QDiscordStateComponent']]],
   ['guilds',['guilds',['../classQDiscordStateComponent.html#a7cd293b5bd4d57450e405c2d351f8110',1,'QDiscordStateComponent']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['register_5f',['register_',['../structQDiscordUtilities.html#a67cb2811daf1fbf33fb00ec11043e4a2',1,'QDiscordUtilities::EndPoints']]]
+  ['servers',['servers',['../structQDiscordUtilities.html#a475ce75fe6a7dd4bc50c6da1e29636aa',1,'QDiscordUtilities::EndPoints']]]
 ];
