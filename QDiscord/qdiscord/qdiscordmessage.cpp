@@ -12,6 +12,7 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object, QDiscordChannel* cha
     _tts = object["tts"].toBool(false);
     _timestamp = QDateTime::fromString(object["timestamp"].toString(""), Qt::ISODate);
     _editedTimestamp = QDateTime::fromString(object["edited_timestamp"].toString(""), Qt::ISODate);
+    qDebug()<<"QDiscordMessage("<<this<<") constructed";
 }
 
 QDiscordMessage::QDiscordMessage(QDiscordMessage& other)

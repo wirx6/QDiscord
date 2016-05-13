@@ -44,9 +44,7 @@ public:
         QString servers;  ///<\brief The servers endpoint.
         QString channels; ///<\brief The channels endpoint.
     };
-    /*!
-     * \brief A constant static instantiation of the QDiscordUtilities::EndPoints struct.
-     */
+    ///
     const static EndPoints endPoints;
     /*!
      * \brief Converts network errors to a human-readable string based on Discord documentation.

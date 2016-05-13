@@ -20,8 +20,8 @@
 #define QDISCORDRESTCOMPONENT_HPP
 
 #include <QObject>
-#include <QJsonObject>
 #include <QJsonArray>
+#include <QJsonObject>
 #include <QJsonDocument>
 #include <QNetworkAccessManager>
 #include "qdiscordmessage.hpp"

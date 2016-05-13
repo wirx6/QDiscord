@@ -42,15 +42,11 @@ QDiscordChannel* QDiscordStateComponent::channel(const QString& id)
 void QDiscordStateComponent::clear()
 {
     if(_self)
-    {
         delete _self;
-        _self = nullptr;
-    }
-    for(int i = 0; i < _guilds.values().length(); i++)
-        delete _guilds.values()[i];
+    _self = nullptr;
+    qDeleteAll(_guilds.values());
     _guilds.clear();
-    for(int i = 0; i < _privateChannels.values().length(); i++)
-        delete _privateChannels.values()[i];
+    qDeleteAll(_privateChannels.values());
     _privateChannels.clear();
 }
 
@@ -112,12 +108,33 @@ void QDiscordStateComponent::guildIntegrationsUpdateRecevied(const QJsonObject& 
 
 void QDiscordStateComponent::guildMemberAddReceived(const QJsonObject& object)
 {
+    QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
+    QDiscordMember* member = new QDiscordMember(object, guildPtr);
+    if(guildPtr)
+        guildPtr->addMember(member);
+    emit guildMemberAdded(member);
 
 }
 
 void QDiscordStateComponent::guildMemberRemoveReceived(const QJsonObject& object)
 {
-
+    QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
+    QDiscordMember* member;
+    if(guildPtr)
+    {
+        QDiscordMember* tmpMember = guildPtr->member(object["user"].toObject()["id"].toString(""));
+        if(tmpMember)
+        {
+            member = new QDiscordMember(*tmpMember);
+            guildPtr->removeMember(tmpMember);
+        }
+        else
+            member = new QDiscordMember(object, nullptr);
+    }
+    else
+        member = new QDiscordMember(object, nullptr);
+    emit guildMemberRemoved(QDiscordMember(*member));
+    delete member;
 }
 
 void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object)

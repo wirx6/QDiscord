@@ -25,7 +25,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTimer>
-//#include <QFile>
+#include <QFile>
 #include "qdiscordutilities.hpp"
 
 /*!

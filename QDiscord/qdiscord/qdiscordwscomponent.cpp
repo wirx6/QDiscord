@@ -130,13 +130,11 @@ void QDiscordWsComponent::textMessageReceived(const QString& message)
 {
     QJsonDocument document = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject object = document.object();
-
-    //QFile file("DUMPFILE.txt");
-    //file.open(QFile::WriteOnly|QFile::Append);
-    //file.write(document.toJson(QJsonDocument::Indented));
-    //file.flush();
-    //file.close();
-
+    QFile file("DUMPFILE.txt");
+    file.open(QFile::WriteOnly|QFile::Append);
+    file.write(document.toJson(QJsonDocument::Indented));
+    file.flush();
+    file.close();
     qDebug()<<this<<"op:"<<object["op"].toInt()<<" t:"<<object["t"].toString();
     if(object["op"].toInt() == 0 && object["t"].toString() == "READY")
     {

@@ -23,8 +23,8 @@
 #include <QDebug>
 #include <QJsonObject>
 #include <QJsonArray>
-#include "qdiscordchannel.hpp"
 #include "qdiscordmember.hpp"
+#include "qdiscordchannel.hpp"
 
 /*!
  * \brief Represents a guild in the Discord API.
@@ -96,6 +96,18 @@ public:
      * If the guild contains the provided channel, the pointed channel will be destroyed.
      */
     void removeChannel(QDiscordChannel* channel);
+    /*!
+     * \brief Adds the provided member to the guild.
+     *
+     * The guild will handle destroying the pointed member when the guild gets destroyed.
+     */
+    void addMember(QDiscordMember* member);
+    /*!
+     * \brief Removes the provided member from the guild.
+     *
+     * If the guild contains the provided member, the pointed member will be destroyed.
+     */
+    void removeMember(QDiscordMember* member);
 private:
     QString _id;
     QString _name;

@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "qdiscordchannel.hpp"
 #include "qdiscordguild.hpp"
 
 QDiscordGuild::QDiscordGuild(const QJsonObject& object)
@@ -86,20 +87,35 @@ void QDiscordGuild::addChannel(QDiscordChannel* channel)
     if(!channel)
         return;
     if(_channels.keys().contains(channel->id()))
-    {
         delete _channels.value(channel->id());
-        _channels.insert(channel->id(), channel);
-    }
-    else
-        _channels.insert(channel->id(), channel);
+     _channels.insert(channel->id(), channel);
 }
 
 void QDiscordGuild::removeChannel(QDiscordChannel* channel)
 {
     if(!channel)
         return;
-    if(!_channels.contains(channel->id()))
+    if(!_channels.keys().contains(channel->id()))
         return;
     _channels.remove(channel->id());
     delete channel;
+}
+
+void QDiscordGuild::addMember(QDiscordMember* member)
+{
+    if(!member)
+        return;
+    if(_members.keys().contains(member->user()->id()))
+        delete _members.value(member->user()->id());
+    _members.insert(member->user()->id(), member);
+}
+
+void QDiscordGuild::removeMember(QDiscordMember* member)
+{
+    if(!member)
+        return;
+    if(!_members.keys().contains(member->user()->id()))
+        return;
+    _members.remove(member->user()->id());
+    delete member;
 }

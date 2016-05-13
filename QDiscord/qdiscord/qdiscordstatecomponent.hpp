@@ -20,9 +20,6 @@
 #define QDISCORDSTATECOMPONENT_HPP
 
 #include <QObject>
-#include <QDebug>
-#include <QJsonObject>
-#include <QJsonArray>
 #include <QMap>
 #include "qdiscordguild.hpp"
 #include "qdiscorduser.hpp"
@@ -87,6 +84,16 @@ signals:
      * \param guild An object containing information about the guild that was deleted.
      */
     void guildDeleted(const QDiscordGuild& guild);
+    /*!
+     * \brief Emitted when a member has been added to a guild.
+     * \param member A pointer to the guild member that has been added.
+     */
+    void guildMemberAdded(QDiscordMember* member);
+    /*!
+     * \brief Emitted when a member has been removed from a guild.
+     * \param member An object containing information ab out the member that was deleted.
+     */
+    void guildMemberRemoved(const QDiscordMember& member);
     /*!
      * \brief Emitted when information about the current client has been collected.
      *

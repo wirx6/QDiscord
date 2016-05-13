@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "qdiscordchannel.hpp"
 #include "qdiscordguild.hpp"
+#include "qdiscordchannel.hpp"
 
 QDiscordChannel::QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild)
 {

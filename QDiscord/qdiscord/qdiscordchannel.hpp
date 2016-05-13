@@ -19,7 +19,6 @@
 #ifndef QDISCORDCHANNEL_HPP
 #define QDISCORDCHANNEL_HPP
 
-#include <QDebug>
 #include <QJsonObject>
 #include "qdiscorduser.hpp"
 

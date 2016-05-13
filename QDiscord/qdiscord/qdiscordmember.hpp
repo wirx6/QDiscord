@@ -19,6 +19,7 @@
 #ifndef QDISCORDMEMBER_HPP
 #define QDISCORDMEMBER_HPP
 
+#include <QDebug>
 #include <QDateTime>
 #include "qdiscorduser.hpp"
 
