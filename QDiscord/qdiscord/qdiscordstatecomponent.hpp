@@ -36,18 +36,12 @@ class QDiscordStateComponent : public QObject
     Q_OBJECT
     friend class QDiscord;
 public:
-    /*!
-     * \brief Standard QObject constructor.
-     */
+    ///\brief Standard QObject constructor.
     explicit QDiscordStateComponent(QObject* parent = 0);
     ~QDiscordStateComponent();
-    /*!
-     * \brief Returns a pointer to the guild that has the provided ID.
-     */
+    ///\brief Returns a pointer to the guild that has the provided ID.
     QDiscordGuild* guild(const QString& id) {return _guilds.value(id, nullptr);}
-    /*!
-     * \brief Returns a map of pointers to all guilds and their IDs.
-     */
+    ///\brief Returns a map of pointers to all guilds and their IDs.
     QMap<QString, QDiscordGuild*> guilds() {return _guilds;}
     /*!
      * \brief Returns a pointer to the channel that has the provided ID.
@@ -55,13 +49,9 @@ public:
      * This may return a private channel, a guild channel or a nullptr if nothing was found.
      */
     QDiscordChannel* channel(const QString& id);
-    /*!
-     * \brief Returns a map of pointers to all private channels and their IDs.
-     */
+    ///\brief Returns a map of pointers to all private channels and their IDs.
     QMap<QString, QDiscordChannel*> privateChannels() {return _privateChannels;}
-    /*!
-     * \brief Returns a pointer to this client's information.
-     */
+    ///\brief Returns a pointer to this client's information.
     QDiscordUser* self() {return _self;}
 signals:
     /*!

@@ -24,9 +24,7 @@
 
 class QDiscordGuild;
 
-/*!
- * \brief Represents either a private or guild channel in the Discord API.
- */
+///\brief Represents either a private or guild channel in the Discord API.
 class QDiscordChannel
 {
 public:
@@ -36,9 +34,7 @@ public:
      * \param guild A pointer to the parent guild of the channel, if any.
      */
     QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild = nullptr);
-    /*!
-     * \brief Deep copies the provided object.
-     */
+    ///\brief Deep copies the provided object.
     QDiscordChannel(QDiscordChannel& other);
     ~QDiscordChannel();
     /*!
@@ -50,21 +46,13 @@ public:
     {
         Voice, Text, UnknownType
     };
-    /*!
-     * \brief Returns the channel's ID.
-     */
+    ///\brief Returns the channel's ID.
     QString id() {return _id;}
-    /*!
-     * \brief Returns the channel's name.
-     */
+    ///\brief Returns the channel's name.
     QString name() {return _name;}
-    /*!
-     * \brief Returns the channel's position in the channel list.
-     */
+    ///\brief Returns the channel's position in the channel list.
     int position() {return _position;}
-    /*!
-     * \brief Returns the channel's topic.
-     */
+    ///\brief Returns the channel's topic.
     QString topic() {return _topic;}
     /*!
      * \brief Returns the channel's type.
@@ -78,13 +66,9 @@ public:
      * Some parameters may not be set depending on this value.
      */
     bool isPrivate() {return _isPrivate;}
-    /*!
-     * \brief Returns the ID of the last sent message.
-     */
+    ///\brief Returns the ID of the last sent message.
     QString lastMessageId() {return _lastMessageId;}
-    /*!
-     * \brief Returns a pointer to this channel's parent guild.
-     */
+    ///\brief Returns a pointer to this channel's parent guild.
     QDiscordGuild* guild() {return _guild;}
     /*!
      * \brief Returns a pointer to this channel's recipient, if this is a private channel.

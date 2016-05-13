@@ -26,9 +26,7 @@
 #include "qdiscordmember.hpp"
 #include "qdiscordchannel.hpp"
 
-/*!
- * \brief Represents a guild in the Discord API.
- */
+///\brief Represents a guild in the Discord API.
 class QDiscordGuild
 {
 public:
@@ -37,18 +35,12 @@ public:
      * \param object A JSON object of a Discord guild.
      */
     QDiscordGuild(const QJsonObject& object);
-    /*!
-     * \brief Deep copies the provided object.
-     */
+    ///\brief Deep copies the provided object.
     QDiscordGuild(QDiscordGuild& other);
     ~QDiscordGuild();
-    /*!
-     * \brief Returns the guild's ID.
-     */
+    ///\brief Returns the guild's ID.
     QString id() {return _id;}
-    /*!
-     * \brief Returns the guild's name.
-     */
+    ///\brief Returns the guild's name.
     QString name() {return _name;}
     /*!
      * \brief Returns whether the guild is unavailable.
@@ -56,33 +48,19 @@ public:
      * If this is true, most members will not be set to anything.
      */
     bool unavailable() {return _unavailable;}
-    /*!
-     * \brief Returns the guild's verification level.
-     */
+    ///\brief Returns the guild's verification level.
     int verificationLevel() {return _verificationLevel;}
-    /*!
-     * \brief Returns the guild's AFK time needed to move a user to the AFK channel.
-     */
+    ///\brief Returns the guild's AFK time needed to move a user to the AFK channel.
     int afkTimeout() {return _afkTimeout;}
-    /*!
-     * \brief Returns the guild's member count.
-     */
+    ///\brief Returns the guild's member count.
     int memberCount() {return _memberCount;}
-    /*!
-     * \brief Returns the date the current user joined this guild.
-     */
+    ///\brief Returns the date the current user joined this guild.
     QDateTime joinedAt() {return _joinedAt;}
-    /*!
-     * \brief Returns a map of pointers to the guild's channels and their IDs.
-     */
+    ///\brief Returns a map of pointers to the guild's channels and their IDs.
     QMap<QString, QDiscordChannel*> channels() {return _channels;}
-    /*!
-     * \brief Returns a pointer to a guild channel that has the provided ID.
-     */
+    ///\brief Returns a pointer to a guild channel that has the provided ID.
     QDiscordChannel* channel(const QString& id) {return _channels.value(id, nullptr);}
-    /*!
-     * \brief Returns a pointer to a guild member that has the provided ID.
-     */
+    ///\brief Returns a pointer to a guild member that has the provided ID.
     QDiscordMember* member(const QString& id) {return _members.value(id, nullptr);}
     /*!
      * \brief Adds the provided channel to the guild.

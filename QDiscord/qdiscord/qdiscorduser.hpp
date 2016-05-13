@@ -22,9 +22,7 @@
 #include <QDebug>
 #include <QJsonObject>
 
-/*!
- * \brief Represents a user in the Discord API.
- */
+///\brief Represents a user in the Discord API.
 class QDiscordUser
 {
 public:
@@ -33,33 +31,19 @@ public:
      * \param object A JSON object of a Discord user.
      */
     QDiscordUser(const QJsonObject& object);
-    /*!
-     * \brief Returns the user's ID.
-     */
+    ///\brief Returns the user's ID.
     QString id() {return _id;}
-    /*!
-     * \brief Returns the user's avatar string.
-     */
+    ///\brief Returns the user's avatar string.
     QString avatar() {return _avatar;}
-    /*!
-     * \brief Returns whether the user is a bot.
-     */
+    ///\brief Returns whether the user is a bot.
     bool bot() {return _bot;}
-    /*!
-     * \brief Returns the user's discriminator.
-     */
+    ///\brief Returns the user's discriminator.
     QString discriminator() {return _discriminator;}
-    /*!
-     * \brief Returns the user's e-mail, if it can be determined.
-     */
+    ///\brief Returns the user's e-mail, if it can be determined.
     QString email() {return _email;}
-    /*!
-     * \brief Returns the user's username.
-     */
+    ///\brief Returns the user's username.
     QString username() {return _username;}
-    /*!
-     * \brief Returns whether the user has verified their e-mail.
-     */
+    ///\brief Returns whether the user has verified their e-mail.
     bool verified() {return _verified;}
 private:
     QString _id;

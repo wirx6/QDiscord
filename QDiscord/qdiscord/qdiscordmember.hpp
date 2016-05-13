@@ -40,30 +40,18 @@ public:
      * \param guild A pointer to the member's parent guild.
      */
     QDiscordMember(const QJsonObject& object, QDiscordGuild* guild);
-    /*!
-     * \brief Deep copies the provided object.
-     */
+    ///\brief Deep copies the provided object.
     QDiscordMember(QDiscordMember& other);
     ~QDiscordMember();
-    /*!
-     * \brief Returns whether the member has disabled their speakers.
-     */
+    ///\brief Returns whether the member has disabled their speakers.
     bool deaf() {return _deaf;}
-    /*!
-     * \brief Returns whether the member has muted their microphone.
-     */
+    ///\brief Returns whether the member has muted their microphone.
     bool mute() {return _mute;}
-    /*!
-     * \brief Returns the date at which the member has joined the guild.
-     */
+    ///\brief Returns the date at which the member has joined the guild.
     QDateTime joinedAt() {return _joinedAt;}
-    /*!
-     * \brief Returns a pointer to the user object contained by this object.
-     */
+    ///\brief Returns a pointer to the user object contained by this object.
     QDiscordUser* user() {return _user;}
-    /*!
-     * \brief Returns a pointer to this object's parent guild.
-     */
+    ///\brief Returns a pointer to this object's parent guild.
     QDiscordGuild* guild() {return _guild;}
 private:
     bool _deaf;

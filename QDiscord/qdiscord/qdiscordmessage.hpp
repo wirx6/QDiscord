@@ -17,46 +17,26 @@ public:
      * \param channel A pointer to the channel the message was sent to.
      */
     QDiscordMessage(const QJsonObject& object, QDiscordChannel* channel = nullptr);
-    /*!
-     * \brief Deep copies the provided object.
-     */
+    ///\brief Deep copies the provided object.
     QDiscordMessage(QDiscordMessage& other);
     ~QDiscordMessage();
-    /*!
-     * \brief Returns the message's ID.
-     */
+    ///\brief Returns the message's ID.
     QString id() {return _id;}
-    /*!
-     * \brief Returns the message's contents.
-     */
+    ///\brief Returns the message's contents.
     QString content() {return _content;}
-    /*!
-     * \brief Returns the date at which the message was edited. May be invalid if the message was not edited.
-     */
+    ///\brief Returns the date at which the message was edited. May be invalid if the message was not edited.
     QDateTime editedTimestamp() {return _editedTimestamp;}
-    /*!
-     * \brief Returns the date at which the message was created.
-     */
+    ///\brief Returns the date at which the message was created.
     QDateTime timestamp() {return _timestamp;}
-    /*!
-     * \brief Returns whether the message will use text to speech.
-     */
+    ///\brief Returns whether the message will use text to speech.
     bool tts() {return _tts;}
-    /*!
-     * \brief Returns whether the message successfully mentioned everyone.
-     */
+    ///\brief Returns whether the message successfully mentioned everyone.
     bool mentionEveryone() {return _mentionEveryone;}
-    /*!
-     * \brief Returns the ID of the channel this message was sent in.
-     */
+    ///\brief Returns the ID of the channel this message was sent in.
     QString channelId() {return _channelId;}
-    /*!
-     * \brief Returns a pointer to the channel this message was sent in.
-     */
+    ///\brief Returns a pointer to the channel this message was sent in.
     QDiscordChannel* channel() {return _channel;}
-    /*!
-     * \brief Returns a pointer to the user that sent this message.
-     */
+    ///\brief Returns a pointer to the user that sent this message.
     QDiscordUser* author() {return _author;}
     /*!
      * \brief Returns a pointer to the guild this message was sent in using

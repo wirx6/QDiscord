@@ -41,9 +41,7 @@ class QDiscordRestComponent : public QObject
     friend class QDiscord;
     Q_OBJECT
 public:
-    /*!
-     * \brief Standard QObject constructor.
-     */
+    ///\brief Standard QObject constructor.
     explicit QDiscordRestComponent(QObject* parent = 0);
     ~QDiscordRestComponent();
     /*!
@@ -66,13 +64,9 @@ public:
      * \param tts Whether to use text to speech when sending the message.
      */
     void sendMessage(const QString& content, QDiscordChannel* channel, bool tts = false);
-    /*!
-     * \brief Logs out using the stored token.
-     */
+    ///\brief Logs out using the stored token.
     void logout();
-    /*!
-     * \brief Sends a request to receive an endpoint for connecting using a WebSocket.
-     */
+    ///\brief Sends a request to receive an endpoint for connecting using a WebSocket.
     void getEndpoint();
 signals:
     /*!
@@ -86,13 +80,9 @@ signals:
      * information about the reason why this request failed.
      */
     void endpointAcquireFailed(QNetworkReply::NetworkError error);
-    /*!
-     * \brief Emitted when a logout has successfully completed.
-     */
+    ///\brief Emitted when a logout has successfully completed.
     void loggedOut();
-    /*!
-     * \brief Emitted when the token acquired when logging in has been verified to be correct.
-     */
+    ///\brief Emitted when the token acquired when logging in has been verified to be correct.
     void tokenVerified(const QString& token);
     /*!
      * \brief Emitted when logging in has failed. The most common cause for this is invalid authentication.
@@ -100,9 +90,7 @@ signals:
      * information about the reason why this request failed.
      */
     void loginFailed(QNetworkReply::NetworkError error);
-    /*!
-     * \brief Emitted when a message has been successfully sent.
-     */
+    ///\brief Emitted when a message has been successfully sent.
     void messageSent(const QDiscordMessage& message);
     /*!
      * \brief Emitted when sending a message has failed.

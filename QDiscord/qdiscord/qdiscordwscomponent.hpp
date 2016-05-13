@@ -37,9 +37,7 @@ class QDiscordWsComponent : public QObject
 {
     Q_OBJECT
 public:
-    /*!
-     * \brief Standard QObject constructor.
-     */
+    ///\brief Standard QObject constructor.
     explicit QDiscordWsComponent(QObject* parent = 0);
     /*!
      * \brief Makes the WebSocket connect to the specified endpoint.
@@ -47,14 +45,10 @@ public:
      * \param token The token the WebSocket should use to authenticate itself once it connects.
      */
     void connectToEndpoint(const QString& endpoint, const QString& token);
-    /*!
-     * \brief Makes the WebSocket disconnect from the endpoint.
-     */
+    ///\brief Makes the WebSocket disconnect from the endpoint.
     void close();
 signals:
-    /*!
-     * \brief Emitted when the WebSocket has successfully logged in.
-     */
+    ///\brief Emitted when the WebSocket has successfully logged in.
     void loginSuccess();
     /*!
      * \brief Emitted when the WebSocket fails to log in with the provided token.
@@ -68,13 +62,9 @@ signals:
      * Useful when an application needs to track the WebSocket's current state.
      */
     void connected();
-    /*!
-     * \brief Emitted when the WebSocket has been disconnected from the endpoint.
-     */
+    ///\brief Emitted when the WebSocket has been disconnected from the endpoint.
     void disconnected();
-    /*!
-     * \brief Emitted when all reconnect attempts have failed and the WebSocket will stop retrying.
-     */
+    ///\brief Emitted when all reconnect attempts have failed and the WebSocket will stop retrying.
     void reconnectImpossible();
     /*!
      * \brief Emitted when the WebSocket encounters an error.

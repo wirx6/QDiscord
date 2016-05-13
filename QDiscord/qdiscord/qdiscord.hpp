@@ -162,21 +162,13 @@ public:
      * \param token The token to use.
      */
     void login(const QString& token);
-    /*!
-     * \brief Handles logging out from the Discord API and destroying any state information in memory.
-     */
+    ///\brief Handles logging out from the Discord API and destroying any state information in memory.
     void logout();
-    /*!
-     * \brief Returns a pointer to the REST component.
-     */
+    ///\brief Returns a pointer to the REST component.
     QDiscordRestComponent* rest() {return &_rest;}
-    /*!
-     * \brief Returns a pointer to the WebSocket component.
-     */
+    ///\brief Returns a pointer to the WebSocket component.
     QDiscordWsComponent* ws() {return &_ws;}
-    /*!
-     * \brief Returns a pointer to the state component.
-     */
+    ///\brief Returns a pointer to the state component.
     QDiscordStateComponent* state() {return &_state;}
 signals:
     /*!
@@ -185,13 +177,9 @@ signals:
      * Connect to component signals in order to get more information about the error that caused this.
      */
     void loginFailed();
-    /*!
-     * \brief Emitted when logging in is completed and successful.
-     */
+    ///\brief Emitted when logging in is completed and successful.
     void loginSuccess();
-    /*!
-     * \brief Emitted when logging out has finished.
-     */
+    ///\brief Emitted when logging out has finished.
     void loggedOut();
     /*!
      * \brief Emitted when the WebSocket has disconnected.
