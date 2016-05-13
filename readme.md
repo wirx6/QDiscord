@@ -1,8 +1,12 @@
 # QDiscord
 
-QDiscord is a Qt wrapper for the Discord API written in C++.
+QDiscord is a [Qt](https://www.qt.io/) wrapper for the [Discord API](https://discordapp.com/developers/docs) written in C++.
 It was written to easily allow the creation of Discord bots.
 Currently it is in an incomplete state and will constantly be under development, so expect things to not work in future versions.
+
+# Discord
+
+[Discord](https://discordapp.com) is a proprietary Voice over IP application designed for gaming communities and is developed by [Hammer & Chisel](https://discordapp.com/company).
 
 # Documentation
 
@@ -33,10 +37,6 @@ LIBS += "/home/user/git/QDiscord/build-QDiscord-Desktop_Qt_5_5_1_GCC_64bit-Debug
 The `CONFIG` part tells the compiler to use the C++11 standard.
 The `INCLUDEPATH` part specifies where the header files for the library can be found.
 The `LIBS` part specifies where your compiled library is.
-
-### Step 3: Distribute
-
-The library is licensed under LGPL and is configured to statically link, so it goes straight into your executable.
 
 # Example
 
@@ -97,4 +97,4 @@ void Application::logout()
 }
 ```
 # Related projects
-A list of Discord API libraries in other languages can be found [here](https://discordapi.com/unofficial/libs.html)
+A list of Discord API libraries in other languages can be found [here](https://discordapi.com/unofficial/libs.html).
