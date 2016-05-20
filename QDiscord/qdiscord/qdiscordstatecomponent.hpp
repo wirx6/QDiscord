@@ -73,7 +73,7 @@ signals:
      * \brief Emitted when a guild has been deleted.
      * \param guild An object containing information about the guild that was deleted.
      */
-    void guildDeleted(const QDiscordGuild& guild);
+    void guildDeleted(QDiscordGuild guild);
     /*!
      * \brief Emitted when a member has been added to a guild.
      * \param member A pointer to the guild member that has been added.
@@ -83,14 +83,14 @@ signals:
      * \brief Emitted when a member has been removed from a guild.
      * \param member An object containing information ab out the member that was deleted.
      */
-    void guildMemberRemoved(const QDiscordMember& member);
+    void guildMemberRemoved(QDiscordMember member);
     /*!
      * \brief Emitted when information about the current client has been collected.
      *
      * This usually gets emitted whenever the READY event gets processed.
      * \param self An object of this client's user.
      */
-    void selfCreated(const QDiscordUser& self);
+    void selfCreated(QDiscordUser self);
     /*!
      * \brief Emitted when a channel has been created.
      * \param channel A pointer to the channel that was created.
@@ -100,7 +100,7 @@ signals:
      * \brief Emitted when a channel has been deleted.
      * \param channel An object containing information about the channel that was deleted.
      */
-    void channelDeleted(const QDiscordChannel& channel);
+    void channelDeleted(QDiscordChannel channel);
     /*!
      * \brief Emitted when a channel has updated.
      * \param channel A pointer to the channel that was updated.
@@ -115,7 +115,7 @@ signals:
      * \brief Emitted when a private channel has been deleted.
      * \param channel A pointer to the pirvate channel that was deleted.
      */
-    void privateChannelDeleted(const QDiscordChannel& channel);
+    void privateChannelDeleted(QDiscordChannel channel);
     /*!
      * \brief Emitted when a private channel has been updated.
      * \param channel A pointer to the channel that was updated.
@@ -125,7 +125,7 @@ signals:
      * \brief Emitted when a message has been created.
      * \param message An object containing information about the sent message.
      */
-    void messageCreated(const QDiscordMessage& message);
+    void messageCreated(QDiscordMessage message);
 private:
     void clear();
     void readyReceived(const QJsonObject& object);

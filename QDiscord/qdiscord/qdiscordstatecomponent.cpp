@@ -133,7 +133,8 @@ void QDiscordStateComponent::guildMemberRemoveReceived(const QJsonObject& object
     }
     else
         member = new QDiscordMember(object, nullptr);
-    emit guildMemberRemoved(QDiscordMember(*member));
+    QDiscordMember newMember(*member);
+    emit guildMemberRemoved(newMember);
     delete member;
 }
 
