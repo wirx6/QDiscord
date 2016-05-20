@@ -106,8 +106,8 @@ void QDiscord::disconnectDiscordSignals()
     disconnect(&_rest, &QDiscordRestComponent::endpointAcquired, this, &QDiscord::endpointAcquired);
     disconnect(&_rest, &QDiscordRestComponent::loginFailed, this, &QDiscord::loginFailed);
     disconnect(&_rest, &QDiscordRestComponent::endpointAcquireFailed, this, &QDiscord::loginFailed);
-    disconnect(&_ws, &QDiscordWsComponent::loginFailed, this, &QDiscord::loginFailed);
-    disconnect(&_ws, &QDiscordWsComponent::loginSuccess, this, &QDiscord::loginSuccess);
+    disconnect(&_ws, &QDiscordWsComponent::loginFailed, this, &QDiscord::loginFailedReceived);
+    disconnect(&_ws, &QDiscordWsComponent::loginSuccess, this, &QDiscord::loginSuccessRecevied);
     disconnect(&_ws, &QDiscordWsComponent::disconnected, this, &QDiscord::disconnected);
     disconnect(&_ws, &QDiscordWsComponent::error, this, &QDiscord::disconnected);
     disconnect(&_rest, &QDiscordRestComponent::loggedOut, this, &QDiscord::logoutFinished);
@@ -121,4 +121,14 @@ void QDiscord::logoutFinished()
         disconnectDiscordSignals();
     }
     emit loggedOut();
+}
+
+void QDiscord::loginSuccessRecevied()
+{
+    emit loginSuccess();
+}
+
+void QDiscord::loginFailedReceived()
+{
+    emit loginFailed();
 }

@@ -143,6 +143,7 @@ void QDiscordWsComponent::textMessageReceived(const QString& message)
         qDebug()<<this<<"beating every "<<_heartbeatTimer.interval()/1000.<<" seconds";
         _tryReconnecting = true;
         _reconnectAttempts = 0;
+        emit loginSuccess();
         emit readyReceived(dataObject);
     }
     else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_CREATE")

@@ -194,6 +194,8 @@ private:
     void connectDiscordSignals();
     void disconnectDiscordSignals();
     void logoutFinished();
+    void loginSuccessRecevied();
+    void loginFailedReceived();
     QString _token;
     QDiscordRestComponent _rest;
     QDiscordWsComponent _ws;
