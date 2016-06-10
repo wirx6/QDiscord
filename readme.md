@@ -38,6 +38,8 @@ The `CONFIG` part tells the compiler to use the C++11 standard.
 The `INCLUDEPATH` part specifies where the header files for the library can be found.
 The `LIBS` part specifies where your compiled library is.
 
+Alternatively, you may include this project as a Git submodule and use QtCreator's wizards to link it as a library to your own project.
+
 # Example
 
 Here's a short example application that will send a message to a specified server once it connects.
