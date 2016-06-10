@@ -102,6 +102,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classQDiscordWsComponent__inherit__graph.png" border="0" usemap="#QDiscordWsComponent_inherit__map" alt="Inheritance graph"/></div>
+<map name="QDiscordWsComponent_inherit__map" id="QDiscordWsComponent_inherit__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for QDiscordWsComponent:</div>
@@ -109,6 +111,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classQDiscordWsComponent__coll__graph.png" border="0" usemap="#QDiscordWsComponent_coll__map" alt="Collaboration graph"/></div>
+<map name="QDiscordWsComponent_coll__map" id="QDiscordWsComponent_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
@@ -125,6 +129,9 @@ Signals</h2></td></tr>
 <tr class="memitem:a4b3ab6f30dd6174d62497fc11a343a3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#a4b3ab6f30dd6174d62497fc11a343a3e">disconnected</a> ()</td></tr>
 <tr class="memdesc:a4b3ab6f30dd6174d62497fc11a343a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when the WebSocket has been disconnected from the endpoint.  <a href="#a4b3ab6f30dd6174d62497fc11a343a3e">More...</a><br /></td></tr>
 <tr class="separator:a4b3ab6f30dd6174d62497fc11a343a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab8d625b5572b997ef94187eeff5c48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#a3ab8d625b5572b997ef94187eeff5c48">attemptingReconnect</a> ()</td></tr>
+<tr class="memdesc:a3ab8d625b5572b997ef94187eeff5c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a reconnection attempt is about to start.  <a href="#a3ab8d625b5572b997ef94187eeff5c48">More...</a><br /></td></tr>
+<tr class="separator:a3ab8d625b5572b997ef94187eeff5c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc6617f6b667977548a4d54ab04b252b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#acc6617f6b667977548a4d54ab04b252b">reconnectImpossible</a> ()</td></tr>
 <tr class="memdesc:acc6617f6b667977548a4d54ab04b252b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when all reconnect attempts have failed and the WebSocket will stop retrying.  <a href="#acc6617f6b667977548a4d54ab04b252b">More...</a><br /></td></tr>
 <tr class="separator:acc6617f6b667977548a4d54ab04b252b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,6 +219,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a72b29bdc0fb58b92adf76fa75543e536"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#a72b29bdc0fb58b92adf76fa75543e536">close</a> ()</td></tr>
 <tr class="memdesc:a72b29bdc0fb58b92adf76fa75543e536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the WebSocket disconnect from the endpoint.  <a href="#a72b29bdc0fb58b92adf76fa75543e536">More...</a><br /></td></tr>
 <tr class="separator:a72b29bdc0fb58b92adf76fa75543e536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfad6c4d5d44d5fd351c3ad44f87293f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#acfad6c4d5d44d5fd351c3ad44f87293f">maxReconnectAttempts</a> ()</td></tr>
+<tr class="memdesc:acfad6c4d5d44d5fd351c3ad44f87293f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of reconnects this object will attempt to do before stopping.  <a href="#acfad6c4d5d44d5fd351c3ad44f87293f">More...</a><br /></td></tr>
+<tr class="separator:acfad6c4d5d44d5fd351c3ad44f87293f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa564de61a0a1b001e254442ea890257f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#aa564de61a0a1b001e254442ea890257f">setMaxReconnectAttempts</a> (int <a class="el" href="classQDiscordWsComponent.html#acfad6c4d5d44d5fd351c3ad44f87293f">maxReconnectAttempts</a>)</td></tr>
+<tr class="memdesc:aa564de61a0a1b001e254442ea890257f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum reconnection attempts.  <a href="#aa564de61a0a1b001e254442ea890257f">More...</a><br /></td></tr>
+<tr class="separator:aa564de61a0a1b001e254442ea890257f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed0338d3f40deb33843633afb5bcfd42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordWsComponent.html#aed0338d3f40deb33843633afb5bcfd42">enableDumpfile</a> ()</td></tr>
+<tr class="memdesc:aed0338d3f40deb33843633afb5bcfd42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable dumping incoming WebSocket packets.  <a href="#aed0338d3f40deb33843633afb5bcfd42">More...</a><br /></td></tr>
+<tr class="separator:aed0338d3f40deb33843633afb5bcfd42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The WebSocket component of <a class="el" href="classQDiscord.html" title="This class represents a single connection to the Discord API. ">QDiscord</a>. </p>
@@ -252,9 +268,11 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    connect(&amp;_socket, &amp;QWebSocket::textMessageReceived, <span class="keyword">this</span>, &amp;QDiscordWsComponent::textMessageReceived);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    connect(&amp;_heartbeatTimer, &amp;QTimer::timeout, <span class="keyword">this</span>, &amp;QDiscordWsComponent::heartbeat);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    _tryReconnecting = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    _reconnectAttempts = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    _useDumpfile = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    _reconnectAttempts = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    _maxReconnectAttempts = -1;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -292,13 +310,13 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="qdiscordwscomponent_8cpp_source.html#l00033">33</a> of file <a class="el" href="qdiscordwscomponent_8cpp_source.html">qdiscordwscomponent.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    _socket.open(endpoint);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    _gateway = endpoint;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    _token = token;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;connecting to&quot;</span>&lt;&lt;endpoint;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordwscomponent_8cpp_source.html#l00035">35</a> of file <a class="el" href="qdiscordwscomponent_8cpp_source.html">qdiscordwscomponent.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    _socket.open(endpoint);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    _gateway = endpoint;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    _token = token;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;connecting to&quot;</span>&lt;&lt;endpoint;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -317,14 +335,103 @@ Public Member Functions</h2></td></tr>
 
 <p>Makes the WebSocket disconnect from the endpoint. </p>
 
-<p>Definition at line <a class="el" href="qdiscordwscomponent_8cpp_source.html#l00041">41</a> of file <a class="el" href="qdiscordwscomponent_8cpp_source.html">qdiscordwscomponent.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    _tryReconnecting = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    _gateway = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    _token = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    _reconnectAttempts = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _socket.close();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordwscomponent_8cpp_source.html#l00043">43</a> of file <a class="el" href="qdiscordwscomponent_8cpp_source.html">qdiscordwscomponent.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    _tryReconnecting = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    _gateway = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _token = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    _reconnectAttempts = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    _socket.close();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="acfad6c4d5d44d5fd351c3ad44f87293f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QDiscordWsComponent::maxReconnectAttempts </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the amount of reconnects this object will attempt to do before stopping. </p>
+<p>If the value is -1, the object will always attempt to stay connected. </p>
+
+<p>Definition at line <a class="el" href="qdiscordwscomponent_8hpp_source.html#l00055">55</a> of file <a class="el" href="qdiscordwscomponent_8hpp_source.html">qdiscordwscomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{<span class="keywordflow">return</span> _maxReconnectAttempts;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aa564de61a0a1b001e254442ea890257f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QDiscordWsComponent::setMaxReconnectAttempts </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxReconnectAttempts</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the maximum reconnection attempts. </p>
+<p>Set to -1 if you don't want this object to stop attempting to reconnect. This is the default. </p>
+
+<p>Definition at line <a class="el" href="qdiscordwscomponent_8hpp_source.html#l00061">61</a> of file <a class="el" href="qdiscordwscomponent_8hpp_source.html">qdiscordwscomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{_maxReconnectAttempts=<a class="code" href="classQDiscordWsComponent.html#acfad6c4d5d44d5fd351c3ad44f87293f">maxReconnectAttempts</a>;}</div>
+<div class="ttc" id="classQDiscordWsComponent_html_acfad6c4d5d44d5fd351c3ad44f87293f"><div class="ttname"><a href="classQDiscordWsComponent.html#acfad6c4d5d44d5fd351c3ad44f87293f">QDiscordWsComponent::maxReconnectAttempts</a></div><div class="ttdeci">int maxReconnectAttempts()</div><div class="ttdoc">Returns the amount of reconnects this object will attempt to do before stopping. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordwscomponent_8hpp_source.html#l00055">qdiscordwscomponent.hpp:55</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aed0338d3f40deb33843633afb5bcfd42"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QDiscordWsComponent::enableDumpfile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable dumping incoming WebSocket packets. </p>
+<p>This information will be placed in a file named <code>DUMPFILE.txt</code> in the current working directory. The information contained in the file is useful for collecting samples for improving this library's coverage of the API. </p>
+
+<p>Definition at line <a class="el" href="qdiscordwscomponent_8hpp_source.html#l00068">68</a> of file <a class="el" href="qdiscordwscomponent_8hpp_source.html">qdiscordwscomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{_useDumpfile = <span class="keyword">true</span>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -430,6 +537,31 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3ab8d625b5572b997ef94187eeff5c48"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QDiscordWsComponent::attemptingReconnect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emitted when a reconnection attempt is about to start. </p>
+
+</div>
+</div>
 <a class="anchor" id="acc6617f6b667977548a4d54ab04b252b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -494,7 +626,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 13 2016 17:31:58 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 10 2016 16:37:55 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

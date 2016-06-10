@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['maxreconnectattempts',['maxReconnectAttempts',['../classQDiscordWsComponent.html#acfad6c4d5d44d5fd351c3ad44f87293f',1,'QDiscordWsComponent']]],
   ['member',['member',['../classQDiscordGuild.html#abf027e58894310d7f252d29d3ef95f9b',1,'QDiscordGuild']]],
   ['membercount',['memberCount',['../classQDiscordGuild.html#a218465d13d7316decee1a4ef8f7f3e90',1,'QDiscordGuild']]],
   ['mentioneveryone',['mentionEveryone',['../classQDiscordMessage.html#a678450c6b15e9243d0a2aeeceeda323a',1,'QDiscordMessage']]],

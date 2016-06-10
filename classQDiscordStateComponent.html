@@ -103,6 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classQDiscordStateComponent__inherit__graph.png" border="0" usemap="#QDiscordStateComponent_inherit__map" alt="Inheritance graph"/></div>
+<map name="QDiscordStateComponent_inherit__map" id="QDiscordStateComponent_inherit__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for QDiscordStateComponent:</div>
@@ -110,6 +112,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classQDiscordStateComponent__coll__graph.png" border="0" usemap="#QDiscordStateComponent_coll__map" alt="Collaboration graph"/></div>
+<map name="QDiscordStateComponent_coll__map" id="QDiscordStateComponent_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
@@ -245,8 +249,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 
 <p>Returns a pointer to the guild that has the provided ID. </p>
 
-<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00047">47</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{<span class="keywordflow">return</span> _guilds.value(<span class="keywordtype">id</span>, <span class="keyword">nullptr</span>);}</div>
+<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00043">43</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{<span class="keywordflow">return</span> _guilds.value(<span class="keywordtype">id</span>, <span class="keyword">nullptr</span>);}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,8 +277,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 
 <p>Returns a map of pointers to all guilds and their IDs. </p>
 
-<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00051">51</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{<span class="keywordflow">return</span> _guilds;}</div>
+<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00045">45</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{<span class="keywordflow">return</span> _guilds;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -330,8 +334,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 
 <p>Returns a map of pointers to all private channels and their IDs. </p>
 
-<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00061">61</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{<span class="keywordflow">return</span> _privateChannels;}</div>
+<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00053">53</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{<span class="keywordflow">return</span> _privateChannels;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -358,8 +362,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 
 <p>Returns a pointer to this client's information. </p>
 
-<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00065">65</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{<span class="keywordflow">return</span> _self;}</div>
+<p>Definition at line <a class="el" href="qdiscordstatecomponent_8hpp_source.html#l00055">55</a> of file <a class="el" href="qdiscordstatecomponent_8hpp_source.html">qdiscordstatecomponent.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{<span class="keywordflow">return</span> _self;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -787,7 +791,7 @@ Explicit checks will be required due to this. </p><dl class="params"><dt>Paramet
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 13 2016 17:31:58 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 10 2016 16:37:55 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

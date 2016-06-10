@@ -101,7 +101,9 @@ Step 2: Link</h2>
 <p>I'll start by showing an example of what I have to include in the .pro file on my machine to get the link working. </p><div class="fragment"><div class="line">CONFIG += C++11</div>
 <div class="line">INCLUDEPATH += <span class="stringliteral">&quot;/home/user/git/QDiscord/QDiscord&quot;</span></div>
 <div class="line">LIBS += <span class="stringliteral">&quot;/home/user/git/QDiscord/build-QDiscord-Desktop_Qt_5_5_1_GCC_64bit-Debug/libQDiscord.a&quot;</span></div>
-</div><!-- fragment --><p> The <code>CONFIG</code> part tells the compiler to use the C++11 standard. The <code>INCLUDEPATH</code> part specifies where the header files for the library can be found. The <code>LIBS</code> part specifies where your compiled library is. </p>
+</div><!-- fragment --><p> The <code>CONFIG</code> part tells the compiler to use the C++11 standard. The <code>INCLUDEPATH</code> part specifies where the header files for the library can be found. The <code>LIBS</code> part specifies where your compiled library is.<br />
+<br />
+Alternatively, you may include this project as a Git submodule and use QtCreator's wizards to link it as a library to your own project. </p>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
 <p>Here's a short example application that will send a message to a specified server once it connects. </p>
@@ -163,7 +165,7 @@ Related projects</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 13 2016 17:31:58 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 10 2016 16:37:55 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
