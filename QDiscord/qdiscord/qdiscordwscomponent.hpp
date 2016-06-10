@@ -47,6 +47,25 @@ public:
     void connectToEndpoint(const QString& endpoint, const QString& token);
     ///\brief Makes the WebSocket disconnect from the endpoint.
     void close();
+    /*!
+     * \brief Returns the amount of reconnects this object will attempt to do before stopping.
+     *
+     * If the value is -1, the object will always attempt to stay connected.
+     */
+    int maxReconnectAttempts(){return _maxReconnectAttempts;}
+    /*!
+     * \brief Sets the maximum reconnection attempts.
+     *
+     * Set to -1 if you don't want this object to stop attempting to reconnect. This is the default.
+     */
+    void setMaxReconnectAttempts(int maxReconnectAttempts){_maxReconnectAttempts=maxReconnectAttempts;}
+    /*!
+     * \brief Enable dumping incoming WebSocket packets.
+     *
+     * This information will be placed in a file named `DUMPFILE.txt` in the current working directory.
+     * The information contained in the file is useful for collecting samples for improving this library's coverage of the API.
+     */
+    void enableDumpfile(){_useDumpfile = true;}
 signals:
     ///\brief Emitted when the WebSocket has successfully logged in.
     void loginSuccess();
@@ -64,6 +83,8 @@ signals:
     void connected();
     ///\brief Emitted when the WebSocket has been disconnected from the endpoint.
     void disconnected();
+    ///\brief Emitted when a reconnection attempt is about to start.
+    void attemptingReconnect();
     ///\brief Emitted when all reconnect attempts have failed and the WebSocket will stop retrying.
     void reconnectImpossible();
     /*!
@@ -105,7 +126,8 @@ private:
     bool _tryReconnecting;
     static const int _reconnectTime = 20*1000;
     int _reconnectAttempts;
-    static const int _maxReconnectAttempts = 5;
+    int _maxReconnectAttempts;
+    bool _useDumpfile;
     QTimer _heartbeatTimer;
     QString _gateway;
     QString _token;

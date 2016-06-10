@@ -26,7 +26,9 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
     connect(&_socket, &QWebSocket::textMessageReceived, this, &QDiscordWsComponent::textMessageReceived);
     connect(&_heartbeatTimer, &QTimer::timeout, this, &QDiscordWsComponent::heartbeat);
     _tryReconnecting = false;
+    _useDumpfile = false;
     _reconnectAttempts = 0;
+    _maxReconnectAttempts = -1;
     qDebug()<<this<<"constructed";
 }
 
@@ -77,7 +79,7 @@ void QDiscordWsComponent::reconnect()
     if(_gateway == "")
         return;
     qDebug()<<this<<"reconnecting";
-    if(_reconnectAttempts > _maxReconnectAttempts)
+    if(_reconnectAttempts > _maxReconnectAttempts && _maxReconnectAttempts != -1)
     {
         qDebug()<<"maximum reconnect attempts reached, stopping";
         _reconnectAttempts = 0;
@@ -86,7 +88,9 @@ void QDiscordWsComponent::reconnect()
     }
     else
     {
-        _reconnectAttempts++;
+        if(_maxReconnectAttempts != -1)
+            _reconnectAttempts++;
+        emit attemptingReconnect();
         connectToEndpoint(_gateway, _token);
     }
 }
@@ -130,11 +134,14 @@ void QDiscordWsComponent::textMessageReceived(const QString& message)
 {
     QJsonDocument document = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject object = document.object();
-    QFile file("DUMPFILE.txt");
-    file.open(QFile::WriteOnly|QFile::Append);
-    file.write(document.toJson(QJsonDocument::Indented));
-    file.flush();
-    file.close();
+    if(_useDumpfile)
+    {
+        QFile file("DUMPFILE.txt");
+        file.open(QFile::WriteOnly|QFile::Append);
+        file.write(document.toJson(QJsonDocument::Indented));
+        file.flush();
+        file.close();
+    }
     qDebug()<<this<<"op:"<<object["op"].toInt()<<" t:"<<object["t"].toString();
     if(object["op"].toInt() == 0 && object["t"].toString() == "READY")
     {
