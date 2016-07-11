@@ -2,7 +2,7 @@ var searchData=
 [
   ['channel',['channel',['../classQDiscordGuild.html#acba7f3596f23a0095c5ab37b713d1d5a',1,'QDiscordGuild::channel()'],['../classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9',1,'QDiscordMessage::channel()'],['../classQDiscordStateComponent.html#a62110128818af22111b3844d46e90111',1,'QDiscordStateComponent::channel()']]],
   ['channelcreated',['channelCreated',['../classQDiscordStateComponent.html#a1d4aca61664d27871ff3f21b2e24c9ec',1,'QDiscordStateComponent']]],
-  ['channeldeleted',['channelDeleted',['../classQDiscordStateComponent.html#a3b2491301352aa437211c4469fef1216',1,'QDiscordStateComponent']]],
+  ['channeldeleted',['channelDeleted',['../classQDiscordStateComponent.html#ac504618b08ecb7ed4196bf060783de53',1,'QDiscordStateComponent']]],
   ['channelid',['channelId',['../classQDiscordMessage.html#a2f2ffee773ff0b5a9a5b912a4044dc09',1,'QDiscordMessage']]],
   ['channels',['channels',['../structQDiscordUtilities.html#a2fc8d958d91da9ec5550044e0870853a',1,'QDiscordUtilities::EndPoints::channels()'],['../classQDiscordGuild.html#a7a95a99816ecf256c2f5beadc20c7d49',1,'QDiscordGuild::channels()']]],
   ['channeltype',['ChannelType',['../classQDiscordChannel.html#a2a535c2f137716af251b9274bd817f23',1,'QDiscordChannel']]],

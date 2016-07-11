@@ -500,8 +500,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns a pointer to the guild this message was sent in using the channel parameter provided in the class' constructor. </p>
-<p>Will return nullptr if the message was sent in a private channel and thus the channel has no guild.<br />
-Will also return nullptr if a channel was not provided in the class' constructor. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>nullptr</code> if the message was sent in a private channel and thus the channel has no guild or if a channel was not provided in the class' constructor </dd></dl>
 
 <p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00037">37</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
@@ -510,7 +509,7 @@ Will also return nullptr if a channel was not provided in the class' constructor
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00072">qdiscordchannel.hpp:72</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -521,7 +520,7 @@ Will also return nullptr if a channel was not provided in the class' constructor
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 10 2016 16:37:55 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 11 2016 20:38:49 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

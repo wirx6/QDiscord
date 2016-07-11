@@ -171,10 +171,10 @@ Public Member Functions</h2></td></tr>
 <p>An enumerator holding all possible types of channels. </p>
 <p>If a type is not defined here, <code>ChannelType::UnknownType</code> will be set. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00045">45</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        Voice, Text, UnknownType</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00046">46</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Voice, Text, UnknownType</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -211,6 +211,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Some properties may be defaul, not accessible or <code>nullptr</code>, depending on what <a class="el" href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d" title="Returns the channel&#39;s type. ">type()</a> and <a class="el" href="classQDiscordChannel.html#ac487336974b4cbebe916b923aa1f1b31" title="Returns whether the channel is a private or a guild channel. ">isPrivate()</a> return. </dd></dl>
 
 <p>Definition at line <a class="el" href="qdiscordchannel_8cpp_source.html#l00022">22</a> of file <a class="el" href="qdiscordchannel_8cpp_source.html">qdiscordchannel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
@@ -234,8 +235,8 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        _recipient = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(recipientObject);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordChannel(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) constructed&quot;</span>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="ttc" id="classQDiscordChannel_html_a8b6c354259cd21d00ca575358982e63d"><div class="ttname"><a href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d">QDiscordChannel::type</a></div><div class="ttdeci">ChannelType type()</div><div class="ttdoc">Returns the channel&#39;s type. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00062">qdiscordchannel.hpp:62</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00072">qdiscordchannel.hpp:72</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a8b6c354259cd21d00ca575358982e63d"><div class="ttname"><a href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d">QDiscordChannel::type</a></div><div class="ttdeci">ChannelType type()</div><div class="ttdoc">Returns the channel&#39;s type. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00063">qdiscordchannel.hpp:63</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
 <div class="ttc" id="classQDiscordUser_html"><div class="ttname"><a href="classQDiscordUser.html">QDiscordUser</a></div><div class="ttdoc">Represents a user in the Discord API. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscorduser_8hpp_source.html#l00026">qdiscorduser.hpp:26</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -271,15 +272,15 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        _recipient = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="ttc" id="classQDiscordChannel_html_a8b6c354259cd21d00ca575358982e63d"><div class="ttname"><a href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d">QDiscordChannel::type</a></div><div class="ttdeci">ChannelType type()</div><div class="ttdoc">Returns the channel&#39;s type. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00062">qdiscordchannel.hpp:62</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00072">qdiscordchannel.hpp:72</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_af3303e8df4e850617e59bc40d360a1fd"><div class="ttname"><a href="classQDiscordChannel.html#af3303e8df4e850617e59bc40d360a1fd">QDiscordChannel::id</a></div><div class="ttdeci">QString id()</div><div class="ttdoc">Returns the channel&#39;s ID. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00050">qdiscordchannel.hpp:50</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_a39ac7aab1c3ac83e0f71178d132d1bbd"><div class="ttname"><a href="classQDiscordChannel.html#a39ac7aab1c3ac83e0f71178d132d1bbd">QDiscordChannel::position</a></div><div class="ttdeci">int position()</div><div class="ttdoc">Returns the channel&#39;s position in the channel list. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00054">qdiscordchannel.hpp:54</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_ac487336974b4cbebe916b923aa1f1b31"><div class="ttname"><a href="classQDiscordChannel.html#ac487336974b4cbebe916b923aa1f1b31">QDiscordChannel::isPrivate</a></div><div class="ttdeci">bool isPrivate()</div><div class="ttdoc">Returns whether the channel is a private or a guild channel. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00068">qdiscordchannel.hpp:68</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_a53eb50bb9a4fb3ed22c3d41fa13f07df"><div class="ttname"><a href="classQDiscordChannel.html#a53eb50bb9a4fb3ed22c3d41fa13f07df">QDiscordChannel::topic</a></div><div class="ttdeci">QString topic()</div><div class="ttdoc">Returns the channel&#39;s topic. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00056">qdiscordchannel.hpp:56</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_a1e8f1bebbc7dd63bf2dae091c25c894c"><div class="ttname"><a href="classQDiscordChannel.html#a1e8f1bebbc7dd63bf2dae091c25c894c">QDiscordChannel::recipient</a></div><div class="ttdeci">QDiscordUser * recipient()</div><div class="ttdoc">Returns a pointer to this channel&#39;s recipient, if this is a private channel. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00078">qdiscordchannel.hpp:78</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_aadeeecf2fed585d92f88d81f0e05ad19"><div class="ttname"><a href="classQDiscordChannel.html#aadeeecf2fed585d92f88d81f0e05ad19">QDiscordChannel::name</a></div><div class="ttdeci">QString name()</div><div class="ttdoc">Returns the channel&#39;s name. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00052">qdiscordchannel.hpp:52</a></div></div>
-<div class="ttc" id="classQDiscordChannel_html_ab9c283eac0e18854dc93146a19991eb1"><div class="ttname"><a href="classQDiscordChannel.html#ab9c283eac0e18854dc93146a19991eb1">QDiscordChannel::lastMessageId</a></div><div class="ttdeci">QString lastMessageId()</div><div class="ttdoc">Returns the ID of the last sent message. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00070">qdiscordchannel.hpp:70</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a8b6c354259cd21d00ca575358982e63d"><div class="ttname"><a href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d">QDiscordChannel::type</a></div><div class="ttdeci">ChannelType type()</div><div class="ttdoc">Returns the channel&#39;s type. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00063">qdiscordchannel.hpp:63</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_af3303e8df4e850617e59bc40d360a1fd"><div class="ttname"><a href="classQDiscordChannel.html#af3303e8df4e850617e59bc40d360a1fd">QDiscordChannel::id</a></div><div class="ttdeci">QString id()</div><div class="ttdoc">Returns the channel&#39;s ID. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00051">qdiscordchannel.hpp:51</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a39ac7aab1c3ac83e0f71178d132d1bbd"><div class="ttname"><a href="classQDiscordChannel.html#a39ac7aab1c3ac83e0f71178d132d1bbd">QDiscordChannel::position</a></div><div class="ttdeci">int position()</div><div class="ttdoc">Returns the channel&#39;s position in the channel list. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00055">qdiscordchannel.hpp:55</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_ac487336974b4cbebe916b923aa1f1b31"><div class="ttname"><a href="classQDiscordChannel.html#ac487336974b4cbebe916b923aa1f1b31">QDiscordChannel::isPrivate</a></div><div class="ttdeci">bool isPrivate()</div><div class="ttdoc">Returns whether the channel is a private or a guild channel. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00069">qdiscordchannel.hpp:69</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a53eb50bb9a4fb3ed22c3d41fa13f07df"><div class="ttname"><a href="classQDiscordChannel.html#a53eb50bb9a4fb3ed22c3d41fa13f07df">QDiscordChannel::topic</a></div><div class="ttdeci">QString topic()</div><div class="ttdoc">Returns the channel&#39;s topic. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00057">qdiscordchannel.hpp:57</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_a1e8f1bebbc7dd63bf2dae091c25c894c"><div class="ttname"><a href="classQDiscordChannel.html#a1e8f1bebbc7dd63bf2dae091c25c894c">QDiscordChannel::recipient</a></div><div class="ttdeci">QDiscordUser * recipient()</div><div class="ttdoc">Returns a pointer to this channel&#39;s recipient, if this is a private channel. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00079">qdiscordchannel.hpp:79</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_aadeeecf2fed585d92f88d81f0e05ad19"><div class="ttname"><a href="classQDiscordChannel.html#aadeeecf2fed585d92f88d81f0e05ad19">QDiscordChannel::name</a></div><div class="ttdeci">QString name()</div><div class="ttdoc">Returns the channel&#39;s name. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00053">qdiscordchannel.hpp:53</a></div></div>
+<div class="ttc" id="classQDiscordChannel_html_ab9c283eac0e18854dc93146a19991eb1"><div class="ttname"><a href="classQDiscordChannel.html#ab9c283eac0e18854dc93146a19991eb1">QDiscordChannel::lastMessageId</a></div><div class="ttdeci">QString lastMessageId()</div><div class="ttdoc">Returns the ID of the last sent message. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00071">qdiscordchannel.hpp:71</a></div></div>
 <div class="ttc" id="classQDiscordUser_html"><div class="ttname"><a href="classQDiscordUser.html">QDiscordUser</a></div><div class="ttdoc">Represents a user in the Discord API. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscorduser_8hpp_source.html#l00026">qdiscorduser.hpp:26</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -308,8 +309,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the channel's ID. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00050">50</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00051">51</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -336,8 +337,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the channel's name. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00052">52</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{<span class="keywordflow">return</span> _name;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00053">53</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{<span class="keywordflow">return</span> _name;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -364,8 +365,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the channel's position in the channel list. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00054">54</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{<span class="keywordflow">return</span> _position;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00055">55</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{<span class="keywordflow">return</span> _position;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -392,8 +393,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the channel's topic. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00056">56</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{<span class="keywordflow">return</span> _topic;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00057">57</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{<span class="keywordflow">return</span> _topic;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -421,8 +422,8 @@ Public Member Functions</h2></td></tr>
 <p>Returns the channel's type. </p>
 <p>Possible types specified in <code>ChannelType</code>. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00062">62</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{<span class="keywordflow">return</span> _type;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00063">63</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{<span class="keywordflow">return</span> _type;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -450,8 +451,8 @@ Public Member Functions</h2></td></tr>
 <p>Returns whether the channel is a private or a guild channel. </p>
 <p>Some parameters may not be set depending on this value. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00068">68</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{<span class="keywordflow">return</span> _isPrivate;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00069">69</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{<span class="keywordflow">return</span> _isPrivate;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -478,8 +479,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the ID of the last sent message. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00070">70</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{<span class="keywordflow">return</span> _lastMessageId;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00071">71</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{<span class="keywordflow">return</span> _lastMessageId;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -506,8 +507,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns a pointer to this channel's parent guild. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00072">72</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{<span class="keywordflow">return</span> _guild;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00073">73</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{<span class="keywordflow">return</span> _guild;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -535,8 +536,8 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to this channel's recipient, if this is a private channel. </p>
 <p>The recipient object will be deleted when this object is deleted. </p>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00078">78</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{<span class="keywordflow">return</span> _recipient;}</div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00079">79</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{<span class="keywordflow">return</span> _recipient;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -570,9 +571,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00083">83</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{_guild = <a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>;}</div>
-<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00072">qdiscordchannel.hpp:72</a></div></div>
+<p>Definition at line <a class="el" href="qdiscordchannel_8hpp_source.html#l00084">84</a> of file <a class="el" href="qdiscordchannel_8hpp_source.html">qdiscordchannel.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{_guild = <a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>;}</div>
+<div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -583,7 +584,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 10 2016 16:37:55 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 11 2016 20:38:49 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
