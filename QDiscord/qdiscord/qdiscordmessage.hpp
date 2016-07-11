@@ -41,9 +41,8 @@ public:
     /*!
      * \brief Returns a pointer to the guild this message was sent in using
      * the channel parameter provided in the class' constructor.
-     *
-     * Will return nullptr if the message was sent in a private channel and thus the channel has no guild.\n
-     * Will also return nullptr if a channel was not provided in the class' constructor.
+     * \returns `nullptr` if the message was sent in a private channel and thus the
+     * channel has no guild or if a channel was not provided in the class' constructor
      */
     QDiscordGuild* guild();
 private:

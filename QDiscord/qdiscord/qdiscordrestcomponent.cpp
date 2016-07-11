@@ -160,12 +160,15 @@ void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
 
 void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, std::function<void()> function)
 {
+    QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+                        ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
+                        "; " + QDiscordUtilities::botName;
     QJsonDocument document;
     document.setObject(object);
     QNetworkRequest request(url);
     if(_authentication != "")
         request.setRawHeader("Authorization", _authentication.toUtf8());
-    request.setRawHeader("User-Agent", QDiscordUtilities::userAgent.toUtf8());
+    request.setRawHeader("User-Agent", userAgent.toUtf8());
     request.setRawHeader("content-type", "application/json");
     QNetworkReply* reply = _manager.post(request, document.toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, function);
@@ -174,12 +177,15 @@ void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, std
 
 void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, std::function<void()> function)
 {
+    QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+                        ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
+                        "; " + QDiscordUtilities::botName;
     QJsonDocument document;
     document.setArray(array);
     QNetworkRequest request(url);
     if(_authentication != "")
         request.setRawHeader("Authorization", _authentication.toUtf8());
-    request.setRawHeader("User-Agent", QDiscordUtilities::userAgent.toUtf8());
+    request.setRawHeader("User-Agent", userAgent.toUtf8());
     request.setRawHeader("content-type", "application/json");
     QNetworkReply* reply = _manager.post(request, document.toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, function);
@@ -188,10 +194,13 @@ void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, std::
 
 void QDiscordRestComponent::get(const QUrl& url, std::function<void()> function)
 {
+    QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+                        ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
+                        "; " + QDiscordUtilities::botName;
     QNetworkRequest request(url);
     if(_authentication != "")
         request.setRawHeader("Authorization", _authentication.toUtf8());
-    request.setRawHeader("User-Agent", QDiscordUtilities::userAgent.toUtf8());
+    request.setRawHeader("User-Agent", userAgent.toUtf8());
     QNetworkReply* reply = _manager.get(request);
     connect(reply, &QNetworkReply::finished, this, function);
     qDebug()<<this<<"GET to "<<url;

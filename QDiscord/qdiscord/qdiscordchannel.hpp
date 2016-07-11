@@ -32,6 +32,7 @@ public:
      * \brief Creates an instance from the provided parameters.
      * \param object A JSON object of a Discord channel.
      * \param guild A pointer to the parent guild of the channel, if any.
+     * \note Some properties may be defaul, not accessible or `nullptr`, depending on what type() and isPrivate() return.
      */
     QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild = nullptr);
     ///\brief Deep copies the provided object.

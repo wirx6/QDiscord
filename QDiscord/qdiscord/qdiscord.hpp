@@ -26,7 +26,10 @@
  * [Discord API](https://discordapp.com/developers/docs) written
  * in C++. It was written to easily allow the creation of Discord bots.
  * Currently, it is in an incomplete state and will be under constant development,
- * so expect things to not work in future versions.
+ * so expect things to either not work or not be available.
+ * Feel free to submit an issue on the
+ * [GitHub for this project](https://github.com/george99g/QDiscord/issues) if you need
+ * specific functionality to be working before anything else.
  * \section discord Discord
  * [Discord](https://discordapp.com) is a proprietary Voice over IP application
  * designed for gaming communities and is developed by
@@ -37,9 +40,9 @@
  * \section installing Installing
  * \subsection step1 Step 1: Compile
  * The quickest way to do this is to open the project file with QtCreator
- * and hit the build (not run!) button. Alternatively, you may build it via
- * the command line like this (assuming you already cloned the project
- * and are in the main directory):
+ * and hit the build button. Alternatively, you may build it via
+ * the command line like this (assuming you already cloned the project,
+ * are in the main directory and have the Qt packages installed on your system):
  * \code
  * mkdir build
  * cd build
@@ -47,22 +50,20 @@
  * make mocables all
  * \endcode
  * \subsection step2 Step 2: Link
- * I'll start by showing an example of what I have to include in the
- * .pro file on my machine to get the link working.
+ * This is what I have to do in my `.pro` file to get everything working on my machine.
  * \code
- * CONFIG += C++11
  * INCLUDEPATH += "/home/user/git/QDiscord/QDiscord"
- * LIBS += "/home/user/git/QDiscord/build-QDiscord-Desktop_Qt_5_5_1_GCC_64bit-Debug/libQDiscord.a"
+ * LIBS += "/home/user/git/QDiscord/build-QDiscord-Desktop_Qt_5_7_0_GCC_64bit-Debug/libQDiscord.a"
  * \endcode
- * The `CONFIG` part tells the compiler to use the C++11 standard.
- * The `INCLUDEPATH` part specifies where the header files for the
- * library can be found. The `LIBS` part specifies where your compiled
- * library is.\n\n
- * Alternatively, you may include this project as a Git submodule and
- * use QtCreator's wizards to link it as a library to your own project.
+ * `INCLUDEPATH` specifies where the header files for the library can be found.
+ * `LIBS` specifies where your compiled library is.\n\n
+ * Alternatively, you may include this project as a Git submodule and use QtCreator's wizards to link
+ * it as a library to your own project. This is the preferred method as Qt will manage building and
+ * linking the library, however it is out of the scope of this readme. For more information, see
+ * [the official Qt documentation](http://doc.qt.io/qtcreator/creator-project-qmake-libraries.html).
  * \section example Example
- * Here's a short example application that will send a message to a specified server
- * once it connects.
+ * Here's a short example application that will send a specified message to the first channel on
+ * the specified server once it connects.
  * \subsection main main.cpp
  * \code
  * #include <QCoreApplication>
@@ -88,7 +89,7 @@
  * public:
  *     explicit Application(QObject *parent = 0);
  * private:
- *     void guildCreated(QDiscordGuild* guild);
+ *     void guildAvailable(QDiscordGuild* guild);
  *     void logout();
  *     QString _token;
  *     QDiscord _discord;
@@ -107,7 +108,7 @@
  *     _discord.login("<TOKEN_HERE>");
  * }
  *
- * void Application::guildCreated(QDiscordGuild* guild)
+ * void Application::guildAvailable(QDiscordGuild* guild)
  * {
  *     if(guild->name() == "Test Server")
  *         _discord.rest()->sendMessage("Test", guild->channels().values()[0]);

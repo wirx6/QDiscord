@@ -21,14 +21,14 @@
 //--------------------------------------------------------------------------------------
 //-----------------------LIBRARY CONFIGURATION------------------------------------------
 //--------------------------------------------------------------------------------------
-const QString QDiscordUtilities::botName = "QDiscordBot";
+QString QDiscordUtilities::botName = "QDiscordBot";
 const QString QDiscordUtilities::libName = "QDiscord";
 const QString QDiscordUtilities::libLink = "https://github.com/george99g/QDiscord";
 const QString QDiscordUtilities::libMajor = "0";
-const QString QDiscordUtilities::libMinor = "1";
-const QString QDiscordUtilities::userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
-                                              ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
-                                              "; " + QDiscordUtilities::botName;
+const QString QDiscordUtilities::libMinor = "2";
+//const QString QDiscordUtilities::userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+//                                              ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
+//                                              "; " + QDiscordUtilities::botName;
 //--------------------------------------------------------------------------------------
 
 const struct QDiscordUtilities::EndPoints QDiscordUtilities::endPoints =

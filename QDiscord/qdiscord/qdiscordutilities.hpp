@@ -60,7 +60,7 @@ public:
      *
      * This should always be changed to your bot's name.
      */
-    const static QString botName;
+    static QString botName;
     ///\brief The major version of the library.
     const static QString libMajor;
     /*!
@@ -71,8 +71,6 @@ public:
     const static QString libMinor;
     ///\brief A link to where the library repository is located.
     const static QString libLink;
-    ///\brief The user agent which will be used for REST requests.
-    const static QString userAgent;
 };
 
 #endif // QDISCORDUTILITIES_HPP

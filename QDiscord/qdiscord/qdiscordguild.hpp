@@ -58,9 +58,15 @@ public:
     QDateTime joinedAt() {return _joinedAt;}
     ///\brief Returns a map of pointers to the guild's channels and their IDs.
     QMap<QString, QDiscordChannel*> channels() {return _channels;}
-    ///\brief Returns a pointer to a guild channel that has the provided ID.
+    /*!
+     * \brief Returns a pointer to a guild channel that has the provided ID.
+     * May return `nullptr` if the channel was not found.
+     */
     QDiscordChannel* channel(const QString& id) {return _channels.value(id, nullptr);}
-    ///\brief Returns a pointer to a guild member that has the provided ID.
+    /*!
+     * \brief Returns a pointer to a guild member that has the provided ID.
+     * May return `nullptr` if the member was not found.
+     */
     QDiscordMember* member(const QString& id) {return _members.value(id, nullptr);}
     /*!
      * \brief Adds the provided channel to the guild.
@@ -72,20 +78,25 @@ public:
      * \brief Removes the provided channel from the guild.
      *
      * If the guild contains the provided channel, the pointed channel will be destroyed.
+     * \returns `true` if the channel was successfully removed. `false` if `nullptr` was
+     * passed or the channel was not found.
      */
-    void removeChannel(QDiscordChannel* channel);
+    bool removeChannel(QDiscordChannel* channel);
     /*!
      * \brief Adds the provided member to the guild.
      *
      * The guild will handle destroying the pointed member when the guild gets destroyed.
+     * If the member already exists, the previous member will be destroyed.
      */
     void addMember(QDiscordMember* member);
     /*!
      * \brief Removes the provided member from the guild.
      *
      * If the guild contains the provided member, the pointed member will be destroyed.
+     * \returns `true` if the member was successfully removed. `false` if `nullptr` was
+     * passed or the member was not found.
      */
-    void removeMember(QDiscordMember* member);
+    bool removeMember(QDiscordMember* member);
 private:
     QString _id;
     QString _name;

@@ -91,14 +91,15 @@ void QDiscordGuild::addChannel(QDiscordChannel* channel)
      _channels.insert(channel->id(), channel);
 }
 
-void QDiscordGuild::removeChannel(QDiscordChannel* channel)
+bool QDiscordGuild::removeChannel(QDiscordChannel* channel)
 {
     if(!channel)
-        return;
+        return false;
     if(!_channels.keys().contains(channel->id()))
-        return;
+        return false;
     _channels.remove(channel->id());
     delete channel;
+    return true;
 }
 
 void QDiscordGuild::addMember(QDiscordMember* member)
@@ -110,12 +111,13 @@ void QDiscordGuild::addMember(QDiscordMember* member)
     _members.insert(member->user()->id(), member);
 }
 
-void QDiscordGuild::removeMember(QDiscordMember* member)
+bool QDiscordGuild::removeMember(QDiscordMember* member)
 {
     if(!member)
-        return;
+        return false;
     if(!_members.keys().contains(member->user()->id()))
-        return;
+        return false;
     _members.remove(member->user()->id());
     delete member;
+    return true;
 }

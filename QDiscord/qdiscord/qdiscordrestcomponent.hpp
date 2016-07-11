@@ -47,6 +47,9 @@ public:
     ~QDiscordRestComponent();
     /*!
      * \brief Acquires a token for use in all other methods using a standard Discord account.
+     *
+     * If logging in fails, emits QDiscordRestComponent::loginFailed
+     * If logging in succeeds, emits QDiscordRestComponent::tokenVerified
      * \param email An e-mail for the Discord account to log in with.
      * \param password The password to the provided Discord account.
      * \deprecated This method has been deprecated for bot usage by Discord.\n
@@ -55,11 +58,16 @@ public:
     void login(const QString& email, const QString& password);
     /*!
      * \brief Sets the token for use in all other methods.
+     *
+     * If logging in fails, emits QDiscordRestComponent::loginFailed
+     * If logging in succeeds, emits QDiscordRestComponent::tokenVerified
      * \param token The token to use.
      */
     void login(const QString& token);
     /*!
      * \brief Sends a message to the specified channel.
+     *
+     * If not logged in or if the channel pointer is NULL, does nothing.
      * \param content The message's contents.
      * \param channel The channel to send the message in. This may be a private or a guild channel.
      * \param tts Whether to use text to speech when sending the message.
@@ -78,7 +86,8 @@ signals:
     /*!
      * \brief Emitted when acquiring a WebSocket endpoint has failed.
      * \param error A QNetworkReply::NetworkError enum containing more
-     * information about the reason why this request failed.
+     * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+     * may return a more useful string in the context of the Discord API.
      */
     void endpointAcquireFailed(QNetworkReply::NetworkError error);
     ///\brief Emitted when a logout has successfully completed.
@@ -88,7 +97,8 @@ signals:
     /*!
      * \brief Emitted when logging in has failed. The most common cause for this is invalid authentication.
      * \param error A QNetworkReply::NetworkError enum containing more
-     * information about the reason why this request failed.
+     * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+     * may return a more useful string in the context of the Discord API.
      */
     void loginFailed(QNetworkReply::NetworkError error);
     ///\brief Emitted when a message has been successfully sent.
@@ -96,7 +106,8 @@ signals:
     /*!
      * \brief Emitted when sending a message has failed.
      * \param error A QNetworkReply::NetworkError enum containing more
-     * information about the reason why this request failed.
+     * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+     * may return a more useful string in the context of the Discord API.
      */
     void messageSendFailed(QNetworkReply::NetworkError error);
 private:
