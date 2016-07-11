@@ -24,6 +24,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QNetworkAccessManager>
+#include <functional>
 #include "qdiscordmessage.hpp"
 #include "qdiscordutilities.hpp"
 #include "qdiscordchannel.hpp"
@@ -107,14 +108,9 @@ private:
         bool tts;
     };
     void selfCreated(const QDiscordUser& self);
-    void getEndpointFinished();
-    void loginFinished();
-    void tokenLoginFinished();
-    void logoutFinished();
-    void sendMessageFinished();
-    void post(const QJsonObject& object, const QUrl& url, void (QDiscordRestComponent::*function)(void));
-    void post(const QJsonArray& array, const QUrl& url, void (QDiscordRestComponent::*function)(void));
-    void get(const QUrl& url, void (QDiscordRestComponent::*function)(void));
+    void post(const QJsonObject& object, const QUrl& url, std::function<void()> function);
+    void post(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
+    void get(const QUrl& url, std::function<void ()> function);
     QDiscordUser* _self;
     QString _authentication;
     QNetworkAccessManager _manager;

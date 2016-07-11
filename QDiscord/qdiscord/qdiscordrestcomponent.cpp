@@ -36,13 +36,39 @@ void QDiscordRestComponent::login(const QString& email, const QString& password)
     QJsonObject object;
     object["email"] = email;
     object["password"] = password;
-    post(object, QDiscordUtilities::endPoints.login, &QDiscordRestComponent::loginFinished);
+    post(object, QDiscordUtilities::endPoints.login,
+    std::function<void ()>([=](){
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+        if(!reply)
+            return;
+        if(reply->error() != QNetworkReply::NoError)
+            emit loginFailed(reply->error());
+        else
+        {
+            _authentication = QJsonDocument::fromJson(reply->readAll()).object().value("token").toString();
+            emit tokenVerified(_authentication);
+        }
+        reply->deleteLater();
+    }));
 }
 
 void QDiscordRestComponent::login(const QString& token)
 {
     _authentication = token;
-    get(QDiscordUtilities::endPoints.me, &QDiscordRestComponent::tokenLoginFinished);
+    get(QDiscordUtilities::endPoints.me,
+    std::function<void()>([=](){
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+        if(!reply)
+            return;
+        if(reply->error() != QNetworkReply::NoError)
+        {
+            _authentication = "";
+            emit loginFailed(reply->error());
+        }
+        else
+            emit tokenVerified(_authentication);
+        reply->deleteLater();
+    }));
 }
 
 void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel* channel, bool tts)
@@ -71,7 +97,21 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
     //MessageParams params = {nonce, content, channel, tts};
     //_messageSendQueue.append(params);
     post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
-         &QDiscordRestComponent::sendMessageFinished);
+    std::function<void ()>([=](){
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+        if(!reply)
+            return;
+        if(reply->error() != QNetworkReply::NoError)
+            emit messageSendFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordMessage message(object, nullptr);
+            emit messageSent(message);
+        }
+        reply->deleteLater();
+    }));
 }
 
 void QDiscordRestComponent::logout()
@@ -84,14 +124,31 @@ void QDiscordRestComponent::logout()
     QJsonObject object;
     object["token"] = _authentication;
     _authentication = "";
-    post(object, QDiscordUtilities::endPoints.logout, &QDiscordRestComponent::logoutFinished);
+    post(object, QDiscordUtilities::endPoints.logout,
+    std::function<void()>([=](){
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+        if(!reply)
+            return;
+        emit loggedOut();
+        reply->deleteLater();
+    }));
 }
 
 void QDiscordRestComponent::getEndpoint()
 {
     if(_authentication == "")
         return;
-    get(QDiscordUtilities::endPoints.gateway, &QDiscordRestComponent::getEndpointFinished);
+    get(QDiscordUtilities::endPoints.gateway,
+    std::function<void()>([=](){
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+        if(!reply)
+            return;
+        if(reply->error() != QNetworkReply::NoError)
+            emit endpointAcquireFailed(reply->error());
+        else
+            emit endpointAcquired(QJsonDocument::fromJson(reply->readAll()).object().value("url").toString());
+        reply->deleteLater();
+    }));
 }
 
 void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
@@ -101,75 +158,7 @@ void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
     _self = new QDiscordUser(self);
 }
 
-void QDiscordRestComponent::getEndpointFinished()
-{
-    QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-    if(!reply)
-        return;
-    if(reply->error() != QNetworkReply::NoError)
-        emit endpointAcquireFailed(reply->error());
-    else
-        emit endpointAcquired(QJsonDocument::fromJson(reply->readAll()).object().value("url").toString());
-    reply->deleteLater();
-}
-
-void QDiscordRestComponent::loginFinished()
-{
-    QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-    if(!reply)
-        return;
-    if(reply->error() != QNetworkReply::NoError)
-        emit loginFailed(reply->error());
-    else
-    {
-        _authentication = QJsonDocument::fromJson(reply->readAll()).object().value("token").toString();
-        emit tokenVerified(_authentication);
-    }
-    reply->deleteLater();
-}
-
-void QDiscordRestComponent::tokenLoginFinished()
-{
-    QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-    if(!reply)
-        return;
-    if(reply->error() != QNetworkReply::NoError)
-    {
-        _authentication = "";
-        emit loginFailed(reply->error());
-    }
-    else
-        emit tokenVerified(_authentication);
-    reply->deleteLater();
-}
-
-void QDiscordRestComponent::logoutFinished()
-{
-    QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-    if(!reply)
-        return;
-    emit loggedOut();
-    reply->deleteLater();
-}
-
-void QDiscordRestComponent::sendMessageFinished()
-{
-    QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-    if(!reply)
-        return;
-    if(reply->error() != QNetworkReply::NoError)
-        emit messageSendFailed(reply->error());
-    else
-    {
-        QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject object = document.object();
-        QDiscordMessage message(object, nullptr);
-        emit messageSent(message);
-    }
-    reply->deleteLater();
-}
-
-void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, void (QDiscordRestComponent::*function)())
+void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, std::function<void()> function)
 {
     QJsonDocument document;
     document.setObject(object);
@@ -183,7 +172,7 @@ void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, voi
     qDebug()<<this<<"posted: "<<object<<" to "<<url;
 }
 
-void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, void (QDiscordRestComponent::*function)())
+void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, std::function<void()> function)
 {
     QJsonDocument document;
     document.setArray(array);
@@ -197,7 +186,7 @@ void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, void 
     qDebug()<<this<<"posted: "<<array<<" to "<<url;
 }
 
-void QDiscordRestComponent::get(const QUrl& url, void (QDiscordRestComponent::*function)())
+void QDiscordRestComponent::get(const QUrl& url, std::function<void()> function)
 {
     QNetworkRequest request(url);
     if(_authentication != "")
