@@ -37,7 +37,7 @@ void QDiscordRestComponent::login(const QString& email, const QString& password)
     object["email"] = email;
     object["password"] = password;
     post(object, QDiscordUtilities::endPoints.login,
-    std::function<void ()>([=](){
+    [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
@@ -49,14 +49,14 @@ void QDiscordRestComponent::login(const QString& email, const QString& password)
             emit tokenVerified(_authentication);
         }
         reply->deleteLater();
-    }));
+    });
 }
 
 void QDiscordRestComponent::login(const QString& token)
 {
     _authentication = token;
     get(QDiscordUtilities::endPoints.me,
-    std::function<void()>([=](){
+    [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
@@ -68,12 +68,12 @@ void QDiscordRestComponent::login(const QString& token)
         else
             emit tokenVerified(_authentication);
         reply->deleteLater();
-    }));
+    });
 }
 
 void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel* channel, bool tts)
 {
-    if(_authentication == "")
+    if(_authentication.isEmpty())
         return;
     if(!channel)
         return;
@@ -97,7 +97,7 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
     //MessageParams params = {nonce, content, channel, tts};
     //_messageSendQueue.append(params);
     post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
-    std::function<void ()>([=](){
+    [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
@@ -111,12 +111,12 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
             emit messageSent(message);
         }
         reply->deleteLater();
-    }));
+    });
 }
 
 void QDiscordRestComponent::logout()
 {
-    if(_authentication == "")
+    if(_authentication.isEmpty())
         return;
     if(_self)
         delete _self;
@@ -125,21 +125,21 @@ void QDiscordRestComponent::logout()
     object["token"] = _authentication;
     _authentication = "";
     post(object, QDiscordUtilities::endPoints.logout,
-    std::function<void()>([=](){
+    [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
         emit loggedOut();
         reply->deleteLater();
-    }));
+    });
 }
 
 void QDiscordRestComponent::getEndpoint()
 {
-    if(_authentication == "")
+    if(_authentication.isEmpty())
         return;
     get(QDiscordUtilities::endPoints.gateway,
-    std::function<void()>([=](){
+    [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
@@ -148,7 +148,7 @@ void QDiscordRestComponent::getEndpoint()
         else
             emit endpointAcquired(QJsonDocument::fromJson(reply->readAll()).object().value("url").toString());
         reply->deleteLater();
-    }));
+    });
 }
 
 void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
