@@ -41,8 +41,8 @@ void QDiscord::login(const QString& token)
 
 void QDiscord::logout()
 {
-    _rest.logout();
     _ws.close();
+    _rest.logout();
 }
 
 void QDiscord::tokenVerfified(const QString& token)
