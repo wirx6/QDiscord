@@ -25,6 +25,8 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
     connect(&_socket, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketError)>(&QWebSocket::error), this, &QDiscordWsComponent::error_);
     connect(&_socket, &QWebSocket::textMessageReceived, this, &QDiscordWsComponent::textMessageReceived);
     connect(&_heartbeatTimer, &QTimer::timeout, this, &QDiscordWsComponent::heartbeat);
+    _reconnectTimer.setSingleShot(true);
+    connect(&_reconnectTimer, &QTimer::timeout, this, &QDiscordWsComponent::reconnect);
     _tryReconnecting = false;
     _useDumpfile = false;
     _reconnectAttempts = 0;
@@ -34,9 +36,9 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
 
 void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QString& token)
 {
-    _socket.open(endpoint);
     _gateway = endpoint;
     _token = token;
+    _socket.open(endpoint);
     qDebug()<<this<<"connecting to"<<endpoint;
 }
 
@@ -108,7 +110,7 @@ void QDiscordWsComponent::disconnected_()
     qDebug()<<this<<"disconnected";
     _heartbeatTimer.stop();
     if(_tryReconnecting)
-        QTimer::singleShot(_reconnectTime, this, &QDiscordWsComponent::reconnect);
+        _reconnectTimer.start(_reconnectTime);
     else
     {
         _token = "";

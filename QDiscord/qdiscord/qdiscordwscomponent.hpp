@@ -59,6 +59,10 @@ public:
      * Set to -1 if you don't want this object to stop attempting to reconnect. This is the default.
      */
     void setMaxReconnectAttempts(int maxReconnectAttempts){_maxReconnectAttempts=maxReconnectAttempts;}
+    ///\brief Returns the delay time before reconnecting in milliseconds.
+    int reconnectTime() {return _reconnectTime;}
+    ///\brief Sets the delay time before reconnecting in milliseconds.
+    void setReconnectTime(int reconnectTime) {_reconnectTime=reconnectTime;}
     /*!
      * \brief Enable dumping incoming WebSocket packets.
      *
@@ -124,11 +128,12 @@ private:
     void textMessageReceived(const QString& message);
     void heartbeat();
     bool _tryReconnecting;
-    static const int _reconnectTime = 20*1000;
+    int _reconnectTime = 20*1000;
     int _reconnectAttempts;
     int _maxReconnectAttempts;
     bool _useDumpfile;
     QTimer _heartbeatTimer;
+    QTimer _reconnectTimer;
     QString _gateway;
     QString _token;
     QWebSocket _socket;
