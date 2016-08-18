@@ -1,5 +1,6 @@
 # QDiscord
 
+[![Discord](https://discordapp.com/api/guilds/215902295303520256/widget.png)](https://discord.gg/MGdYDqC)<br>
 QDiscord is a [Qt](https://www.qt.io/) wrapper for the [Discord API](https://discordapp.com/developers/docs) written in C++.
 It was written to easily allow the creation of Discord bots.
 Currently it is in an incomplete state and will constantly be under development, so expect things to either not work or not be available.
