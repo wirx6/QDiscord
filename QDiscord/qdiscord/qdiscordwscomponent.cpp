@@ -36,6 +36,8 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
 
 void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QString& token)
 {
+	if(_reconnectTimer.isActive())
+		_reconnectTimer.stop();
     _gateway = endpoint;
     _token = token;
     _socket.open(endpoint);
@@ -44,6 +46,8 @@ void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QStri
 
 void QDiscordWsComponent::close()
 {
+	if(_reconnectTimer.isActive())
+		_reconnectTimer.stop();
     _tryReconnecting = false;
     _gateway = "";
     _token = "";
@@ -53,6 +57,8 @@ void QDiscordWsComponent::close()
 
 void QDiscordWsComponent::login(const QString& token)
 {
+	if(_reconnectTimer.isActive())
+		_reconnectTimer.stop();
     QJsonDocument document;
     QJsonObject mainObject;
     mainObject["op"] = 2;
@@ -76,7 +82,9 @@ void QDiscordWsComponent::login(const QString& token)
 
 void QDiscordWsComponent::reconnect()
 {
-    if(_token == "")
+	if(_reconnectTimer.isActive())
+		_reconnectTimer.stop();
+	if(_token == "")
         return;
     if(_gateway == "")
         return;
@@ -86,7 +94,7 @@ void QDiscordWsComponent::reconnect()
         qDebug()<<"maximum reconnect attempts reached, stopping";
         _reconnectAttempts = 0;
         close();
-        emit reconnectImpossible();
+		emit reconnectImpossible();
     }
     else
     {
@@ -99,6 +107,8 @@ void QDiscordWsComponent::reconnect()
 
 void QDiscordWsComponent::connected_()
 {
+	if(_reconnectTimer.isActive())
+		_reconnectTimer.stop();
     emit connected();
     login(_token);
     qDebug()<<this<<"connected, logging in";
@@ -110,13 +120,7 @@ void QDiscordWsComponent::disconnected_()
     qDebug()<<this<<"disconnected";
     _heartbeatTimer.stop();
     if(_tryReconnecting)
-	{
-		if(!_reconnectTimer.isSingleShot())
-			_reconnectTimer.setSingleShot(true);
-		if(_reconnectTimer.isActive())
-			_reconnectTimer.stop();
-        _reconnectTimer.start(_reconnectTime);
-	}
+		_reconnectTimer.start(_reconnectTime);
     else
     {
         _token = "";
