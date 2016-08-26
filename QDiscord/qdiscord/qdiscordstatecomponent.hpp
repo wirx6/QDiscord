@@ -130,6 +130,18 @@ signals:
      * \param message An object containing information about the sent message.
      */
     void messageCreated(QDiscordMessage message);
+	/*!
+	 * \brief Emitted when a message has been created.
+	 * \param message An object containing information about the deleted message. Usually,
+	 * the only valid information is the ID.
+	 */
+	void messageDeleted(QDiscordMessage message);
+	/*!
+	 * \brief Emitted when a message has been updated.
+	 * \param message An object containing information about the new message.
+	 * \param editedTimestamp The timestamp when the message was edited.
+	 */
+	void messageUpdated(QDiscordMessage message, QDateTime editedTimestamp);
 private:
     void clear();
     void readyReceived(const QJsonObject& object);

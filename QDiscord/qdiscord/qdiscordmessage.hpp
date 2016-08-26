@@ -42,8 +42,6 @@ public:
     QString id() {return _id;}
     ///\brief Returns the message's contents.
     QString content() {return _content;}
-    ///\brief Returns the date at which the message was edited. May be invalid if the message was not edited.
-    QDateTime editedTimestamp() {return _editedTimestamp;}
     ///\brief Returns the date at which the message was created.
     QDateTime timestamp() {return _timestamp;}
     ///\brief Returns whether the message will use text to speech.
@@ -65,8 +63,7 @@ public:
     QDiscordGuild* guild();
 private:
     QString _id;
-    QString _content;
-    QDateTime _editedTimestamp;
+	QString _content;
     QDateTime _timestamp;
     bool _tts;
     bool _mentionEveryone;

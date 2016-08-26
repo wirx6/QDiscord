@@ -171,12 +171,14 @@ void QDiscordStateComponent::messageCreateReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::messageDeleteReceived(const QJsonObject& object)
 {
-
+	QDiscordMessage message(object, channel(object["channel_id"].toString("")));
+	emit messageDeleted(message);
 }
 
 void QDiscordStateComponent::messageUpdateReceived(const QJsonObject& object)
 {
-
+	QDiscordMessage message(object, channel(object["channel_id"].toString("")));
+	emit messageUpdated(message, QDateTime::fromString(object["edited_timestamp"].toString(), Qt::ISODate));
 }
 
 void QDiscordStateComponent::presenceUpdateReceived(const QJsonObject& object)
