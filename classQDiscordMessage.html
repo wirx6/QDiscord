@@ -110,9 +110,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a193644c07828f8c15328f2fee5136755"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordMessage.html#a193644c07828f8c15328f2fee5136755">content</a> ()</td></tr>
 <tr class="memdesc:a193644c07828f8c15328f2fee5136755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the message's contents.  <a href="#a193644c07828f8c15328f2fee5136755">More...</a><br /></td></tr>
 <tr class="separator:a193644c07828f8c15328f2fee5136755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a207b39a6636ce11277a420c5755f7a"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordMessage.html#a9a207b39a6636ce11277a420c5755f7a">editedTimestamp</a> ()</td></tr>
-<tr class="memdesc:a9a207b39a6636ce11277a420c5755f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the date at which the message was edited. May be invalid if the message was not edited.  <a href="#a9a207b39a6636ce11277a420c5755f7a">More...</a><br /></td></tr>
-<tr class="separator:a9a207b39a6636ce11277a420c5755f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acab613ddc56479423e00c730a355249c"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordMessage.html#acab613ddc56479423e00c730a355249c">timestamp</a> ()</td></tr>
 <tr class="memdesc:acab613ddc56479423e00c730a355249c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the date at which the message was created.  <a href="#acab613ddc56479423e00c730a355249c">More...</a><br /></td></tr>
 <tr class="separator:acab613ddc56479423e00c730a355249c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a message in the Discord API. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00011">11</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00029">29</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8223080d0d7ae0006280e68676991088"></a>
 <div class="memitem">
@@ -173,21 +170,21 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00003">3</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    _id = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;id&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    _mentionEveryone = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;mention_everyone&quot;</span>].toBool(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    _content = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;content&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    _author = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    _channel = <a class="code" href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">channel</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    _channelId = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;channel_id&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    _author = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;author&quot;</span>].toObject());</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    _tts = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;tts&quot;</span>].toBool(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    _timestamp = QDateTime::fromString(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;timestamp&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>), Qt::ISODate);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    _editedTimestamp = QDateTime::fromString(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;edited_timestamp&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>), Qt::ISODate);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordMessage(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) constructed&quot;</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="ttc" id="classQDiscordMessage_html_aa25a1fc61e7ae9d068374d62d2b6bfb9"><div class="ttname"><a href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">QDiscordMessage::channel</a></div><div class="ttdeci">QDiscordChannel * channel()</div><div class="ttdoc">Returns a pointer to the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00038">qdiscordmessage.hpp:38</a></div></div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00021">21</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    _id = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;id&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    _mentionEveryone = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;mention_everyone&quot;</span>].toBool(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    _content = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;content&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    _author = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    _channel = <a class="code" href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">channel</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    _channelId = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;channel_id&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;author&quot;</span>))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        _author = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;author&quot;</span>].toObject());</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    _tts = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;tts&quot;</span>].toBool(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    _timestamp = QDateTime::fromString(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;timestamp&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>), Qt::ISODate);;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordMessage(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) constructed&quot;</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="ttc" id="classQDiscordMessage_html_aa25a1fc61e7ae9d068374d62d2b6bfb9"><div class="ttname"><a href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">QDiscordMessage::channel</a></div><div class="ttdeci">QDiscordChannel * channel()</div><div class="ttdoc">Returns a pointer to the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00054">qdiscordmessage.hpp:54</a></div></div>
 <div class="ttc" id="classQDiscordUser_html"><div class="ttname"><a href="classQDiscordUser.html">QDiscordUser</a></div><div class="ttdoc">Represents a user in the Discord API. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscorduser_8hpp_source.html#l00026">qdiscorduser.hpp:26</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -208,28 +205,29 @@ Public Member Functions</h2></td></tr>
 
 <p>Deep copies the provided object. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00018">18</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    _id = other.<a class="code" href="classQDiscordMessage.html#a911aaf0d82a2298ceaabcc29d015adbd">id</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    _mentionEveryone = other.<a class="code" href="classQDiscordMessage.html#a678450c6b15e9243d0a2aeeceeda323a">mentionEveryone</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    _content = other.<a class="code" href="classQDiscordMessage.html#a193644c07828f8c15328f2fee5136755">content</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    _author = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(*other.<a class="code" href="classQDiscordMessage.html#a5a9a27f6fc5ea1d9adad4ad006956e5a">author</a>());</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    _channel = other.<a class="code" href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">channel</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    _channelId = other.<a class="code" href="classQDiscordMessage.html#a2f2ffee773ff0b5a9a5b912a4044dc09">channelId</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    _tts = other.<a class="code" href="classQDiscordMessage.html#a2c2e75bb023a7872b0e6500af2c8338a">tts</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    _timestamp = other.<a class="code" href="classQDiscordMessage.html#acab613ddc56479423e00c730a355249c">timestamp</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    _editedTimestamp = other.<a class="code" href="classQDiscordMessage.html#a9a207b39a6636ce11277a420c5755f7a">editedTimestamp</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="ttc" id="classQDiscordMessage_html_a2f2ffee773ff0b5a9a5b912a4044dc09"><div class="ttname"><a href="classQDiscordMessage.html#a2f2ffee773ff0b5a9a5b912a4044dc09">QDiscordMessage::channelId</a></div><div class="ttdeci">QString channelId()</div><div class="ttdoc">Returns the ID of the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00036">qdiscordmessage.hpp:36</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a9a207b39a6636ce11277a420c5755f7a"><div class="ttname"><a href="classQDiscordMessage.html#a9a207b39a6636ce11277a420c5755f7a">QDiscordMessage::editedTimestamp</a></div><div class="ttdeci">QDateTime editedTimestamp()</div><div class="ttdoc">Returns the date at which the message was edited. May be invalid if the message was not edited...</div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00028">qdiscordmessage.hpp:28</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_aa25a1fc61e7ae9d068374d62d2b6bfb9"><div class="ttname"><a href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">QDiscordMessage::channel</a></div><div class="ttdeci">QDiscordChannel * channel()</div><div class="ttdoc">Returns a pointer to the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00038">qdiscordmessage.hpp:38</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a678450c6b15e9243d0a2aeeceeda323a"><div class="ttname"><a href="classQDiscordMessage.html#a678450c6b15e9243d0a2aeeceeda323a">QDiscordMessage::mentionEveryone</a></div><div class="ttdeci">bool mentionEveryone()</div><div class="ttdoc">Returns whether the message successfully mentioned everyone. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00034">qdiscordmessage.hpp:34</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a911aaf0d82a2298ceaabcc29d015adbd"><div class="ttname"><a href="classQDiscordMessage.html#a911aaf0d82a2298ceaabcc29d015adbd">QDiscordMessage::id</a></div><div class="ttdeci">QString id()</div><div class="ttdoc">Returns the message&#39;s ID. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00024">qdiscordmessage.hpp:24</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a5a9a27f6fc5ea1d9adad4ad006956e5a"><div class="ttname"><a href="classQDiscordMessage.html#a5a9a27f6fc5ea1d9adad4ad006956e5a">QDiscordMessage::author</a></div><div class="ttdeci">QDiscordUser * author()</div><div class="ttdoc">Returns a pointer to the user that sent this message. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00040">qdiscordmessage.hpp:40</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a2c2e75bb023a7872b0e6500af2c8338a"><div class="ttname"><a href="classQDiscordMessage.html#a2c2e75bb023a7872b0e6500af2c8338a">QDiscordMessage::tts</a></div><div class="ttdeci">bool tts()</div><div class="ttdoc">Returns whether the message will use text to speech. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00032">qdiscordmessage.hpp:32</a></div></div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00036">36</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    _id = other.<a class="code" href="classQDiscordMessage.html#a911aaf0d82a2298ceaabcc29d015adbd">id</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    _mentionEveryone = other.<a class="code" href="classQDiscordMessage.html#a678450c6b15e9243d0a2aeeceeda323a">mentionEveryone</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    _content = other.<a class="code" href="classQDiscordMessage.html#a193644c07828f8c15328f2fee5136755">content</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span>(other.<a class="code" href="classQDiscordMessage.html#a5a9a27f6fc5ea1d9adad4ad006956e5a">author</a>())</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        _author = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(*other.<a class="code" href="classQDiscordMessage.html#a5a9a27f6fc5ea1d9adad4ad006956e5a">author</a>());</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        _author = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    _channel = other.<a class="code" href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">channel</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    _channelId = other.<a class="code" href="classQDiscordMessage.html#a2f2ffee773ff0b5a9a5b912a4044dc09">channelId</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _tts = other.<a class="code" href="classQDiscordMessage.html#a2c2e75bb023a7872b0e6500af2c8338a">tts</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    _timestamp = other.<a class="code" href="classQDiscordMessage.html#acab613ddc56479423e00c730a355249c">timestamp</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="ttc" id="classQDiscordMessage_html_a2f2ffee773ff0b5a9a5b912a4044dc09"><div class="ttname"><a href="classQDiscordMessage.html#a2f2ffee773ff0b5a9a5b912a4044dc09">QDiscordMessage::channelId</a></div><div class="ttdeci">QString channelId()</div><div class="ttdoc">Returns the ID of the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00052">qdiscordmessage.hpp:52</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_aa25a1fc61e7ae9d068374d62d2b6bfb9"><div class="ttname"><a href="classQDiscordMessage.html#aa25a1fc61e7ae9d068374d62d2b6bfb9">QDiscordMessage::channel</a></div><div class="ttdeci">QDiscordChannel * channel()</div><div class="ttdoc">Returns a pointer to the channel this message was sent in. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00054">qdiscordmessage.hpp:54</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_a678450c6b15e9243d0a2aeeceeda323a"><div class="ttname"><a href="classQDiscordMessage.html#a678450c6b15e9243d0a2aeeceeda323a">QDiscordMessage::mentionEveryone</a></div><div class="ttdeci">bool mentionEveryone()</div><div class="ttdoc">Returns whether the message successfully mentioned everyone. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00050">qdiscordmessage.hpp:50</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_a911aaf0d82a2298ceaabcc29d015adbd"><div class="ttname"><a href="classQDiscordMessage.html#a911aaf0d82a2298ceaabcc29d015adbd">QDiscordMessage::id</a></div><div class="ttdeci">QString id()</div><div class="ttdoc">Returns the message&#39;s ID. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00042">qdiscordmessage.hpp:42</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_a5a9a27f6fc5ea1d9adad4ad006956e5a"><div class="ttname"><a href="classQDiscordMessage.html#a5a9a27f6fc5ea1d9adad4ad006956e5a">QDiscordMessage::author</a></div><div class="ttdeci">QDiscordUser * author()</div><div class="ttdoc">Returns a pointer to the user that sent this message. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00056">qdiscordmessage.hpp:56</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_a2c2e75bb023a7872b0e6500af2c8338a"><div class="ttname"><a href="classQDiscordMessage.html#a2c2e75bb023a7872b0e6500af2c8338a">QDiscordMessage::tts</a></div><div class="ttdeci">bool tts()</div><div class="ttdoc">Returns whether the message will use text to speech. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00048">qdiscordmessage.hpp:48</a></div></div>
 <div class="ttc" id="classQDiscordUser_html"><div class="ttname"><a href="classQDiscordUser.html">QDiscordUser</a></div><div class="ttdoc">Represents a user in the Discord API. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscorduser_8hpp_source.html#l00026">qdiscorduser.hpp:26</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_a193644c07828f8c15328f2fee5136755"><div class="ttname"><a href="classQDiscordMessage.html#a193644c07828f8c15328f2fee5136755">QDiscordMessage::content</a></div><div class="ttdeci">QString content()</div><div class="ttdoc">Returns the message&#39;s contents. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00026">qdiscordmessage.hpp:26</a></div></div>
-<div class="ttc" id="classQDiscordMessage_html_acab613ddc56479423e00c730a355249c"><div class="ttname"><a href="classQDiscordMessage.html#acab613ddc56479423e00c730a355249c">QDiscordMessage::timestamp</a></div><div class="ttdeci">QDateTime timestamp()</div><div class="ttdoc">Returns the date at which the message was created. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00030">qdiscordmessage.hpp:30</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_a193644c07828f8c15328f2fee5136755"><div class="ttname"><a href="classQDiscordMessage.html#a193644c07828f8c15328f2fee5136755">QDiscordMessage::content</a></div><div class="ttdeci">QString content()</div><div class="ttdoc">Returns the message&#39;s contents. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00044">qdiscordmessage.hpp:44</a></div></div>
+<div class="ttc" id="classQDiscordMessage_html_acab613ddc56479423e00c730a355249c"><div class="ttname"><a href="classQDiscordMessage.html#acab613ddc56479423e00c730a355249c">QDiscordMessage::timestamp</a></div><div class="ttdeci">QDateTime timestamp()</div><div class="ttdoc">Returns the date at which the message was created. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmessage_8hpp_source.html#l00046">qdiscordmessage.hpp:46</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -257,8 +255,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the message's ID. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00024">24</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00042">42</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -285,36 +283,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the message's contents. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00026">26</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{<span class="keywordflow">return</span> _content;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a class="anchor" id="a9a207b39a6636ce11277a420c5755f7a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QDateTime QDiscordMessage::editedTimestamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the date at which the message was edited. May be invalid if the message was not edited. </p>
-
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00028">28</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{<span class="keywordflow">return</span> _editedTimestamp;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00044">44</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{<span class="keywordflow">return</span> _content;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -341,8 +311,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the date at which the message was created. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00030">30</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{<span class="keywordflow">return</span> _timestamp;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00046">46</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{<span class="keywordflow">return</span> _timestamp;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -369,8 +339,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns whether the message will use text to speech. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00032">32</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{<span class="keywordflow">return</span> _tts;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00048">48</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{<span class="keywordflow">return</span> _tts;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,8 +367,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns whether the message successfully mentioned everyone. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00034">34</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{<span class="keywordflow">return</span> _mentionEveryone;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00050">50</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{<span class="keywordflow">return</span> _mentionEveryone;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -425,8 +395,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the ID of the channel this message was sent in. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00036">36</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{<span class="keywordflow">return</span> _channelId;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00052">52</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{<span class="keywordflow">return</span> _channelId;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -453,8 +423,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns a pointer to the channel this message was sent in. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00038">38</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{<span class="keywordflow">return</span> _channel;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00054">54</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{<span class="keywordflow">return</span> _channel;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -481,8 +451,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns a pointer to the user that sent this message. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00040">40</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{<span class="keywordflow">return</span> _author;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8hpp_source.html#l00056">56</a> of file <a class="el" href="qdiscordmessage_8hpp_source.html">qdiscordmessage.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{<span class="keywordflow">return</span> _author;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -502,13 +472,13 @@ Public Member Functions</h2></td></tr>
 <p>Returns a pointer to the guild this message was sent in using the channel parameter provided in the class' constructor. </p>
 <dl class="section return"><dt>Returns</dt><dd><code>nullptr</code> if the message was sent in a private channel and thus the channel has no guild or if a channel was not provided in the class' constructor </dd></dl>
 
-<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00037">37</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span>(_channel)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> _channel-&gt;<a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordmessage_8cpp_source.html#l00057">57</a> of file <a class="el" href="qdiscordmessage_8cpp_source.html">qdiscordmessage.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span>(_channel)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> _channel-&gt;<a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -520,7 +490,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 11 2016 20:38:49 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 26 2016 20:31:19 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

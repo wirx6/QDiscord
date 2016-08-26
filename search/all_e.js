@@ -6,5 +6,6 @@ var searchData=
   ['servers',['servers',['../structQDiscordUtilities.html#a475ce75fe6a7dd4bc50c6da1e29636aa',1,'QDiscordUtilities::EndPoints']]],
   ['setguild',['setGuild',['../classQDiscordChannel.html#aceb3909d2b6b4c3ca3e1cfb4d20c1b3e',1,'QDiscordChannel']]],
   ['setmaxreconnectattempts',['setMaxReconnectAttempts',['../classQDiscordWsComponent.html#aa564de61a0a1b001e254442ea890257f',1,'QDiscordWsComponent']]],
+  ['setreconnecttime',['setReconnectTime',['../classQDiscordWsComponent.html#a69dbd174601ff8bb00fe0cbb662dec09',1,'QDiscordWsComponent']]],
   ['state',['state',['../classQDiscord.html#ab86597d7951ba1365e70fbf8970ba647',1,'QDiscord']]]
 ];
