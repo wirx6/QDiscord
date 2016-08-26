@@ -110,7 +110,13 @@ void QDiscordWsComponent::disconnected_()
     qDebug()<<this<<"disconnected";
     _heartbeatTimer.stop();
     if(_tryReconnecting)
+	{
+		if(!_reconnectTimer.isSingleShot())
+			_reconnectTimer.setSingleShot(true);
+		if(_reconnectTimer.isActive())
+			_reconnectTimer.stop();
         _reconnectTimer.start(_reconnectTime);
+	}
     else
     {
         _token = "";
