@@ -52,7 +52,34 @@ void QDiscordWsComponent::close()
     _gateway = "";
     _token = "";
     _reconnectAttempts = 0;
-    _socket.close();
+	_socket.close();
+}
+
+void QDiscordWsComponent::setStatus(bool idle, QDiscordGame game)
+{
+	if(_token == "")
+		return;
+	if(_gateway == "")
+		return;
+	QJsonDocument document;
+	QJsonObject object;
+	object["op"] = 3;
+	QJsonObject presenceObject;
+	presenceObject["idle_since"] = idle?QDateTime::currentMSecsSinceEpoch():QJsonValue();
+	if(game.name() != "")
+	{
+		QJsonObject gameObject;
+		gameObject["name"] = game.name();
+		gameObject["url"] = game.url()==""?QJsonValue():game.url();
+		gameObject["type"] = game.type();
+		presenceObject["game"] = gameObject;
+	}
+	else
+		presenceObject["game"] = QJsonValue();
+	object["d"] = presenceObject;
+	document.setObject(object);
+	qDebug()<<document.toJson(QJsonDocument::Indented);
+	_socket.sendTextMessage(document.toJson(QJsonDocument::Compact));
 }
 
 void QDiscordWsComponent::login(const QString& token)
@@ -64,7 +91,7 @@ void QDiscordWsComponent::login(const QString& token)
     mainObject["op"] = 2;
     QJsonObject dataObject;
     dataObject["token"] = token;
-    dataObject["v"] = 4;
+	dataObject["v"] = 5;
     dataObject["properties"] =
             QJsonObject({
                             {"$os", QSysInfo::kernelType()},
@@ -117,7 +144,7 @@ void QDiscordWsComponent::connected_()
 void QDiscordWsComponent::disconnected_()
 {
     emit disconnected();
-    qDebug()<<this<<"disconnected";
+	qDebug()<<this<<"disconnected: \""<<_socket.closeReason()<<"\":"<<_socket.closeCode();
     _heartbeatTimer.stop();
     if(_tryReconnecting)
 		_reconnectTimer.start(_reconnectTime);

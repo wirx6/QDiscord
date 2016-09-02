@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QTimer>
 #include <QFile>
+#include "qdiscordgame.hpp"
 #include "qdiscordutilities.hpp"
 
 /*!
@@ -70,6 +71,14 @@ public:
      * The information contained in the file is useful for collecting samples for improving this library's coverage of the API.
      */
     void enableDumpfile(){_useDumpfile = true;}
+	/*!
+	 * \brief Sets the client's status.
+	 * \param idle Whether to set the client as idle or not. If true, gives Discord
+	 * the current UNIX time to use for idle duration.
+	 * \param game A QDiscordGame object containing a game to set the current status to.
+	 * Defaults to nothing.
+	 */
+	void setStatus(bool idle = false, QDiscordGame game = QDiscordGame());
 signals:
     ///\brief Emitted when the WebSocket has successfully logged in.
     void loginSuccess();

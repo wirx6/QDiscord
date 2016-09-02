@@ -25,7 +25,7 @@ QString QDiscordUtilities::botName = "QDiscordBot";
 const QString QDiscordUtilities::libName = "QDiscord";
 const QString QDiscordUtilities::libLink = "https://github.com/george99g/QDiscord";
 const QString QDiscordUtilities::libMajor = "0";
-const QString QDiscordUtilities::libMinor = "4";
+const QString QDiscordUtilities::libMinor = "6";
 //const QString QDiscordUtilities::userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
 //                                              ", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
 //                                              "; " + QDiscordUtilities::botName;

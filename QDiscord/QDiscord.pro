@@ -21,7 +21,8 @@ SOURCES += qdiscord/qdiscord.cpp \
     qdiscord/qdiscorduser.cpp \
     qdiscord/qdiscordchannel.cpp \
     qdiscord/qdiscordmember.cpp \
-    qdiscord/qdiscordmessage.cpp
+    qdiscord/qdiscordmessage.cpp \
+    qdiscord/qdiscordgame.cpp
 
 HEADERS += qdiscord/qdiscord.hpp \
     QDiscord \
@@ -33,7 +34,8 @@ HEADERS += qdiscord/qdiscord.hpp \
     qdiscord/qdiscorduser.hpp \
     qdiscord/qdiscordchannel.hpp \
     qdiscord/qdiscordmember.hpp \
-    qdiscord/qdiscordmessage.hpp
+    qdiscord/qdiscordmessage.hpp \
+    qdiscord/qdiscordgame.hpp
 unix {
     target.path = /usr/lib
     INSTALLS += target
