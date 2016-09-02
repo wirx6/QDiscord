@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['gametype',['GameType',['../classQDiscordGame.html#a52ffa1468b86accdfe311bfae0223121',1,'QDiscordGame']]],
   ['gateway',['gateway',['../structQDiscordUtilities.html#a929531b132f7dc6f8ba028ec22bdb74d',1,'QDiscordUtilities::EndPoints']]],
   ['getendpoint',['getEndpoint',['../classQDiscordRestComponent.html#ad6305e2091af425f1569dd98c496ec43',1,'QDiscordRestComponent']]],
   ['guild',['guild',['../classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f',1,'QDiscordChannel::guild()'],['../classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae',1,'QDiscordMember::guild()'],['../classQDiscordMessage.html#a4dd3dc6603e6b45669f915b073721195',1,'QDiscordMessage::guild()'],['../classQDiscordStateComponent.html#af952049e8751b336ef25004fa12d9bbe',1,'QDiscordStateComponent::guild()']]],

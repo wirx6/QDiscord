@@ -2,6 +2,7 @@ var searchData=
 [
   ['qdiscord',['QDiscord',['../classQDiscord.html',1,'']]],
   ['qdiscordchannel',['QDiscordChannel',['../classQDiscordChannel.html',1,'']]],
+  ['qdiscordgame',['QDiscordGame',['../classQDiscordGame.html',1,'']]],
   ['qdiscordguild',['QDiscordGuild',['../classQDiscordGuild.html',1,'']]],
   ['qdiscordmember',['QDiscordMember',['../classQDiscordMember.html',1,'']]],
   ['qdiscordmessage',['QDiscordMessage',['../classQDiscordMessage.html',1,'']]],
