@@ -144,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classQDiscordRestComponent.html#a56dd1bf361e195512053a6425ebd7105">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">QDiscordRestComponent::login</a>(<span class="keyword">const</span> QString&amp; token)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    _authentication = token;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    _authentication = <span class="stringliteral">&quot;Bot &quot;</span>+token;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">get</span>(QDiscordUtilities::endPoints.me,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    [=](){</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        QNetworkReply* reply = <span class="keyword">static_cast&lt;</span>QNetworkReply*<span class="keyword">&gt;</span>(sender());</div>
@@ -304,7 +304,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 2 2016 21:03:52 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 2 2016 21:14:35 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

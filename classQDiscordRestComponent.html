@@ -289,7 +289,7 @@ See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-ac
 
 <p>Definition at line <a class="el" href="qdiscordrestcomponent_8cpp_source.html#l00055">55</a> of file <a class="el" href="qdiscordrestcomponent_8cpp_source.html">qdiscordrestcomponent.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    _authentication = token;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    _authentication = <span class="stringliteral">&quot;Bot &quot;</span>+token;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">get</span>(QDiscordUtilities::endPoints.me,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    [=](){</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        QNetworkReply* reply = <span class="keyword">static_cast&lt;</span>QNetworkReply*<span class="keyword">&gt;</span>(sender());</div>
@@ -672,7 +672,7 @@ See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-ac
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 2 2016 21:03:52 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 2 2016 21:14:35 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
