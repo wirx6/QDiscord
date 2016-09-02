@@ -111,21 +111,13 @@ signals:
      */
     void messageSendFailed(QNetworkReply::NetworkError error);
 private:
-    struct MessageParams
-    {
-        int nonce;
-        QString content;
-        QDiscordChannel* channel;
-        bool tts;
-    };
     void selfCreated(const QDiscordUser& self);
     void post(const QJsonObject& object, const QUrl& url, std::function<void()> function);
     void post(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
     void get(const QUrl& url, std::function<void ()> function);
     QDiscordUser* _self;
     QString _authentication;
-    QNetworkAccessManager _manager;
-    QList<MessageParams> _messageSendQueue;
+	QNetworkAccessManager _manager;
 };
 
 #endif // QDISCORDRESTCOMPONENT_HPP

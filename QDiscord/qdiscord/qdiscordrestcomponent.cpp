@@ -79,35 +79,21 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
         return;
     QString id = channel->id();
     QJsonObject object;
-    object["content"] = content;
-    int seed = QDateTime::currentDateTime().toTime_t();
-    std::minstd_rand0 generator(seed);
-    int nonce;
-    while(true)
-    {
-        nonce = (int)generator();
-        for(int i = 0; i < _messageSendQueue.length(); i++)
-            if(_messageSendQueue[i].nonce == nonce)
-                continue;
-        break;
-    }
-    object["nonce"] = nonce;
+	object["content"] = content;
     if(tts)
         object["tts"] = true;
-    //MessageParams params = {nonce, content, channel, tts};
-    //_messageSendQueue.append(params);
     post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
     [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
         if(!reply)
             return;
         if(reply->error() != QNetworkReply::NoError)
-            emit messageSendFailed(reply->error());
+			emit messageSendFailed(reply->error());
         else
         {
             QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
             QJsonObject object = document.object();
-            QDiscordMessage message(object, nullptr);
+			QDiscordMessage message(object, channel);
             emit messageSent(message);
         }
         reply->deleteLater();
