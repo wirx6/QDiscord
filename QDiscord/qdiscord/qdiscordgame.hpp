@@ -22,19 +22,35 @@
 #include <QJsonObject>
 #include <QDebug>
 
+///\brief Represents a game. Used in statuses.
 class QDiscordGame
 {
 public:
+	/*!
+	 * \brief An enum holding different game types.
+	 *
+	 * Usually set when streaming. If an enum is not contained here, UnknownType will be set.
+	 */
 	enum GameType : int
 	{
 		None = 0,
 		Streaming = 1,
 		UnknownType = -1
 	};
+	/*!
+	 * \brief Manual constructor for a game object. Defaults to an empty object.
+	 * \param name The game you wish to display for the status.
+	 * \param url The game URL for your status. Usually only used when streaming.
+	 * \param type The game type. Set this if you wish to show a streaming status.
+	 */
 	QDiscordGame(QString name = "", QString url = "", GameType type = GameType::None);
+	///\brief Creates an instance from the provided JSON object.
 	QDiscordGame(const QJsonObject& object);
+	///\brief Returns the game name of this object.
 	QString name() {return _name;}
+	///\brief Returns the URL of this game object.
 	QString url() {return _url;}
+	///\brief Returns the type of this game object.
 	GameType type() {return _type;}
 private:
 	QString _name;
