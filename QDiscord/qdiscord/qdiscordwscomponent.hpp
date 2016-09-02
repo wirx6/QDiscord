@@ -95,7 +95,7 @@ signals:
      */
     void connected();
     ///\brief Emitted when the WebSocket has been disconnected from the endpoint.
-    void disconnected();
+	void disconnected(QString reason, int reasonCode);
     ///\brief Emitted when a reconnection attempt is about to start.
     void attemptingReconnect();
     ///\brief Emitted when all reconnect attempts have failed and the WebSocket will stop retrying.

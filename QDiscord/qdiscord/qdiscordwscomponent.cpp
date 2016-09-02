@@ -143,7 +143,7 @@ void QDiscordWsComponent::connected_()
 
 void QDiscordWsComponent::disconnected_()
 {
-    emit disconnected();
+	emit disconnected(_socket.closeReason(), _socket.closeCode());
 	qDebug()<<this<<"disconnected: \""<<_socket.closeReason()<<"\":"<<_socket.closeCode();
     _heartbeatTimer.stop();
     if(_tryReconnecting)
