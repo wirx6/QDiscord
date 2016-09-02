@@ -54,7 +54,7 @@ void QDiscordRestComponent::login(const QString& email, const QString& password)
 
 void QDiscordRestComponent::login(const QString& token)
 {
-    _authentication = token;
+	_authentication = "Bot "+token;
     get(QDiscordUtilities::endPoints.me,
     [=](){
         QNetworkReply* reply = static_cast<QNetworkReply*>(sender());

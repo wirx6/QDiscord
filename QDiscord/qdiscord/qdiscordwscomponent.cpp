@@ -78,7 +78,6 @@ void QDiscordWsComponent::setStatus(bool idle, QDiscordGame game)
 		presenceObject["game"] = QJsonValue();
 	object["d"] = presenceObject;
 	document.setObject(object);
-	qDebug()<<document.toJson(QJsonDocument::Indented);
 	_socket.sendTextMessage(document.toJson(QJsonDocument::Compact));
 }
 
