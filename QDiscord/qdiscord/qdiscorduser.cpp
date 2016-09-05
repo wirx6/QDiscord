@@ -17,6 +17,7 @@
  */
 
 #include "qdiscorduser.hpp"
+#include "qdiscordutilities.hpp"
 
 QDiscordUser::QDiscordUser(const QJsonObject& object)
 {
@@ -26,5 +27,7 @@ QDiscordUser::QDiscordUser(const QJsonObject& object)
     _email = object["email"].toString("");
     _username = object["username"].toString("");
     _verified = object["verified"].toBool(false);
-    qDebug()<<"QDiscordUser("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordUser("<<this<<") constructed";
 }

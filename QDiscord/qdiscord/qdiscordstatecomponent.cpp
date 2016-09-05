@@ -21,7 +21,9 @@
 QDiscordStateComponent::QDiscordStateComponent(QObject* parent) : QObject(parent)
 {
     _self = nullptr;
-    qDebug()<<this<<"constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"constructed";
 }
 
 QDiscordStateComponent::~QDiscordStateComponent()

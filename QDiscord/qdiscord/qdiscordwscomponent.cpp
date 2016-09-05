@@ -31,7 +31,9 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
     _useDumpfile = false;
     _reconnectAttempts = 0;
     _maxReconnectAttempts = -1;
-    qDebug()<<this<<"constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"constructed";
 }
 
 void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QString& token)
@@ -41,7 +43,9 @@ void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QStri
     _gateway = endpoint;
     _token = token;
     _socket.open(endpoint);
-    qDebug()<<this<<"connecting to"<<endpoint;
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"connecting to"<<endpoint;
 }
 
 void QDiscordWsComponent::close()
@@ -114,10 +118,15 @@ void QDiscordWsComponent::reconnect()
         return;
     if(_gateway == "")
         return;
-    qDebug()<<this<<"reconnecting";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"reconnecting";
+
     if(_reconnectAttempts > _maxReconnectAttempts && _maxReconnectAttempts != -1)
     {
-        qDebug()<<"maximum reconnect attempts reached, stopping";
+        if (QDiscordUtilities::debugMode)
+            qDebug()<<"maximum reconnect attempts reached, stopping";
+
         _reconnectAttempts = 0;
         close();
 		emit reconnectImpossible();
@@ -137,13 +146,18 @@ void QDiscordWsComponent::connected_()
 		_reconnectTimer.stop();
     emit connected();
     login(_token);
-    qDebug()<<this<<"connected, logging in";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"connected, logging in";
 }
 
 void QDiscordWsComponent::disconnected_()
 {
 	emit disconnected(_socket.closeReason(), _socket.closeCode());
-	qDebug()<<this<<"disconnected: \""<<_socket.closeReason()<<"\":"<<_socket.closeCode();
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"disconnected: \""<<_socket.closeReason()<<"\":"<<_socket.closeCode();
+
     _heartbeatTimer.stop();
     if(_tryReconnecting)
 		_reconnectTimer.start(_reconnectTime);
@@ -164,7 +178,9 @@ void QDiscordWsComponent::error_(QAbstractSocket::SocketError err)
         _token = "";
         _gateway = "";
         emit loginFailed();
-        qDebug()<<this<<"login failed: "<<err;
+
+        if (QDiscordUtilities::debugMode)
+            qDebug()<<this<<"login failed: "<<err;
     }
 }
 
@@ -180,12 +196,18 @@ void QDiscordWsComponent::textMessageReceived(const QString& message)
         file.flush();
         file.close();
     }
-    qDebug()<<this<<"op:"<<object["op"].toInt()<<" t:"<<object["t"].toString();
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"op:"<<object["op"].toInt()<<" t:"<<object["t"].toString();
+
     if(object["op"].toInt() == 0 && object["t"].toString() == "READY")
     {
         QJsonObject dataObject = object["d"].toObject();
         _heartbeatTimer.start(dataObject["heartbeat_interval"].toInt());
-        qDebug()<<this<<"beating every "<<_heartbeatTimer.interval()/1000.<<" seconds";
+
+        if (QDiscordUtilities::debugMode)
+            qDebug()<<this<<"beating every "<<_heartbeatTimer.interval()/1000.<<" seconds";
+
         _tryReconnecting = true;
         _reconnectAttempts = 0;
         emit loginSuccess();
@@ -311,5 +333,7 @@ void QDiscordWsComponent::heartbeat()
     object["d"] = QString::number(QDateTime::currentMSecsSinceEpoch());
     document.setObject(object);
     _socket.sendTextMessage(document.toJson(QJsonDocument::Compact));
-    qDebug()<<this<<"heartbeat sent";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"heartbeat sent";
 }

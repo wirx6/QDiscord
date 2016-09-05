@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += network websockets
-
+QT += websockets
 QT       -= gui
 
 TARGET = QDiscord

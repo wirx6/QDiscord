@@ -52,7 +52,9 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
         else
             _channels.insert(channel->id(), channel);
     }
-    qDebug()<<"QDiscordGuild("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordGuild("<<this<<") constructed";
 }
 
 QDiscordGuild::QDiscordGuild(QDiscordGuild& other)

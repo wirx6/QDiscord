@@ -22,6 +22,7 @@
 #include "qdiscordmember.hpp"
 #include "qdiscordchannel.hpp"
 #include "qdiscordguild.hpp"
+#include "qdiscordutilities.hpp"
 
 /*!
  * \brief Represents a message in the Discord API.
