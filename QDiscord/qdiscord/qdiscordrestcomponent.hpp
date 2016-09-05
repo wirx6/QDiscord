@@ -73,6 +73,17 @@ public:
      * \param tts Whether to use text to speech when sending the message.
      */
     void sendMessage(const QString& content, QDiscordChannel* channel, bool tts = false);
+	/*!
+	 * \brief Sends a message to the specified channel ID.
+	 * \param content The message's contents.
+	 * \param channelId The channel to send the message in. This may be a private or a guild channel.
+	 * \param tts Whether to use text to speech when sending the message.
+	 */
+	void sendMessage(const QString& content, const QString& channelId, bool tts = false);
+	///\brief Deletes the specified message.
+	void deleteMessage(QDiscordMessage message);
+	///\brief Deletes the specified message by ID and channel ID.
+	void deleteMessage(const QString& messageId, const QString& channelId);
     ///\brief Logs out using the stored token.
     void logout();
     ///\brief Sends a request to receive an endpoint for connecting using a WebSocket.
@@ -110,8 +121,18 @@ signals:
      * may return a more useful string in the context of the Discord API.
      */
     void messageSendFailed(QNetworkReply::NetworkError error);
+	///\brief Emitted when a message has been successfully deleted.
+	void messageDeleted(const QString& messageId);
+	/*!
+	 * \brief Emitted when deleting a message has failed.
+	 * \param error A QNetworkReply::NetworkError enum containing more
+	 * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+	 * may return a more useful string in the context of the Discord API.
+	 */
+	void messageDeleteFailed(QNetworkReply::NetworkError error);
 private:
     void selfCreated(const QDiscordUser& self);
+	void deleteResource(const QUrl& url, std::function<void()> function);
     void post(const QJsonObject& object, const QUrl& url, std::function<void()> function);
     void post(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
     void get(const QUrl& url, std::function<void ()> function);

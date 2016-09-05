@@ -77,27 +77,75 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
         return;
     if(!channel)
         return;
-    QString id = channel->id();
-    QJsonObject object;
+	QString id = channel->id();
+	QJsonObject object;
 	object["content"] = content;
-    if(tts)
-        object["tts"] = true;
-    post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
-    [=](){
-        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-        if(!reply)
-            return;
-        if(reply->error() != QNetworkReply::NoError)
+	if(tts)
+		object["tts"] = true;
+	post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
+	[=](){
+		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+		if(!reply)
+			return;
+		if(reply->error() != QNetworkReply::NoError)
 			emit messageSendFailed(reply->error());
-        else
-        {
-            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-            QJsonObject object = document.object();
+		else
+		{
+			QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+			QJsonObject object = document.object();
 			QDiscordMessage message(object, channel);
-            emit messageSent(message);
-        }
-        reply->deleteLater();
-    });
+			emit messageSent(message);
+		}
+		reply->deleteLater();
+	});
+}
+
+void QDiscordRestComponent::sendMessage(const QString& content, const QString& channelId, bool tts)
+{
+	if(_authentication.isEmpty())
+		return;
+	QJsonObject object;
+	object["content"] = content;
+	if(tts)
+		object["tts"] = true;
+	post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + channelId + "/messages")),
+	[=](){
+		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+		if(!reply)
+			return;
+		if(reply->error() != QNetworkReply::NoError)
+			emit messageSendFailed(reply->error());
+		else
+		{
+			QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+			QJsonObject object = document.object();
+			QDiscordMessage message(object, nullptr);
+			emit messageSent(message);
+		}
+		reply->deleteLater();
+	});
+}
+
+void QDiscordRestComponent::deleteMessage(QDiscordMessage message)
+{
+	deleteMessage(message.id(), message.channelId());
+}
+
+void QDiscordRestComponent::deleteMessage(const QString& messageId, const QString& channelId)
+{
+	if(_authentication.isEmpty())
+		return;
+	deleteResource(QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + channelId + "/messages/" + messageId)),
+	[=](){
+		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+		if(!reply)
+			return;
+		if(reply->error() != QNetworkReply::NoError)
+			emit messageDeleteFailed(reply->error());
+		else
+			emit messageDeleted(messageId);
+		reply->deleteLater();
+	});
 }
 
 void QDiscordRestComponent::logout()
@@ -141,7 +189,20 @@ void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
 {
     if(_self)
         delete _self;
-    _self = new QDiscordUser(self);
+	_self = new QDiscordUser(self);
+}
+
+void QDiscordRestComponent::deleteResource(const QUrl& url, std::function<void()> function)
+{
+	QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+						", v" + QDiscordUtilities::libMajor + ":" + QDiscordUtilities::libMinor + ")" +
+						"; " + QDiscordUtilities::botName;
+	QNetworkRequest request(url);
+	if(_authentication != "")
+		request.setRawHeader("Authorization", _authentication.toUtf8());
+	request.setRawHeader("User-Agent", userAgent.toUtf8());
+	connect(_manager.deleteResource(request), &QNetworkReply::finished, this, function);
+	qDebug()<<this<<"DELETE to "<<url;
 }
 
 void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, std::function<void()> function)
