@@ -2,12 +2,13 @@
 
 git checkout master;
 mkdir ../QDiscordDocs;
-set -e;
 rm -r ../QDiscordDocs/*;
 cp -r docs/html/* ../QDiscordDocs/;
 git checkout gh-pages;
 rm -r $(git ls-files);
-rm -r search;
+rmdir search;
 git checkout -- .gitignore;
-git commit --all -m "Update documentation.";
+cp -r ../QDiscordDocs/* .;
+git add --all;
+git commit -m "Update documentation.";
 git checkout master;
