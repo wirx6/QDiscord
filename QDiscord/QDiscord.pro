@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += network websockets
-QT += websockets
+QT       += network
+QT       +=  websockets
 QT       -= gui
 
 TARGET = QDiscord

@@ -9,11 +9,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.	 If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef QDISCORDMEMBER_HPP
@@ -34,31 +34,31 @@ class QDiscordGuild;
 class QDiscordMember
 {
 public:
-    /*!
-     * \brief Creates an instance from the provided parameters.
-     * \param object A JSON object of a Discord guild member.
-     * \param guild A pointer to the member's parent guild.
-     */
-    QDiscordMember(const QJsonObject& object, QDiscordGuild* guild);
-    ///\brief Deep copies the provided object.
-    QDiscordMember(QDiscordMember& other);
-    ~QDiscordMember();
-    ///\brief Returns whether the member has disabled their speakers.
-    bool deaf() {return _deaf;}
-    ///\brief Returns whether the member has muted their microphone.
-    bool mute() {return _mute;}
-    ///\brief Returns the date at which the member has joined the guild.
-    QDateTime joinedAt() {return _joinedAt;}
-    ///\brief Returns a pointer to the user object contained by this object.
-    QDiscordUser* user() {return _user;}
-    ///\brief Returns a pointer to this object's parent guild.
-    QDiscordGuild* guild() {return _guild;}
+	/*!
+	 * \brief Creates an instance from the provided parameters.
+	 * \param object A JSON object of a Discord guild member.
+	 * \param guild A pointer to the member's parent guild.
+	 */
+	QDiscordMember(const QJsonObject& object, QDiscordGuild* guild);
+	///\brief Deep copies the provided object.
+	QDiscordMember(QDiscordMember& other);
+	~QDiscordMember();
+	///\brief Returns whether the member has disabled their speakers.
+	bool deaf() {return _deaf;}
+	///\brief Returns whether the member has muted their microphone.
+	bool mute() {return _mute;}
+	///\brief Returns the date at which the member has joined the guild.
+	QDateTime joinedAt() {return _joinedAt;}
+	///\brief Returns a pointer to the user object contained by this object.
+	QDiscordUser* user() {return _user;}
+	///\brief Returns a pointer to this object's parent guild.
+	QDiscordGuild* guild() {return _guild;}
 private:
-    bool _deaf;
-    QDateTime _joinedAt;
-    bool _mute;
-    QDiscordUser* _user;
-    QDiscordGuild* _guild;
+	bool _deaf;
+	QDateTime _joinedAt;
+	bool _mute;
+	QDiscordUser* _user;
+	QDiscordGuild* _guild;
 };
 
 #endif // QDISCORDMEMBER_HPP

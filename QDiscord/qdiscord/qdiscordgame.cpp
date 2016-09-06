@@ -9,11 +9,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.	 If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "qdiscordgame.hpp"
@@ -24,8 +24,8 @@ QDiscordGame::QDiscordGame(QString name, QString url, QDiscordGame::GameType typ
 	_url = url;
 	_type = type;
 
-    if (QDiscordUtilities::debugMode)
-        qDebug()<<"QDiscordGame("<<this<<") constructed";
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordGame("<<this<<") constructed";
 }
 
 QDiscordGame::QDiscordGame(const QJsonObject& object)
@@ -44,6 +44,6 @@ QDiscordGame::QDiscordGame(const QJsonObject& object)
 			_type = GameType::UnknownType;
 	}
 
-    if (QDiscordUtilities::debugMode)
-        qDebug()<<"QDiscordGame("<<this<<") constructed";
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordGame("<<this<<") constructed";
 }

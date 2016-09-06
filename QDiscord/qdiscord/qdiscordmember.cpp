@@ -9,11 +9,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.	 If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "qdiscordmember.hpp"
@@ -21,31 +21,31 @@
 
 QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
 {
-    _deaf = object["deaf"].toBool(false);
-    _mute = object["mute"].toBool(false);
-    _joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
-    _user = nullptr;
-    _guild = guild;
-    if(object["user"].isObject())
-        _user = new QDiscordUser(object["user"].toObject());
+	_deaf = object["deaf"].toBool(false);
+	_mute = object["mute"].toBool(false);
+	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
+	_user = nullptr;
+	_guild = guild;
+	if(object["user"].isObject())
+		_user = new QDiscordUser(object["user"].toObject());
 
-    if (QDiscordUtilities::debugMode)
-        qDebug()<<"QDiscordMember("<<this<<") constructed";
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordMember("<<this<<") constructed";
 }
 
 QDiscordMember::QDiscordMember(QDiscordMember& other)
 {
-    _deaf = other.deaf();
-    _mute = other.mute();
-    _joinedAt = other.joinedAt();
-    _user = nullptr;
-    if(other.user())
-        _user = new QDiscordUser(*other.user());
-    _guild = other.guild();
+	_deaf = other.deaf();
+	_mute = other.mute();
+	_joinedAt = other.joinedAt();
+	_user = nullptr;
+	if(other.user())
+		_user = new QDiscordUser(*other.user());
+	_guild = other.guild();
 }
 
 QDiscordMember::~QDiscordMember()
 {
-    if(_user)
-        delete _user;
+	if(_user)
+		delete _user;
 }
