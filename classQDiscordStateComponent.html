@@ -221,8 +221,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 <div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                                              : QObject(parent)</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    _self = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span>(QDiscordUtilities::debugMode)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -302,15 +304,15 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>QDiscord</b></td></t
 <p>Returns a pointer to the channel that has the provided ID. May return <code>nullptr</code> if nothing was found. </p>
 <dl class="section return"><dt>Returns</dt><dd>A private channel, a guild channel or <code>nullptr</code> if nothing was found. </dd></dl>
 
-<p>Definition at line <a class="el" href="qdiscordstatecomponent_8cpp_source.html#l00032">32</a> of file <a class="el" href="qdiscordstatecomponent_8cpp_source.html">qdiscordstatecomponent.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span>(_privateChannels.contains(<span class="keywordtype">id</span>))</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> _privateChannels.value(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; _guilds.values().length(); i++)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span>(_guilds.values()[i]-&gt;channels().keys().contains(<span class="keywordtype">id</span>))</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> _guilds.values()[i]-&gt;channels().value(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordstatecomponent_8cpp_source.html#l00034">34</a> of file <a class="el" href="qdiscordstatecomponent_8cpp_source.html">qdiscordstatecomponent.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span>(_privateChannels.contains(<span class="keywordtype">id</span>))</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> _privateChannels.value(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; _guilds.values().length(); i++)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span>(_guilds.values()[i]-&gt;channels().keys().contains(<span class="keywordtype">id</span>))</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordflow">return</span> _guilds.values()[i]-&gt;channels().value(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -869,7 +871,7 @@ Explicit checks will be required due to this. </p><dl class="params"><dt>Paramet
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 5 2016 18:26:54 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

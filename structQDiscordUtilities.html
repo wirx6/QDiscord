@@ -141,11 +141,14 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:af9da83232f6d843c89231deb5bfb72ea"><td class="memItemLeft" align="right" valign="top">static const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structQDiscordUtilities.html#af9da83232f6d843c89231deb5bfb72ea">libLink</a> = &quot;https://github.com/george99g/<a class="el" href="classQDiscord.html">QDiscord</a>&quot;</td></tr>
 <tr class="memdesc:af9da83232f6d843c89231deb5bfb72ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">A link to where the library repository is located.  <a href="#af9da83232f6d843c89231deb5bfb72ea">More...</a><br /></td></tr>
 <tr class="separator:af9da83232f6d843c89231deb5bfb72ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53304606bb7e4f3a62606b9b444f0cb5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53304606bb7e4f3a62606b9b444f0cb5"></a>
+static const bool&#160;</td><td class="memItemRight" valign="bottom"><b>debugMode</b> = getenv(&quot;QDISCORD_DEBUG&quot;)!=NULL?true:false</td></tr>
+<tr class="separator:a53304606bb7e4f3a62606b9b444f0cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class containing configuration variables and static functions used in <a class="el" href="classQDiscord.html" title="This class represents a single connection to the Discord API. ">QDiscord</a>. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8cpp_source.html#l00031">31</a> of file <a class="el" href="qdiscordutilities_8cpp_source.html">qdiscordutilities.cpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8cpp_source.html#l00032">32</a> of file <a class="el" href="qdiscordutilities_8cpp_source.html">qdiscordutilities.cpp</a>.</p>
 </div><hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="structQDiscordUtilities_1_1EndPoints" id="structQDiscordUtilities_1_1EndPoints"></a>
 <div class="memitem">
@@ -158,7 +161,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <div class="textblock"><p>A struct used for storing the Discord API endpoints. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00030">30</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00031">31</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 </div><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Collaboration diagram for QDiscordUtilities::EndPoints:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -264,36 +267,36 @@ The channels endpoint. </td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A human-readable string to help explain the reason for failure. </dd></dl>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8cpp_source.html#l00045">45</a> of file <a class="el" href="qdiscordutilities_8cpp_source.html">qdiscordutilities.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">switch</span>((<span class="keywordtype">int</span>)error)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">case</span> 200:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;200 (OK): The response completed sucessfully.&quot;</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">case</span> 201:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;200 (CREATED): The entity was created successfully.&quot;</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">case</span> 304:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;304 (NOT MODIFIED): The entity was not modified (no action was taken).&quot;</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">case</span> 400:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;400 (BAD REQUEST): The request was improperly formatted, or the server couldn&#39;t understand it.&quot;</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">case</span> 401:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;401 (UNAUTHORIZED): The Authorization header was missing or invalid.&quot;</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">case</span> 403:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;403 (FORBIDDEN): The Authorization token you passed did not have permission to the resource&quot;</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">case</span> 404:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;404 (NOT FOUND): The resource at the location specified doesn&#39;t exist.&quot;</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">case</span> 405:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;405 (METHOD NOT ALLOWED): The HTTP method used is not valid for the location specified.&quot;</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">case</span> 429:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;429 (TOO MANY REQUESTS): You&#39;ve made too many requests.&quot;</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">case</span> 502:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;502 (GATEWAY UNAVAILABLE): There was not a gateway available to process your request. Wait a bit and retry.&quot;</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span>((<span class="keywordtype">int</span>)error &gt; 499 &amp;&amp; (<span class="keywordtype">int</span>)error &lt; 600)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;5xx (SERVER ERROR): The server had an error processing your request.&quot;</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="stringliteral">&quot;xxx (UNKNOWN): Unknown error.&quot;</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordutilities_8cpp_source.html#l00046">46</a> of file <a class="el" href="qdiscordutilities_8cpp_source.html">qdiscordutilities.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">switch</span>((<span class="keywordtype">int</span>)error)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">case</span> 200:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;200 (OK): The response completed sucessfully.&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">case</span> 201:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;200 (CREATED): The entity was created successfully.&quot;</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">case</span> 304:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;304 (NOT MODIFIED): The entity was not modified (no action was taken).&quot;</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">case</span> 400:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;400 (BAD REQUEST): The request was improperly formatted, or the server couldn&#39;t understand it.&quot;</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">case</span> 401:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;401 (UNAUTHORIZED): The Authorization header was missing or invalid.&quot;</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">case</span> 403:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;403 (FORBIDDEN): The Authorization token you passed did not have permission to the resource&quot;</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">case</span> 404:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;404 (NOT FOUND): The resource at the location specified doesn&#39;t exist.&quot;</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">case</span> 405:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;405 (METHOD NOT ALLOWED): The HTTP method used is not valid for the location specified.&quot;</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">case</span> 429:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;429 (TOO MANY REQUESTS): You&#39;ve made too many requests.&quot;</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">case</span> 502:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;502 (GATEWAY UNAVAILABLE): There was not a gateway available to process your request. Wait a bit and retry.&quot;</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">if</span>((<span class="keywordtype">int</span>)error &gt; 499 &amp;&amp; (<span class="keywordtype">int</span>)error &lt; 600)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;5xx (SERVER ERROR): The server had an error processing your request.&quot;</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="stringliteral">&quot;xxx (UNKNOWN): Unknown error.&quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -319,7 +322,7 @@ The channels endpoint. </td></tr>
 <p>The library name. </p>
 <p>This should always be <a class="el" href="classQDiscord.html" title="This class represents a single connection to the Discord API. ">QDiscord</a>, unless you fork the project and change the name. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00057">57</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00058">58</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 
 </div>
 </div>
@@ -344,7 +347,7 @@ The channels endpoint. </td></tr>
 <p>The name of the bot this library will be used for. </p>
 <p>This should always be changed to your bot's name. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00063">63</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00064">64</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +371,7 @@ The channels endpoint. </td></tr>
 
 <p>The major version of the library. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00065">65</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00066">66</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +396,7 @@ The channels endpoint. </td></tr>
 <p>The minor version of the library. </p>
 <p>This should be incremented with each update of the library. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00071">71</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00072">72</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 
 </div>
 </div>
@@ -417,7 +420,7 @@ The channels endpoint. </td></tr>
 
 <p>A link to where the library repository is located. </p>
 
-<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00073">73</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
+<p>Definition at line <a class="el" href="qdiscordutilities_8hpp_source.html#l00074">74</a> of file <a class="el" href="qdiscordutilities_8hpp_source.html">qdiscordutilities.hpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +431,7 @@ The channels endpoint. </td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 5 2016 18:26:54 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

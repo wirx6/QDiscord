@@ -168,8 +168,10 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    _guild = <a class="code" href="classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae">guild</a>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;user&quot;</span>].isObject())</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        _user = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(<span class="keywordtype">object</span>[<span class="stringliteral">&quot;user&quot;</span>].toObject());</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordMember(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) constructed&quot;</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span>(QDiscordUtilities::debugMode)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordMember(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) constructed&quot;</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
 <div class="ttc" id="classQDiscordMember_html_aea9cc047d0b5874da65bfb5f080a89ae"><div class="ttname"><a href="classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae">QDiscordMember::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this object&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmember_8hpp_source.html#l00055">qdiscordmember.hpp:55</a></div></div>
 <div class="ttc" id="classQDiscordUser_html"><div class="ttname"><a href="classQDiscordUser.html">QDiscordUser</a></div><div class="ttdoc">Represents a user in the Discord API. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscorduser_8hpp_source.html#l00026">qdiscorduser.hpp:26</a></div></div>
 </div><!-- fragment -->
@@ -191,16 +193,16 @@ Public Member Functions</h2></td></tr>
 
 <p>Deep copies the provided object. </p>
 
-<p>Definition at line <a class="el" href="qdiscordmember_8cpp_source.html#l00034">34</a> of file <a class="el" href="qdiscordmember_8cpp_source.html">qdiscordmember.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    _deaf = other.<a class="code" href="classQDiscordMember.html#aa99d415c2a23560de0cf08742d80846c">deaf</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    _mute = other.<a class="code" href="classQDiscordMember.html#a703d8d85aba26d67f6680212cbb9c6d2">mute</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    _joinedAt = other.<a class="code" href="classQDiscordMember.html#aa4ba8f479cdb1a4111ef0e7bb100c897">joinedAt</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    _user = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span>(other.<a class="code" href="classQDiscordMember.html#a2f583a0c353b44ce245babc253377631">user</a>())</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        _user = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(*other.<a class="code" href="classQDiscordMember.html#a2f583a0c353b44ce245babc253377631">user</a>());</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    _guild = other.<a class="code" href="classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae">guild</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<p>Definition at line <a class="el" href="qdiscordmember_8cpp_source.html#l00036">36</a> of file <a class="el" href="qdiscordmember_8cpp_source.html">qdiscordmember.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    _deaf = other.<a class="code" href="classQDiscordMember.html#aa99d415c2a23560de0cf08742d80846c">deaf</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    _mute = other.<a class="code" href="classQDiscordMember.html#a703d8d85aba26d67f6680212cbb9c6d2">mute</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    _joinedAt = other.<a class="code" href="classQDiscordMember.html#aa4ba8f479cdb1a4111ef0e7bb100c897">joinedAt</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    _user = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>(other.<a class="code" href="classQDiscordMember.html#a2f583a0c353b44ce245babc253377631">user</a>())</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        _user = <span class="keyword">new</span> <a class="code" href="classQDiscordUser.html">QDiscordUser</a>(*other.<a class="code" href="classQDiscordMember.html#a2f583a0c353b44ce245babc253377631">user</a>());</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    _guild = other.<a class="code" href="classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae">guild</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="ttc" id="classQDiscordMember_html_a703d8d85aba26d67f6680212cbb9c6d2"><div class="ttname"><a href="classQDiscordMember.html#a703d8d85aba26d67f6680212cbb9c6d2">QDiscordMember::mute</a></div><div class="ttdeci">bool mute()</div><div class="ttdoc">Returns whether the member has muted their microphone. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmember_8hpp_source.html#l00049">qdiscordmember.hpp:49</a></div></div>
 <div class="ttc" id="classQDiscordMember_html_aea9cc047d0b5874da65bfb5f080a89ae"><div class="ttname"><a href="classQDiscordMember.html#aea9cc047d0b5874da65bfb5f080a89ae">QDiscordMember::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this object&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmember_8hpp_source.html#l00055">qdiscordmember.hpp:55</a></div></div>
 <div class="ttc" id="classQDiscordMember_html_aa4ba8f479cdb1a4111ef0e7bb100c897"><div class="ttname"><a href="classQDiscordMember.html#aa4ba8f479cdb1a4111ef0e7bb100c897">QDiscordMember::joinedAt</a></div><div class="ttdeci">QDateTime joinedAt()</div><div class="ttdoc">Returns the date at which the member has joined the guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordmember_8hpp_source.html#l00051">qdiscordmember.hpp:51</a></div></div>
@@ -358,7 +360,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 5 2016 18:26:54 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

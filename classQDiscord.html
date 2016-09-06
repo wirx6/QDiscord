@@ -192,8 +192,10 @@ It also handles communication between the components, allowing each component to
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    connectComponents();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    _signalsConnected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span>(QDiscordUtilities::debugMode)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        qDebug()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;constructed&quot;</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -233,13 +235,13 @@ It also handles communication between the components, allowing each component to
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>This method is deprecated for bot usage.<br />
 See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-accounts">https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-accounts</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00028">28</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    connectDiscordSignals();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    _signalsConnected = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">login</a>(email, password);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="ttc" id="classQDiscordRestComponent_html_a39ccf40e4d4941e5a890811e80dfbffa"><div class="ttname"><a href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">QDiscordRestComponent::login</a></div><div class="ttdeci">void login(const QString &amp;email, const QString &amp;password)</div><div class="ttdoc">Acquires a token for use in all other methods using a standard Discord account. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00034">qdiscordrestcomponent.cpp:34</a></div></div>
+<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00030">30</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    connectDiscordSignals();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    _signalsConnected = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">login</a>(email, password);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="ttc" id="classQDiscordRestComponent_html_a39ccf40e4d4941e5a890811e80dfbffa"><div class="ttname"><a href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">QDiscordRestComponent::login</a></div><div class="ttdeci">void login(const QString &amp;email, const QString &amp;password)</div><div class="ttdoc">Acquires a token for use in all other methods using a standard Discord account. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00036">qdiscordrestcomponent.cpp:36</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -265,13 +267,13 @@ See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-ac
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00035">35</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    connectDiscordSignals();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    _signalsConnected = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">login</a>(token);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
-<div class="ttc" id="classQDiscordRestComponent_html_a39ccf40e4d4941e5a890811e80dfbffa"><div class="ttname"><a href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">QDiscordRestComponent::login</a></div><div class="ttdeci">void login(const QString &amp;email, const QString &amp;password)</div><div class="ttdoc">Acquires a token for use in all other methods using a standard Discord account. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00034">qdiscordrestcomponent.cpp:34</a></div></div>
+<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00037">37</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    connectDiscordSignals();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    _signalsConnected = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">login</a>(token);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="ttc" id="classQDiscordRestComponent_html_a39ccf40e4d4941e5a890811e80dfbffa"><div class="ttname"><a href="classQDiscordRestComponent.html#a39ccf40e4d4941e5a890811e80dfbffa">QDiscordRestComponent::login</a></div><div class="ttdeci">void login(const QString &amp;email, const QString &amp;password)</div><div class="ttdoc">Acquires a token for use in all other methods using a standard Discord account. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00036">qdiscordrestcomponent.cpp:36</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,13 +292,13 @@ See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-ac
 
 <p>Handles logging out from the Discord API and destroying any state information in memory. </p>
 
-<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00042">42</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    _ws.<a class="code" href="classQDiscordWsComponent.html#a72b29bdc0fb58b92adf76fa75543e536">close</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a3aff92864a5eef9bf2d38d49d21558d1">logout</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="ttc" id="classQDiscordWsComponent_html_a72b29bdc0fb58b92adf76fa75543e536"><div class="ttname"><a href="classQDiscordWsComponent.html#a72b29bdc0fb58b92adf76fa75543e536">QDiscordWsComponent::close</a></div><div class="ttdeci">void close()</div><div class="ttdoc">Makes the WebSocket disconnect from the endpoint. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordwscomponent_8cpp_source.html#l00047">qdiscordwscomponent.cpp:47</a></div></div>
-<div class="ttc" id="classQDiscordRestComponent_html_a3aff92864a5eef9bf2d38d49d21558d1"><div class="ttname"><a href="classQDiscordRestComponent.html#a3aff92864a5eef9bf2d38d49d21558d1">QDiscordRestComponent::logout</a></div><div class="ttdeci">void logout()</div><div class="ttdoc">Logs out using the stored token. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00151">qdiscordrestcomponent.cpp:151</a></div></div>
+<p>Definition at line <a class="el" href="qdiscord_8cpp_source.html#l00044">44</a> of file <a class="el" href="qdiscord_8cpp_source.html">qdiscord.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    _ws.<a class="code" href="classQDiscordWsComponent.html#a72b29bdc0fb58b92adf76fa75543e536">close</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _rest.<a class="code" href="classQDiscordRestComponent.html#a3aff92864a5eef9bf2d38d49d21558d1">logout</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="ttc" id="classQDiscordWsComponent_html_a72b29bdc0fb58b92adf76fa75543e536"><div class="ttname"><a href="classQDiscordWsComponent.html#a72b29bdc0fb58b92adf76fa75543e536">QDiscordWsComponent::close</a></div><div class="ttdeci">void close()</div><div class="ttdoc">Makes the WebSocket disconnect from the endpoint. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordwscomponent_8cpp_source.html#l00051">qdiscordwscomponent.cpp:51</a></div></div>
+<div class="ttc" id="classQDiscordRestComponent_html_a3aff92864a5eef9bf2d38d49d21558d1"><div class="ttname"><a href="classQDiscordRestComponent.html#a3aff92864a5eef9bf2d38d49d21558d1">QDiscordRestComponent::logout</a></div><div class="ttdeci">void logout()</div><div class="ttdoc">Logs out using the stored token. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordrestcomponent_8cpp_source.html#l00164">qdiscordrestcomponent.cpp:164</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -493,7 +495,7 @@ See <a href="https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-ac
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 5 2016 18:26:54 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
