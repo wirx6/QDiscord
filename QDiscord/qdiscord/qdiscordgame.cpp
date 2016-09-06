@@ -23,7 +23,9 @@ QDiscordGame::QDiscordGame(QString name, QString url, QDiscordGame::GameType typ
 	_name = name;
 	_url = url;
 	_type = type;
-	qDebug()<<"QDiscordGame("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordGame("<<this<<") constructed";
 }
 
 QDiscordGame::QDiscordGame(const QJsonObject& object)
@@ -41,5 +43,7 @@ QDiscordGame::QDiscordGame(const QJsonObject& object)
 		default:
 			_type = GameType::UnknownType;
 	}
-	qDebug()<<"QDiscordGame("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordGame("<<this<<") constructed";
 }

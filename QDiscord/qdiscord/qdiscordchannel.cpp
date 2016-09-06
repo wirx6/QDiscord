@@ -39,7 +39,9 @@ QDiscordChannel::QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild
     _recipient = nullptr;
     if(_isPrivate)
         _recipient = new QDiscordUser(recipientObject);
-    qDebug()<<"QDiscordChannel("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordChannel("<<this<<") constructed";
 }
 
 QDiscordChannel::QDiscordChannel(QDiscordChannel& other)

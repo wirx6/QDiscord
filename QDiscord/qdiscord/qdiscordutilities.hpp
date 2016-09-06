@@ -71,6 +71,7 @@ public:
     const static QString libMinor;
     ///\brief A link to where the library repository is located.
     const static QString libLink;
+    const static bool debugMode;
 };
 
 #endif // QDISCORDUTILITIES_HPP

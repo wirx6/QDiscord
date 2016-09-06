@@ -28,7 +28,9 @@ QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
     _guild = guild;
     if(object["user"].isObject())
         _user = new QDiscordUser(object["user"].toObject());
-    qDebug()<<"QDiscordMember("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordMember("<<this<<") constructed";
 }
 
 QDiscordMember::QDiscordMember(QDiscordMember& other)

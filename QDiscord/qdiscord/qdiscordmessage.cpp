@@ -30,7 +30,9 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object, QDiscordChannel* cha
 		_author = new QDiscordUser(object["author"].toObject());
     _tts = object["tts"].toBool(false);
 	_timestamp = QDateTime::fromString(object["timestamp"].toString(""), Qt::ISODate);;
-    qDebug()<<"QDiscordMessage("<<this<<") constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<"QDiscordMessage("<<this<<") constructed";
 }
 
 QDiscordMessage::QDiscordMessage(QDiscordMessage& other)

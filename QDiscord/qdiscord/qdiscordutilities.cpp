@@ -26,6 +26,7 @@ const QString QDiscordUtilities::libName = "QDiscord";
 const QString QDiscordUtilities::libLink = "https://github.com/george99g/QDiscord";
 const QString QDiscordUtilities::libMajor = "0";
 const QString QDiscordUtilities::libMinor = "7";
+const bool QDiscordUtilities::debugMode = false;
 //--------------------------------------------------------------------------------------
 
 const struct QDiscordUtilities::EndPoints QDiscordUtilities::endPoints =

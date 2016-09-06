@@ -22,7 +22,9 @@ QDiscordRestComponent::QDiscordRestComponent(QObject* parent) : QObject(parent)
 {
     _authentication = "";
     _self = nullptr;
-    qDebug()<<this<<"constructed";
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"constructed";
 }
 
 QDiscordRestComponent::~QDiscordRestComponent()
@@ -75,18 +77,24 @@ void QDiscordRestComponent::sendMessage(const QString& content, QDiscordChannel*
 {
     if(_authentication.isEmpty())
         return;
+
     if(!channel)
         return;
+
 	QString id = channel->id();
 	QJsonObject object;
 	object["content"] = content;
+
 	if(tts)
 		object["tts"] = true;
-	post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),
-	[=](){
+
+    post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + id + "/messages")),[=]()
+    {
 		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
 		if(!reply)
 			return;
+
 		if(reply->error() != QNetworkReply::NoError)
 			emit messageSendFailed(reply->error());
 		else
@@ -104,18 +112,23 @@ void QDiscordRestComponent::sendMessage(const QString& content, const QString& c
 {
 	if(_authentication.isEmpty())
 		return;
+
 	QJsonObject object;
 	object["content"] = content;
+
 	if(tts)
 		object["tts"] = true;
-	post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + channelId + "/messages")),
-	[=](){
+
+    post(object, QUrl(QString(QDiscordUtilities::endPoints.channels + "/" + channelId + "/messages")), [=]()
+    {
 		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
-		if(!reply)
-			return;
+
+        if(!reply)
+            return;
+
 		if(reply->error() != QNetworkReply::NoError)
 			emit messageSendFailed(reply->error());
-		else
+        else
 		{
 			QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 			QJsonObject object = document.object();
@@ -219,7 +232,9 @@ void QDiscordRestComponent::post(const QJsonObject& object, const QUrl& url, std
     request.setRawHeader("content-type", "application/json");
     QNetworkReply* reply = _manager.post(request, document.toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, function);
-    qDebug()<<this<<"posted: "<<object<<" to "<<url;
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"posted: "<<object<<" to "<<url;
 }
 
 void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, std::function<void()> function)
@@ -236,7 +251,9 @@ void QDiscordRestComponent::post(const QJsonArray& array, const QUrl& url, std::
     request.setRawHeader("content-type", "application/json");
     QNetworkReply* reply = _manager.post(request, document.toJson(QJsonDocument::Compact));
     connect(reply, &QNetworkReply::finished, this, function);
-    qDebug()<<this<<"posted: "<<array<<" to "<<url;
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"posted: "<<array<<" to "<<url;
 }
 
 void QDiscordRestComponent::get(const QUrl& url, std::function<void()> function)
@@ -250,5 +267,7 @@ void QDiscordRestComponent::get(const QUrl& url, std::function<void()> function)
     request.setRawHeader("User-Agent", userAgent.toUtf8());
     QNetworkReply* reply = _manager.get(request);
     connect(reply, &QNetworkReply::finished, this, function);
-    qDebug()<<this<<"GET to "<<url;
+
+    if (QDiscordUtilities::debugMode)
+        qDebug()<<this<<"GET to "<<url;
 }
