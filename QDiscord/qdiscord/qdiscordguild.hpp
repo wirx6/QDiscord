@@ -59,6 +59,8 @@ public:
 	QDateTime joinedAt() {return _joinedAt;}
 	///\brief Returns a map of pointers to the guild's channels and their IDs.
 	QMap<QString, QDiscordChannel*> channels() {return _channels;}
+	///\brief Returns a map of pointers to the guild's members and their IDs.
+	QMap<QString, QDiscordMember*> members() {return _members;}
 	/*!
 	 * \brief Returns a pointer to a guild channel that has the provided ID.
 	 * May return `nullptr` if the channel was not found.
