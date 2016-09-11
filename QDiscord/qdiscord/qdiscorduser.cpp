@@ -31,3 +31,22 @@ QDiscordUser::QDiscordUser(const QJsonObject& object)
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordUser("<<this<<") constructed";
 }
+
+void QDiscordUser::update(const QJsonObject& object)
+{
+	if(object.contains("id"))
+		_id = object["id"].toString("");
+	if(object.contains("bot"))
+		_bot = object["bot"].toBool(false);
+	if(object.contains("discriminator"))
+		_discriminator = object["discriminator"].toString("");
+	if(object.contains("email"))
+		_email = object["email"].toString("");
+	if(object.contains("username"))
+		_username = object["username"].toString("");
+	if(object.contains("verified"))
+		_verified = object["verified"].toBool(false);
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordUser("<<this<<") updated";
+}

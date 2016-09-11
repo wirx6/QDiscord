@@ -142,7 +142,25 @@ void QDiscordStateComponent::guildMemberRemoveReceived(const QJsonObject& object
 
 void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object)
 {
-
+	QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
+	if(guildPtr)
+	{
+		QDiscordMember* memberPtr = guildPtr->member(object["user"].toObject()["id"].toString(""));
+		if(memberPtr)
+		{
+			memberPtr->update(object, guildPtr);
+			emit guildMemberUpdated(memberPtr);
+		}
+		else
+			if(QDiscordUtilities::debugMode)
+				qDebug()<<this<<"DESYNC: Member update received but member is not stored in guild.\n"
+								"Member ID: "+object["user"].toObject()["id"].toString("")+"\n"
+								"Guild ID: "+guildPtr->id();
+	}
+	else
+		if(QDiscordUtilities::debugMode)
+			qDebug()<<this<<"DESYNC: Member update received but guild is not stored in state.\n"
+							"Guild ID: "+object["guild_id"].toString("");
 }
 
 void QDiscordStateComponent::guildRoleCreateReceived(const QJsonObject& object)

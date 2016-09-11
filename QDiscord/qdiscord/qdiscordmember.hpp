@@ -43,6 +43,8 @@ public:
 	///\brief Deep copies the provided object.
 	QDiscordMember(QDiscordMember& other);
 	~QDiscordMember();
+	///\brief Updates the current instance from the provided parameters.
+	void update(const QJsonObject& object, QDiscordGuild* guild);
 	///\brief Returns whether the member has disabled their speakers.
 	bool deaf() {return _deaf;}
 	///\brief Returns whether the member has muted their microphone.
@@ -53,6 +55,8 @@ public:
 	QDiscordUser* user() {return _user;}
 	///\brief Returns a pointer to this object's parent guild.
 	QDiscordGuild* guild() {return _guild;}
+	///\brief Returns this member's nickname.
+	QString nickname() {return _nickname;}
 	///\brief Returns a string which allows you to mention this member using their username.
 	QString mentionUsername() {return QString("<@"+(_user?_user->id():"nullptr")+">");}
 	///\brief Returns a string which allows you to mention this member using their nickname.
@@ -61,6 +65,7 @@ private:
 	bool _deaf;
 	QDateTime _joinedAt;
 	bool _mute;
+	QString _nickname;
 	QDiscordUser* _user;
 	QDiscordGuild* _guild;
 };

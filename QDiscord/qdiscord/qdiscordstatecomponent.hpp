@@ -89,6 +89,11 @@ signals:
 	 */
 	void guildMemberRemoved(QDiscordMember member);
 	/*!
+	 * \brief Emitted when a member in a guild has received an update.
+	 * \param member A pointer to the guild member that has been updated.
+	 */
+	void guildMemberUpdated(QDiscordMember* member);
+	/*!
 	 * \brief Emitted when information about the current client has been collected.
 	 *
 	 * This usually gets emitted whenever the READY event gets processed.

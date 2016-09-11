@@ -23,6 +23,7 @@ QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
 {
 	_deaf = object["deaf"].toBool(false);
 	_mute = object["mute"].toBool(false);
+	_nickname = object["nick"].toString("");
 	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
 	_user = nullptr;
 	_guild = guild;
@@ -48,4 +49,23 @@ QDiscordMember::~QDiscordMember()
 {
 	if(_user)
 		delete _user;
+}
+
+void QDiscordMember::update(const QJsonObject& object, QDiscordGuild* guild)
+{
+	if(object.contains("deaf"))
+		_deaf = object["deaf"].toBool(false);
+	if(object.contains("mute"))
+		_mute = object["mute"].toBool(false);
+	if(object.contains("nick"))
+		_nickname = object["nick"].toString("");
+	if(object.contains("joined_at"))
+		_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
+	if(guild)
+		_guild = guild;
+	if(_user)
+		_user->update(object["user"].toObject());
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordMember("<<this<<") updated";
 }

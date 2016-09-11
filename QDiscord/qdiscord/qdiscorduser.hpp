@@ -31,6 +31,8 @@ public:
 	 * \param object A JSON object of a Discord user.
 	 */
 	QDiscordUser(const QJsonObject& object);
+	///\brief Updates the current instance from the provided parameters.
+	void update(const QJsonObject& object);
 	///\brief Returns the user's ID.
 	QString id() {return _id;}
 	///\brief Returns the user's avatar string.
