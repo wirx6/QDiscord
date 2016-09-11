@@ -82,6 +82,8 @@ public:
 	 * \param guild A pointer to this object's new parent guild.
 	 */
 	void setGuild(QDiscordGuild* guild) {_guild = guild;}
+	///\brief Returns a string which allows you to mention this channel.
+	QString mention() {return QString("<#"+_id+">");}
 private:
 	QString _id;
 	QString _name;

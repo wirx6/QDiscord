@@ -53,6 +53,10 @@ public:
 	QDiscordUser* user() {return _user;}
 	///\brief Returns a pointer to this object's parent guild.
 	QDiscordGuild* guild() {return _guild;}
+	///\brief Returns a string which allows you to mention this member using their username.
+	QString mentionUsername() {return QString("<@"+(_user?_user->id():"nullptr")+">");}
+	///\brief Returns a string which allows you to mention this member using their nickname.
+	QString mentionNickname() {return QString("<@!"+(_user?_user->id():"nullptr")+">");}
 private:
 	bool _deaf;
 	QDateTime _joinedAt;

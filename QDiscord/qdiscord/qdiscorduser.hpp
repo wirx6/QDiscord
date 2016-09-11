@@ -45,6 +45,8 @@ public:
 	QString username() {return _username;}
 	///\brief Returns whether the user has verified their e-mail.
 	bool verified() {return _verified;}
+	///\brief Returns a string which allows you to mention this user using their username.
+	QString mention() {return QString("<@"+_id+">");}
 private:
 	QString _id;
 	QString _avatar;
