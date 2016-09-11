@@ -101,6 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac49f7902450cb367524e994cee3408d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordUser.html#ac49f7902450cb367524e994cee3408d5">QDiscordUser</a> (const QJsonObject &amp;object)</td></tr>
 <tr class="memdesc:ac49f7902450cb367524e994cee3408d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance from the provided parameters.  <a href="#ac49f7902450cb367524e994cee3408d5">More...</a><br /></td></tr>
 <tr class="separator:ac49f7902450cb367524e994cee3408d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07fe1d3d30538eed77a35cf14a98e005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordUser.html#a07fe1d3d30538eed77a35cf14a98e005">update</a> (const QJsonObject &amp;object)</td></tr>
+<tr class="memdesc:a07fe1d3d30538eed77a35cf14a98e005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the current instance from the provided parameters.  <a href="#a07fe1d3d30538eed77a35cf14a98e005">More...</a><br /></td></tr>
+<tr class="separator:a07fe1d3d30538eed77a35cf14a98e005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90fa64af2d88c1549fbc46080fc66dc0"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordUser.html#a90fa64af2d88c1549fbc46080fc66dc0">id</a> ()</td></tr>
 <tr class="memdesc:a90fa64af2d88c1549fbc46080fc66dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the user's ID.  <a href="#a90fa64af2d88c1549fbc46080fc66dc0">More...</a><br /></td></tr>
 <tr class="separator:a90fa64af2d88c1549fbc46080fc66dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,6 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a77e72bf31593711da1f76651825b2dd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordUser.html#a77e72bf31593711da1f76651825b2dd2">verified</a> ()</td></tr>
 <tr class="memdesc:a77e72bf31593711da1f76651825b2dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the user has verified their e-mail.  <a href="#a77e72bf31593711da1f76651825b2dd2">More...</a><br /></td></tr>
 <tr class="separator:a77e72bf31593711da1f76651825b2dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db1bdc307a84bffc500645e63035406"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordUser.html#a1db1bdc307a84bffc500645e63035406">mention</a> ()</td></tr>
+<tr class="memdesc:a1db1bdc307a84bffc500645e63035406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string which allows you to mention this user using their username.  <a href="#a1db1bdc307a84bffc500645e63035406">More...</a><br /></td></tr>
+<tr class="separator:a1db1bdc307a84bffc500645e63035406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a user in the Discord API. </p>
@@ -166,6 +172,43 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a07fe1d3d30538eed77a35cf14a98e005"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QDiscordUser::update </td>
+          <td>(</td>
+          <td class="paramtype">const QJsonObject &amp;&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the current instance from the provided parameters. </p>
+
+<p>Definition at line <a class="el" href="qdiscorduser_8cpp_source.html#l00035">35</a> of file <a class="el" href="qdiscorduser_8cpp_source.html">qdiscorduser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;id&quot;</span>))</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        _id = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;id&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;bot&quot;</span>))</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        _bot = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;bot&quot;</span>].toBool(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;discriminator&quot;</span>))</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        _discriminator = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;discriminator&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;email&quot;</span>))</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        _email = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;email&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;username&quot;</span>))</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        _username = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;username&quot;</span>].toString(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>(<span class="keywordtype">object</span>.contains(<span class="stringliteral">&quot;verified&quot;</span>))</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        _verified = <span class="keywordtype">object</span>[<span class="stringliteral">&quot;verified&quot;</span>].toBool(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span>(QDiscordUtilities::debugMode)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        qDebug()&lt;&lt;<span class="stringliteral">&quot;QDiscordUser(&quot;</span>&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="stringliteral">&quot;) updated&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="a90fa64af2d88c1549fbc46080fc66dc0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -189,8 +232,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the user's ID. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00035">35</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00037">37</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{<span class="keywordflow">return</span> _id;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -217,8 +260,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the user's avatar string. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00037">37</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{<span class="keywordflow">return</span> _avatar;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00039">39</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{<span class="keywordflow">return</span> _avatar;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -245,8 +288,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns whether the user is a bot. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00039">39</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{<span class="keywordflow">return</span> _bot;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00041">41</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{<span class="keywordflow">return</span> _bot;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,8 +316,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the user's discriminator. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00041">41</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{<span class="keywordflow">return</span> _discriminator;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00043">43</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{<span class="keywordflow">return</span> _discriminator;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -301,8 +344,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the user's e-mail, if it can be determined. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00043">43</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{<span class="keywordflow">return</span> _email;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00045">45</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{<span class="keywordflow">return</span> _email;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -329,8 +372,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the user's username. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00045">45</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{<span class="keywordflow">return</span> _username;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00047">47</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{<span class="keywordflow">return</span> _username;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -357,8 +400,36 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns whether the user has verified their e-mail. </p>
 
-<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00047">47</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{<span class="keywordflow">return</span> _verified;}</div>
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00049">49</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{<span class="keywordflow">return</span> _verified;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a1db1bdc307a84bffc500645e63035406"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString QDiscordUser::mention </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a string which allows you to mention this user using their username. </p>
+
+<p>Definition at line <a class="el" href="qdiscorduser_8hpp_source.html#l00051">51</a> of file <a class="el" href="qdiscorduser_8hpp_source.html">qdiscorduser.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{<span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;&lt;@&quot;</span>+_id+<span class="stringliteral">&quot;&gt;&quot;</span>);}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -369,7 +440,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 11 2016 20:14:17 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

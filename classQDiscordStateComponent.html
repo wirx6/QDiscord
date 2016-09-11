@@ -129,6 +129,9 @@ Signals</h2></td></tr>
 <tr class="memitem:abb3f5300497094ce4d61cb6cf0f019c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordStateComponent.html#abb3f5300497094ce4d61cb6cf0f019c7">guildMemberRemoved</a> (<a class="el" href="classQDiscordMember.html">QDiscordMember</a> member)</td></tr>
 <tr class="memdesc:abb3f5300497094ce4d61cb6cf0f019c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a member has been removed from a guild.  <a href="#abb3f5300497094ce4d61cb6cf0f019c7">More...</a><br /></td></tr>
 <tr class="separator:abb3f5300497094ce4d61cb6cf0f019c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84fb6217f6f3ba4493186bf66d776b29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordStateComponent.html#a84fb6217f6f3ba4493186bf66d776b29">guildMemberUpdated</a> (<a class="el" href="classQDiscordMember.html">QDiscordMember</a> *member)</td></tr>
+<tr class="memdesc:a84fb6217f6f3ba4493186bf66d776b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a member in a guild has received an update.  <a href="#a84fb6217f6f3ba4493186bf66d776b29">More...</a><br /></td></tr>
+<tr class="separator:a84fb6217f6f3ba4493186bf66d776b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac62b7c55f34b6aff0cef1b7fb14becf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQDiscordStateComponent.html#aac62b7c55f34b6aff0cef1b7fb14becf">selfCreated</a> (<a class="el" href="classQDiscordUser.html">QDiscordUser</a> <a class="el" href="classQDiscordStateComponent.html#a4d40194c77edb431a988d0b1be29d7b7">self</a>)</td></tr>
 <tr class="memdesc:aac62b7c55f34b6aff0cef1b7fb14becf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when information about the current client has been collected.  <a href="#aac62b7c55f34b6aff0cef1b7fb14becf">More...</a><br /></td></tr>
 <tr class="separator:aac62b7c55f34b6aff0cef1b7fb14becf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -533,6 +536,38 @@ Explicit checks will be required due to this. </p><dl class="params"><dt>Paramet
 
 </div>
 </div>
+<a class="anchor" id="a84fb6217f6f3ba4493186bf66d776b29"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QDiscordStateComponent::guildMemberUpdated </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classQDiscordMember.html">QDiscordMember</a> *&#160;</td>
+          <td class="paramname"><em>member</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emitted when a member in a guild has received an update. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">member</td><td>A pointer to the guild member that has been updated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="aac62b7c55f34b6aff0cef1b7fb14becf"></a>
 <div class="memitem">
 <div class="memproto">
@@ -871,7 +906,7 @@ Explicit checks will be required due to this. </p><dl class="params"><dt>Paramet
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 11 2016 20:14:17 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

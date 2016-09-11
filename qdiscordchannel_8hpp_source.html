@@ -134,19 +134,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">   73</a></span>&#160;    <a class="code" href="classQDiscordGuild.html">QDiscordGuild</a>* <a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>() {<span class="keywordflow">return</span> _guild;}</div>
 <div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classQDiscordChannel.html#a1e8f1bebbc7dd63bf2dae091c25c894c">   79</a></span>&#160;    <a class="code" href="classQDiscordUser.html">QDiscordUser</a>* <a class="code" href="classQDiscordChannel.html#a1e8f1bebbc7dd63bf2dae091c25c894c">recipient</a>() {<span class="keywordflow">return</span> _recipient;}</div>
 <div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classQDiscordChannel.html#aceb3909d2b6b4c3ca3e1cfb4d20c1b3e">   84</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQDiscordChannel.html#aceb3909d2b6b4c3ca3e1cfb4d20c1b3e">setGuild</a>(<a class="code" href="classQDiscordGuild.html">QDiscordGuild</a>* <a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>) {_guild = <a class="code" href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">guild</a>;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QString _id;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    QString _name;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">int</span> _position;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QString _topic;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classQDiscordChannel.html#a2a535c2f137716af251b9274bd817f23">ChannelType</a> _type;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">bool</span> _isPrivate;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    QString _lastMessageId;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="classQDiscordUser.html">QDiscordUser</a>* _recipient;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classQDiscordGuild.html">QDiscordGuild</a>* _guild;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif // QDISCORDCHANNEL_HPP</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classQDiscordChannel.html#a7b63327aef97930faac8a69b91556adc">   86</a></span>&#160;    QString <a class="code" href="classQDiscordChannel.html#a7b63327aef97930faac8a69b91556adc">mention</a>() {<span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;&lt;#&quot;</span>+_id+<span class="stringliteral">&quot;&gt;&quot;</span>);}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    QString _id;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QString _name;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> _position;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QString _topic;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="classQDiscordChannel.html#a2a535c2f137716af251b9274bd817f23">ChannelType</a> _type;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">bool</span> _isPrivate;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QString _lastMessageId;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="classQDiscordUser.html">QDiscordUser</a>* _recipient;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classQDiscordGuild.html">QDiscordGuild</a>* _guild;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif // QDISCORDCHANNEL_HPP</span></div>
+<div class="ttc" id="classQDiscordChannel_html_a7b63327aef97930faac8a69b91556adc"><div class="ttname"><a href="classQDiscordChannel.html#a7b63327aef97930faac8a69b91556adc">QDiscordChannel::mention</a></div><div class="ttdeci">QString mention()</div><div class="ttdoc">Returns a string which allows you to mention this channel. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00086">qdiscordchannel.hpp:86</a></div></div>
 <div class="ttc" id="classQDiscordChannel_html_a8b6c354259cd21d00ca575358982e63d"><div class="ttname"><a href="classQDiscordChannel.html#a8b6c354259cd21d00ca575358982e63d">QDiscordChannel::type</a></div><div class="ttdeci">ChannelType type()</div><div class="ttdoc">Returns the channel&#39;s type. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00063">qdiscordchannel.hpp:63</a></div></div>
 <div class="ttc" id="classQDiscordChannel_html_a61105d5c2059c781bc65a4f4aecabc2f"><div class="ttname"><a href="classQDiscordChannel.html#a61105d5c2059c781bc65a4f4aecabc2f">QDiscordChannel::guild</a></div><div class="ttdeci">QDiscordGuild * guild()</div><div class="ttdoc">Returns a pointer to this channel&#39;s parent guild. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00073">qdiscordchannel.hpp:73</a></div></div>
 <div class="ttc" id="classQDiscordChannel_html_af3303e8df4e850617e59bc40d360a1fd"><div class="ttname"><a href="classQDiscordChannel.html#af3303e8df4e850617e59bc40d360a1fd">QDiscordChannel::id</a></div><div class="ttdeci">QString id()</div><div class="ttdoc">Returns the channel&#39;s ID. </div><div class="ttdef"><b>Definition:</b> <a href="qdiscordchannel_8hpp_source.html#l00051">qdiscordchannel.hpp:51</a></div></div>
@@ -165,7 +167,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 6 2016 18:11:16 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 11 2016 20:14:17 for QDiscord by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
