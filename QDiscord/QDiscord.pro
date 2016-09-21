@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network
-QT       +=  websockets
+QT       += network websockets
 QT       -= gui
 
 TARGET = QDiscord
@@ -23,9 +22,10 @@ SOURCES += qdiscord/qdiscord.cpp \
     qdiscord/qdiscordmember.cpp \
     qdiscord/qdiscordmessage.cpp \
     qdiscord/qdiscordgame.cpp
+    
+TOPHEADERS += QDiscord
 
-HEADERS += qdiscord/qdiscord.hpp \
-    QDiscord \
+DIRHEADERS += qdiscord/qdiscord.hpp \
     qdiscord/qdiscordrestcomponent.hpp \
     qdiscord/qdiscordutilities.hpp \
     qdiscord/qdiscordwscomponent.hpp \
@@ -36,7 +36,15 @@ HEADERS += qdiscord/qdiscord.hpp \
     qdiscord/qdiscordmember.hpp \
     qdiscord/qdiscordmessage.hpp \
     qdiscord/qdiscordgame.hpp
+    
+HEADERS += $$TOPHEADERS \
+    $$DIRHEADERS
+
 unix {
-    target.path = /usr/lib
-    INSTALLS += target
+    target.path = $$PREFIX/lib
+    topheaders.files = $$TOPHEADERS
+    topheaders.path = $$PREFIX/include
+    dirheaders.files = $$DIRHEADERS
+    dirheaders.path = $$PREFIX/include/qdiscord
+    INSTALLS += target topheaders dirheaders
 }
