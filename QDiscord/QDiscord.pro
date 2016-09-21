@@ -40,6 +40,14 @@ DIRHEADERS += qdiscord/qdiscord.hpp \
 HEADERS += $$TOPHEADERS \
     $$DIRHEADERS
 
+isEmpty(PREFIX) {
+    PREFIX=/usr
+} else {
+    equals(PREFIX, "/") {
+        PREFIX=""
+    }
+}
+
 unix {
     target.path = $$PREFIX/lib
     topheaders.files = $$TOPHEADERS
