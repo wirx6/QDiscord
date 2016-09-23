@@ -48,6 +48,9 @@ isEmpty(PREFIX) {
     }
 }
 
+OTHER_FILES += Doxyfile
+include(doc/doc.pri)
+
 unix {
     target.path = $$PREFIX/lib
     topheaders.files = $$TOPHEADERS

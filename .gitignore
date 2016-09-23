@@ -12,8 +12,8 @@
 
 # Qt-es
 
-/.qmake.cache
-/.qmake.stash
+.qmake.cache
+.qmake.stash
 *.pro.user
 *.pro.user.*
 *.qbs.user
@@ -40,5 +40,4 @@ CMakeLists.txt.user
 *.qm
 
 # Documentation
-
-docs
+QDiscord/docs
