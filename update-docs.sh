@@ -3,7 +3,7 @@
 git checkout master;
 mkdir ../QDiscordDocs;
 rm -r ../QDiscordDocs/*;
-cp -r docs/html/* ../QDiscordDocs/;
+cp -r QDiscord/docs/html/* ../QDiscordDocs/;
 git checkout gh-pages;
 rm -r $(git ls-files);
 rmdir search;

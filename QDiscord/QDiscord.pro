@@ -40,6 +40,17 @@ DIRHEADERS += qdiscord/qdiscord.hpp \
 HEADERS += $$TOPHEADERS \
     $$DIRHEADERS
 
+isEmpty(PREFIX) {
+    PREFIX=/usr
+} else {
+    equals(PREFIX, "/") {
+        PREFIX=""
+    }
+}
+
+OTHER_FILES += Doxyfile
+include(doc/doc.pri)
+
 unix {
     target.path = $$PREFIX/lib
     topheaders.files = $$TOPHEADERS
