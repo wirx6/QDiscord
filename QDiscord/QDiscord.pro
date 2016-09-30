@@ -11,31 +11,31 @@ TARGET = QDiscord
 TEMPLATE = lib
 CONFIG += staticlib c++11
 
-SOURCES += qdiscord/qdiscord.cpp \
-    qdiscord/qdiscordrestcomponent.cpp \
-    qdiscord/qdiscordutilities.cpp \
-    qdiscord/qdiscordwscomponent.cpp \
-    qdiscord/qdiscordstatecomponent.cpp \
-    qdiscord/qdiscordguild.cpp \
-    qdiscord/qdiscorduser.cpp \
-    qdiscord/qdiscordchannel.cpp \
-    qdiscord/qdiscordmember.cpp \
-    qdiscord/qdiscordmessage.cpp \
-    qdiscord/qdiscordgame.cpp
+SOURCES += qdiscord.d/qdiscord.cpp \
+    qdiscord.d/qdiscordrestcomponent.cpp \
+    qdiscord.d/qdiscordutilities.cpp \
+    qdiscord.d/qdiscordwscomponent.cpp \
+    qdiscord.d/qdiscordstatecomponent.cpp \
+    qdiscord.d/qdiscordguild.cpp \
+    qdiscord.d/qdiscorduser.cpp \
+    qdiscord.d/qdiscordchannel.cpp \
+    qdiscord.d/qdiscordmember.cpp \
+    qdiscord.d/qdiscordmessage.cpp \
+    qdiscord.d/qdiscordgame.cpp
     
 TOPHEADERS += QDiscord
 
-DIRHEADERS += qdiscord/qdiscord.hpp \
-    qdiscord/qdiscordrestcomponent.hpp \
-    qdiscord/qdiscordutilities.hpp \
-    qdiscord/qdiscordwscomponent.hpp \
-    qdiscord/qdiscordstatecomponent.hpp \
-    qdiscord/qdiscordguild.hpp \
-    qdiscord/qdiscorduser.hpp \
-    qdiscord/qdiscordchannel.hpp \
-    qdiscord/qdiscordmember.hpp \
-    qdiscord/qdiscordmessage.hpp \
-    qdiscord/qdiscordgame.hpp
+DIRHEADERS += qdiscord.d/qdiscord.hpp \
+    qdiscord.d/qdiscordrestcomponent.hpp \
+    qdiscord.d/qdiscordutilities.hpp \
+    qdiscord.d/qdiscordwscomponent.hpp \
+    qdiscord.d/qdiscordstatecomponent.hpp \
+    qdiscord.d/qdiscordguild.hpp \
+    qdiscord.d/qdiscorduser.hpp \
+    qdiscord.d/qdiscordchannel.hpp \
+    qdiscord.d/qdiscordmember.hpp \
+    qdiscord.d/qdiscordmessage.hpp \
+    qdiscord.d/qdiscordgame.hpp
     
 HEADERS += $$TOPHEADERS \
     $$DIRHEADERS
@@ -56,6 +56,6 @@ unix {
     topheaders.files = $$TOPHEADERS
     topheaders.path = $$PREFIX/include
     dirheaders.files = $$DIRHEADERS
-    dirheaders.path = $$PREFIX/include/qdiscord
+    dirheaders.path = $$PREFIX/include/qdiscord.d
     INSTALLS += target topheaders dirheaders
 }
