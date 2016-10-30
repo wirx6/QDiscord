@@ -33,6 +33,20 @@ QDiscordUser::QDiscordUser(const QJsonObject& object)
 		qDebug()<<"QDiscordUser("<<this<<") constructed";
 }
 
+QDiscordUser::QDiscordUser()
+{
+	_id = "";
+	_bot = false;
+	_discriminator = "";
+	_email = "";
+	_username = "";
+	_verified = false;
+	_avatar = "";
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordUser("<<this<<") constructed";
+}
+
 void QDiscordUser::update(const QJsonObject& object)
 {
 	if(object.contains("id"))

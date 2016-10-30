@@ -31,6 +31,8 @@ public:
 	 * \param object A JSON object of a Discord user.
 	 */
 	QDiscordUser(const QJsonObject& object);
+	///\brief Default public constructor
+	QDiscordUser();
 	///\brief Updates the current instance from the provided parameters.
 	void update(const QJsonObject& object);
 	///\brief Returns the user's ID.
@@ -58,5 +60,7 @@ private:
 	QString _username;
 	bool _verified;
 };
+
+Q_DECLARE_METATYPE(QDiscordUser)
 
 #endif // QDISCORDUSER_HPP
