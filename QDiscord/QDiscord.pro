@@ -6,7 +6,10 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS = src
+SUBDIRS += src
+CONFIG(debug, debug|release) {
+    SUBDIRS += tests
+}
 
 include(doc/doc.pri)
 
