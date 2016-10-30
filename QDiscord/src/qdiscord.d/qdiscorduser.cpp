@@ -27,6 +27,7 @@ QDiscordUser::QDiscordUser(const QJsonObject& object)
 	_email = object["email"].toString("");
 	_username = object["username"].toString("");
 	_verified = object["verified"].toBool(false);
+	_avatar = object["avatar"].toString("");
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordUser("<<this<<") constructed";
@@ -46,6 +47,8 @@ void QDiscordUser::update(const QJsonObject& object)
 		_username = object["username"].toString("");
 	if(object.contains("verified"))
 		_verified = object["verified"].toBool(false);
+	if(object.contains("avatar"))
+		_avatar = object["avatar"].toString("");
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordUser("<<this<<") updated";

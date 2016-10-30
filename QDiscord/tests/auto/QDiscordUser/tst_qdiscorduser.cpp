@@ -4,12 +4,42 @@
 class tst_QDiscordUser: public QObject
 {
 	Q_OBJECT
+public:
+	tst_QDiscordUser();
 private slots:
 	void testConstructor_data();
 	void testConstructor();
+private:
+	QJsonObject _testUser;
+	QJsonObject _nullUser;
 };
 
 
+
+tst_QDiscordUser::tst_QDiscordUser():
+	_testUser({
+				{"avatar", "577444852b"},
+				{"bot", true},
+				{"discriminator", "8701"},
+				{"email", "bot@example.org"},
+				{"id", "111264179623531612"},
+				{"mfa_enabled", false},
+				{"username", "TestBot"},
+				{"verified", true}
+			}),
+	_nullUser({
+				{"avatar", QJsonValue::Null},
+				{"bot", QJsonValue::Null},
+				{"discriminator", QJsonValue::Null},
+				{"email", QJsonValue::Null},
+				{"id", QJsonValue::Null},
+				{"mfa_enabled", QJsonValue::Null},
+				{"username", QJsonValue::Null},
+				{"verified", QJsonValue::Null}
+			})
+{
+
+}
 
 void tst_QDiscordUser::testConstructor_data()
 {
@@ -22,37 +52,15 @@ void tst_QDiscordUser::testConstructor_data()
 	QTest::addColumn<QString>("output_username");
 	QTest::addColumn<bool>("output_verified");
 
-	QJsonObject testUser = {
-		{"avatar", "577444852b"},
-		{"bot", true},
-		{"discriminator", "8701"},
-		{"email", "bot@example.org"},
-		{"id", "111264179623531612"},
-		{"mfa_enabled", false},
-		{"username", "TestBot"},
-		{"verified", true}
-	};
-
-	QJsonObject nullUser = {
-		{"avatar", QJsonValue::Null},
-		{"bot", QJsonValue::Null},
-		{"discriminator", QJsonValue::Null},
-		{"email", QJsonValue::Null},
-		{"id", QJsonValue::Null},
-		{"mfa_enabled", QJsonValue::Null},
-		{"username", QJsonValue::Null},
-		{"verified", QJsonValue::Null}
-	};
-
-	QTest::newRow("testbot") << testUser <<
+	QTest::newRow("testbot") << _testUser <<
 								"111264179623531612" <<
 								"577444852b" <<
 								true <<
 								"8701" <<
-								"bot@exmaple.org" <<
+								"bot@example.org" <<
 								"TestBot" <<
 								true;
-	QTest::newRow("nulluser") << nullUser <<
+	QTest::newRow("nulluser") << _nullUser <<
 								"" <<
 								"" <<
 								false <<
