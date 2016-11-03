@@ -11,6 +11,8 @@ private slots:
 	void testConstructor();
 	void testUpdate_data();
 	void testUpdate();
+	void testOperatorEquals_data();
+	void testOperatorEquals();
 private:
 	QJsonObject _testUser;
 	QJsonObject _nullUser;
@@ -140,6 +142,26 @@ void tst_QDiscordUser::testUpdate()
 	QCOMPARE(original.email(), output_email);
 	QCOMPARE(original.username(), output_username);
 	QVERIFY(original.verified() == output_verified);
+}
+
+void tst_QDiscordUser::testOperatorEquals_data()
+{
+	QTest::addColumn<QDiscordUser>("nullUser");
+	QTest::addColumn<QDiscordUser>("testUser");
+
+	QDiscordUser nullUser(_nullUser);
+	QDiscordUser testUser(_testUser);
+
+	QTest::newRow("test1") << nullUser << testUser;
+}
+
+void tst_QDiscordUser::testOperatorEquals()
+{
+	QFETCH(QDiscordUser, nullUser);
+	QFETCH(QDiscordUser, testUser);
+
+	QVERIFY(nullUser != testUser);
+	QVERIFY(!(nullUser == testUser));
 }
 
 QTEST_MAIN(tst_QDiscordUser)

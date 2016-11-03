@@ -67,3 +67,17 @@ void QDiscordUser::update(const QJsonObject& object)
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordUser("<<this<<") updated";
 }
+
+bool QDiscordUser::operator ==(const QDiscordUser& other) const
+{
+	if(other.id() == _id)
+		return true;
+	return false;
+}
+
+bool QDiscordUser::operator !=(const QDiscordUser& other) const
+{
+	if(other.id() != _id)
+		return true;
+	return false;
+}

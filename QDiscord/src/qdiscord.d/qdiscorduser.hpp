@@ -51,6 +51,8 @@ public:
 	bool verified() const {return _verified;}
 	///\brief Returns a string which allows you to mention this user using their username.
 	QString mention() const {return QString("<@"+_id+">");}
+	bool operator ==(const QDiscordUser& other) const;
+	bool operator !=(const QDiscordUser& other) const;
 private:
 	QString _id;
 	QString _avatar;
