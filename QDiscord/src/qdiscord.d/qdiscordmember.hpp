@@ -40,27 +40,29 @@ public:
 	 * \param guild A pointer to the member's parent guild.
 	 */
 	QDiscordMember(const QJsonObject& object, QDiscordGuild* guild);
+	///\brief Default public constructor.
+	QDiscordMember();
 	///\brief Deep copies the provided object.
-	QDiscordMember(QDiscordMember& other);
+	QDiscordMember(const QDiscordMember& other);
 	~QDiscordMember();
 	///\brief Updates the current instance from the provided parameters.
 	void update(const QJsonObject& object, QDiscordGuild* guild);
 	///\brief Returns whether the member has disabled their speakers.
-	bool deaf() {return _deaf;}
+	bool deaf() const {return _deaf;}
 	///\brief Returns whether the member has muted their microphone.
-	bool mute() {return _mute;}
+	bool mute() const {return _mute;}
 	///\brief Returns the date at which the member has joined the guild.
-	QDateTime joinedAt() {return _joinedAt;}
+	QDateTime joinedAt() const {return _joinedAt;}
 	///\brief Returns a pointer to the user object contained by this object.
-	QDiscordUser* user() {return _user;}
+	QDiscordUser* user() const {return _user;}
 	///\brief Returns a pointer to this object's parent guild.
-	QDiscordGuild* guild() {return _guild;}
+	QDiscordGuild* guild() const {return _guild;}
 	///\brief Returns this member's nickname.
-	QString nickname() {return _nickname;}
+	QString nickname() const {return _nickname;}
 	///\brief Returns a string which allows you to mention this member using their username.
-	QString mentionUsername() {return QString("<@"+(_user?_user->id():"nullptr")+">");}
+	QString mentionUsername() const {return QString("<@"+(_user?_user->id():"nullptr")+">");}
 	///\brief Returns a string which allows you to mention this member using their nickname.
-	QString mentionNickname() {return QString("<@!"+(_user?_user->id():"nullptr")+">");}
+	QString mentionNickname() const {return QString("<@!"+(_user?_user->id():"nullptr")+">");}
 private:
 	bool _deaf;
 	QDateTime _joinedAt;
@@ -69,5 +71,7 @@ private:
 	QDiscordUser* _user;
 	QDiscordGuild* _guild;
 };
+
+Q_DECLARE_METATYPE(QDiscordMember)
 
 #endif // QDISCORDMEMBER_HPP

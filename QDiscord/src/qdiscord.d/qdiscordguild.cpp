@@ -57,7 +57,7 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 		qDebug()<<"QDiscordGuild("<<this<<") constructed";
 }
 
-QDiscordGuild::QDiscordGuild(QDiscordGuild& other)
+QDiscordGuild::QDiscordGuild(const QDiscordGuild& other)
 {
 	_id = other.id();
 	_unavailable = other.unavailable();
@@ -72,6 +72,20 @@ QDiscordGuild::QDiscordGuild(QDiscordGuild& other)
 		newChannel->setGuild(this);
 		_channels.insert(other.channels().keys()[i], newChannel);
 	}
+}
+
+QDiscordGuild::QDiscordGuild()
+{
+	_id = "";
+	_unavailable = false;
+	_name = "";
+	_verificationLevel = 0;
+	_afkTimeout = 0;
+	_memberCount = 0;
+	_joinedAt = QDateTime();
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordGuild("<<this<<") constructed";
 }
 
 QDiscordGuild::~QDiscordGuild()

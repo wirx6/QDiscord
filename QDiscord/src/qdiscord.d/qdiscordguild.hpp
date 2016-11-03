@@ -37,40 +37,42 @@ public:
 	 */
 	QDiscordGuild(const QJsonObject& object);
 	///\brief Deep copies the provided object.
-	QDiscordGuild(QDiscordGuild& other);
+	QDiscordGuild(const QDiscordGuild& other);
+	///\brief Default public constructor.
+	QDiscordGuild();
 	~QDiscordGuild();
 	///\brief Returns the guild's ID.
-	QString id() {return _id;}
+	QString id() const {return _id;}
 	///\brief Returns the guild's name.
-	QString name() {return _name;}
+	QString name() const {return _name;}
 	/*!
 	 * \brief Returns whether the guild is unavailable.
 	 *
 	 * If this is true, most members will not be set to anything.
 	 */
-	bool unavailable() {return _unavailable;}
+	bool unavailable() const {return _unavailable;}
 	///\brief Returns the guild's verification level.
-	int verificationLevel() {return _verificationLevel;}
+	int verificationLevel() const {return _verificationLevel;}
 	///\brief Returns the guild's AFK time needed to move a user to the AFK channel.
-	int afkTimeout() {return _afkTimeout;}
+	int afkTimeout() const {return _afkTimeout;}
 	///\brief Returns the guild's member count.
-	int memberCount() {return _memberCount;}
+	int memberCount() const {return _memberCount;}
 	///\brief Returns the date the current user joined this guild.
-	QDateTime joinedAt() {return _joinedAt;}
+	QDateTime joinedAt() const {return _joinedAt;}
 	///\brief Returns a map of pointers to the guild's channels and their IDs.
-	QMap<QString, QDiscordChannel*> channels() {return _channels;}
+	QMap<QString, QDiscordChannel*> channels() const {return _channels;}
 	///\brief Returns a map of pointers to the guild's members and their IDs.
-	QMap<QString, QDiscordMember*> members() {return _members;}
+	QMap<QString, QDiscordMember*> members() const {return _members;}
 	/*!
 	 * \brief Returns a pointer to a guild channel that has the provided ID.
 	 * May return `nullptr` if the channel was not found.
 	 */
-	QDiscordChannel* channel(const QString& id) {return _channels.value(id, nullptr);}
+	QDiscordChannel* channel(const QString& id) const {return _channels.value(id, nullptr);}
 	/*!
 	 * \brief Returns a pointer to a guild member that has the provided ID.
 	 * May return `nullptr` if the member was not found.
 	 */
-	QDiscordMember* member(const QString& id) {return _members.value(id, nullptr);}
+	QDiscordMember* member(const QString& id) const {return _members.value(id, nullptr);}
 	/*!
 	 * \brief Adds the provided channel to the guild.
 	 *
@@ -111,5 +113,7 @@ private:
 	QMap<QString, QDiscordMember*> _members;
 	QMap<QString, QDiscordChannel*> _channels;
 };
+
+Q_DECLARE_METATYPE(QDiscordGuild)
 
 #endif // QDISCORDGUILD_HPP

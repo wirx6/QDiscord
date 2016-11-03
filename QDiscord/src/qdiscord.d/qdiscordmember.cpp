@@ -34,7 +34,20 @@ QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
 		qDebug()<<"QDiscordMember("<<this<<") constructed";
 }
 
-QDiscordMember::QDiscordMember(QDiscordMember& other)
+QDiscordMember::QDiscordMember()
+{
+	_deaf = false;
+	_mute = false;
+	_nickname = "";
+	_joinedAt = QDateTime();
+	_user = nullptr;
+	_guild = nullptr;
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordMember("<<this<<") constructed";
+}
+
+QDiscordMember::QDiscordMember(const QDiscordMember& other)
 {
 	_deaf = other.deaf();
 	_mute = other.mute();

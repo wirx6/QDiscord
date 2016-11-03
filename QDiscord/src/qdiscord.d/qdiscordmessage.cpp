@@ -35,7 +35,22 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object, QDiscordChannel* cha
 		qDebug()<<"QDiscordMessage("<<this<<") constructed";
 }
 
-QDiscordMessage::QDiscordMessage(QDiscordMessage& other)
+QDiscordMessage::QDiscordMessage()
+{
+	_id = "";
+	_mentionEveryone = false;
+	_content = "";
+	_author = nullptr;
+	_channel = nullptr;
+	_channelId = "";
+	_tts = false;
+	_timestamp = QDateTime();
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordMessage("<<this<<") constructed";
+}
+
+QDiscordMessage::QDiscordMessage(const QDiscordMessage& other)
 {
 	_id = other.id();
 	_mentionEveryone = other.mentionEveryone();
@@ -56,7 +71,7 @@ QDiscordMessage::~QDiscordMessage()
 		delete _author;
 }
 
-QDiscordGuild*QDiscordMessage::guild()
+QDiscordGuild*QDiscordMessage::guild() const
 {
 	if(_channel)
 		return _channel->guild();

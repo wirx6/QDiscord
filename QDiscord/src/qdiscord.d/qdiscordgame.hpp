@@ -48,15 +48,17 @@ public:
 	///\brief Creates an instance from the provided JSON object.
 	QDiscordGame(const QJsonObject& object);
 	///\brief Returns the game name of this object.
-	QString name() {return _name;}
+	QString name() const {return _name;}
 	///\brief Returns the URL of this game object.
-	QString url() {return _url;}
+	QString url() const {return _url;}
 	///\brief Returns the type of this game object.
-	GameType type() {return _type;}
+	GameType type() const {return _type;}
 private:
 	QString _name;
 	QString _url;
 	GameType _type;
 };
+
+Q_DECLARE_METATYPE(QDiscordGame)
 
 #endif // QDISCORDGAME_HPP

@@ -44,7 +44,23 @@ QDiscordChannel::QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild
 		qDebug()<<"QDiscordChannel("<<this<<") constructed";
 }
 
-QDiscordChannel::QDiscordChannel(QDiscordChannel& other)
+QDiscordChannel::QDiscordChannel()
+{
+	_id = "";
+	_isPrivate = false;
+	_lastMessageId = "";
+	_name = "";
+	_position = 0;
+	_topic = "";
+	_type = ChannelType::UnknownType;
+	_guild = nullptr;
+	_recipient = nullptr;
+
+	if(QDiscordUtilities::debugMode)
+		qDebug()<<"QDiscordChannel("<<this<<") constructed";
+}
+
+QDiscordChannel::QDiscordChannel(const QDiscordChannel& other)
 {
 	_id = other.id();
 	_isPrivate = other.isPrivate();
