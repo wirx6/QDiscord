@@ -82,3 +82,39 @@ void QDiscordMember::update(const QJsonObject& object, QDiscordGuild* guild)
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordMember("<<this<<") updated";
 }
+
+bool QDiscordMember::operator ==(const QDiscordMember& other) const
+{
+	if(!_user)
+		return false;
+	if(!other.user())
+		return false;
+	if(!_guild)
+		return false;
+	if(!other.guild())
+		return false;
+	if(*_user == *other.user() &&
+			_guild->id() == other.guild()->id())
+	{
+		return true;
+	}
+	return false;
+}
+
+bool QDiscordMember::operator !=(const QDiscordMember& other) const
+{
+	if(!_user)
+		return true;
+	if(!other.user())
+		return true;
+	if(!_guild)
+		return true;
+	if(!other.guild())
+		return true;
+	if(*_user == *other.user() &&
+			_guild->id() == other.guild()->id())
+	{
+		return false;
+	}
+	return true;
+}

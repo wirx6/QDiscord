@@ -63,6 +63,20 @@ public:
 	QString mentionUsername() const {return QString("<@"+(_user?_user->id():"nullptr")+">");}
 	///\brief Returns a string which allows you to mention this member using their nickname.
 	QString mentionNickname() const {return QString("<@!"+(_user?_user->id():"nullptr")+">");}
+	/*!
+	 * \brief Compares two members.
+	 *
+	 * This uses the users' IDs and the guild pointers to check if they're the
+	 * same member. If a pointer is null, returns false.
+	 */
+	bool operator ==(const QDiscordMember& other) const;
+	/*!
+	 * \brief Compares two members.
+	 *
+	 * This uses the users' IDs and the guild pointers to check if they're the
+	 * same member. If a pointer is null, returns true.
+	 */
+	bool operator !=(const QDiscordMember& other) const;
 private:
 	bool _deaf;
 	QDateTime _joinedAt;
