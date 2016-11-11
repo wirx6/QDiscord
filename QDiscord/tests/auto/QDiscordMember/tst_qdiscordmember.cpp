@@ -10,6 +10,8 @@ public:
 private slots:
 	void testConstructor_data();
 	void testConstructor();
+	void testMentions_data();
+	void testMentions();
 private:
 	QJsonObject _nullMember;
 	QJsonObject _guildlessMember;
@@ -107,6 +109,30 @@ void tst_QDiscordMember::testConstructor()
 	QVERIFY(member.mute() == output_mute);
 	QVERIFY(member.joinedAt() == output_joinedAt);
 	QCOMPARE(member.nickname(), output_nickname);
+}
+
+void tst_QDiscordMember::testMentions_data()
+{
+	QTest::addColumn<QDiscordMember>("input_member");
+	QTest::addColumn<QString>("output_nickname");
+	QTest::addColumn<QString>("output_username");
+
+	QTest::newRow("testMember") << QDiscordMember(_testMember, nullptr) <<
+								   "<@!111264179623531612>" <<
+								   "<@111264179623531612>";
+	QTest::newRow("nullMember") << QDiscordMember(_nullMember, nullptr) <<
+								   "<@!nullptr>" <<
+								   "<@nullptr>";
+}
+
+void tst_QDiscordMember::testMentions()
+{
+	QFETCH(QDiscordMember, input_member);
+	QFETCH(QString, output_nickname);
+	QFETCH(QString, output_username);
+
+	QCOMPARE(input_member.mentionNickname(), output_nickname);
+	QCOMPARE(input_member.mentionUsername(), output_username);
 }
 
 QTEST_MAIN(tst_QDiscordMember)
