@@ -1,6 +1,7 @@
 #include <QtTest>
 #include "qdiscord.d/qdiscordmember.hpp"
 #include "qdiscord.d/qdiscorduser.hpp"
+#include "qdiscord.d/qdiscordguild.hpp"
 
 class tst_QDiscordMember : public QObject
 {
@@ -12,12 +13,15 @@ private slots:
 	void testConstructor();
 	void testMentions_data();
 	void testMentions();
+	void testOperatorEquals_data();
+	void testOperatorEquals();
 private:
 	QJsonObject _nullMember;
 	QJsonObject _guildlessMember;
 	QJsonObject _userlessMember;
 	QJsonObject _testMember;
 	QDiscordUser _testUser;
+	QDiscordGuild _guild;
 };
 
 tst_QDiscordMember::tst_QDiscordMember():
@@ -46,7 +50,10 @@ tst_QDiscordMember::tst_QDiscordMember():
 		QJsonObject({
 			{"id", "111264179623531612"}
 		})
-		)
+		),
+	_guild({
+			{"id", "111264349623531632"}
+		})
 {
 
 }
@@ -133,6 +140,30 @@ void tst_QDiscordMember::testMentions()
 
 	QCOMPARE(input_member.mentionNickname(), output_nickname);
 	QCOMPARE(input_member.mentionUsername(), output_username);
+}
+
+void tst_QDiscordMember::testOperatorEquals_data()
+{
+	QTest::addColumn<QDiscordMember>("null_member");
+	QTest::addColumn<QDiscordMember>("test_member");
+
+	QTest::newRow("test1") << QDiscordMember(_nullMember, &_guild) <<
+							  QDiscordMember(_testMember, &_guild);
+}
+
+void tst_QDiscordMember::testOperatorEquals()
+{
+	QFETCH(QDiscordMember, null_member);
+	QFETCH(QDiscordMember, test_member);
+
+	QVERIFY(test_member == test_member);
+	QVERIFY(!(test_member != test_member));
+
+	QVERIFY(test_member != null_member);
+	QVERIFY(!(test_member == null_member));
+
+	QVERIFY(null_member != null_member);
+	QVERIFY(!(null_member == null_member));
 }
 
 QTEST_MAIN(tst_QDiscordMember)
