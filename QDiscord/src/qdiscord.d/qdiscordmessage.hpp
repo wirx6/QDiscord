@@ -64,6 +64,16 @@ public:
 	 * channel has no guild or if a channel was not provided in the class' constructor
 	 */
 	QDiscordGuild* guild() const;
+	///\brief Returns a list of users mentioned in this message.
+	QList<QDiscordUser*> mentions() const { return _mentions.keys();}
+	/*!
+	 * \brief Returns a list of users mentioned in this message and whether
+	 * this class owns the user object.
+	 *
+	 * This is only really useful if you want to determine whether you should
+	 * deep-copy the user object, which is why this method exists.
+	 */
+	QMap<QDiscordUser*, bool> mentionsWithOwnership() const { return _mentions;}
 private:
 	QString _id;
 	QString _content;
@@ -73,6 +83,9 @@ private:
 	QString _channelId;
 	QDiscordChannel* _channel;
 	QDiscordUser* _author;
+	//The value stores whether we own the user object and whether we're
+	//responsible for deleting it.
+	QMap<QDiscordUser*, bool> _mentions;
 };
 
 Q_DECLARE_METATYPE(QDiscordMessage)
