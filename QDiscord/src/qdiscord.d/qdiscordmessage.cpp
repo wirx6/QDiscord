@@ -111,8 +111,5 @@ QDiscordMessage::~QDiscordMessage()
 
 QDiscordGuild*QDiscordMessage::guild() const
 {
-	if(_channel)
-		return _channel->guild();
-	else
-		return nullptr;
+	return _channel?_channel->guild():nullptr;
 }
