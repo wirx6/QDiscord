@@ -70,14 +70,10 @@ void QDiscordUser::update(const QJsonObject& object)
 
 bool QDiscordUser::operator ==(const QDiscordUser& other) const
 {
-	if(other.id() == _id)
-		return true;
-	return false;
+	return other.id() == _id;
 }
 
 bool QDiscordUser::operator !=(const QDiscordUser& other) const
 {
-	if(other.id() != _id)
-		return true;
-	return false;
+	return other.id() != _id;
 }
