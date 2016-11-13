@@ -27,9 +27,11 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 	_verificationLevel = object["verification_level"].toInt(0);
 	_afkTimeout = object["afk_timeout"].toInt(0);
 	_memberCount = object["member_count"].toInt(1);
-	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
-	for(auto i : object["members"].toArray()){
-		QDiscordMember* member = new QDiscordMember(i.toObject(), this);
+	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""),
+			Qt::ISODate);
+	for(QJsonValue item : object["members"].toArray())
+	{
+		QDiscordMember* member = new QDiscordMember(item.toObject(), this);
 		if(_members.keys().contains(member->user()->id()))
 		{
 			delete _members.value(member->user()->id());
@@ -38,9 +40,9 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 		else
 			_members.insert(member->user()->id(), member);
 	}
-	for(auto i : object["channels"].toArray())
+	for(QJsonValue item : object["channels"].toArray())
 	{
-		QDiscordChannel* channel = new QDiscordChannel(i.toObject(), this);
+		QDiscordChannel* channel = new QDiscordChannel(item.toObject(), this);
 		if(_channels.keys().contains(channel->id()))
 		{
 			delete _channels.value(channel->id());
@@ -63,11 +65,11 @@ QDiscordGuild::QDiscordGuild(const QDiscordGuild& other)
 	_afkTimeout = other.afkTimeout();
 	_memberCount = other.memberCount();
 	_joinedAt = other.joinedAt();
-    for(auto& i : other.channels())
+	for(QDiscordChannel* item : other.channels())
 	{
-		QDiscordChannel* newChannel = new QDiscordChannel(*i);
+		QDiscordChannel* newChannel = new QDiscordChannel(*item);
 		newChannel->setGuild(this);
-		_channels.insert(other.channels().key(i), newChannel);
+		_channels.insert(other.channels().key(item), newChannel);
 	}
 }
 

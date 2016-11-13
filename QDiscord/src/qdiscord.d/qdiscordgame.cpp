@@ -18,7 +18,9 @@
 
 #include "qdiscordgame.hpp"
 
-QDiscordGame::QDiscordGame(QString name, QString url, QDiscordGame::GameType type)
+QDiscordGame::QDiscordGame(QString name,
+						   QString url,
+						   QDiscordGame::GameType type)
 {
 	_name = name;
 	_url = url;

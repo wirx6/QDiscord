@@ -24,9 +24,11 @@ QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
 	_deaf = object["deaf"].toBool(false);
 	_mute = object["mute"].toBool(false);
 	_nickname = object["nick"].toString("");
-	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
+	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""),
+			Qt::ISODate);
 	_guild = guild;
-	_user = object["user"].isObject() ? new QDiscordUser(object["user"].toObject()) : nullptr;
+	_user = object["user"].isObject() ?
+				new QDiscordUser(object["user"].toObject()) : nullptr;
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordMember("<<this<<") constructed";
@@ -68,7 +70,10 @@ void QDiscordMember::update(const QJsonObject& object, QDiscordGuild* guild)
 	if(object.contains("nick"))
 		_nickname = object["nick"].toString("");
 	if(object.contains("joined_at"))
-		_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
+	{
+		_joinedAt = QDateTime::fromString(object["joined_at"].toString(""),
+				Qt::ISODate);
+	}
 	if(guild)
 		_guild = guild;
 	if(_user)

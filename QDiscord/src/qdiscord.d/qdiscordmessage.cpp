@@ -18,32 +18,32 @@
 
 #include "qdiscordmessage.hpp"
 
-QDiscordMessage::QDiscordMessage(const QJsonObject& object, QDiscordChannel* channel)
+QDiscordMessage::QDiscordMessage(const QJsonObject& object,
+								 QDiscordChannel* channel)
 {
 	_id = object["id"].toString("");
 	_mentionEveryone = object["mention_everyone"].toBool(false);
 	_content = object["content"].toString("");
 	_channel = channel;
 	_channelId = object["channel_id"].toString("");
-	_author = object.contains("author") ? new QDiscordUser(object["author"].toObject()) : nullptr;
+	_author = object.contains("author") ?
+				new QDiscordUser(object["author"].toObject()) : nullptr;
 	_tts = object["tts"].toBool(false);
-	_timestamp = QDateTime::fromString(object["timestamp"].toString(""), Qt::ISODate);;
-	for(auto i : object["mentions"].toArray())
+	_timestamp = QDateTime::fromString(object["timestamp"].toString(""),
+			Qt::ISODate);;
+	for(QJsonValue item : object["mentions"].toArray())
 	{
 		if(guild())
 		{
-			QDiscordMember* member = guild()->member(i.toObject()["id"].toString(""));
+			QDiscordMember* member =
+					guild()->member(item.toObject()["id"].toString(""));
 			if(member && member->user())
 				_mentions.insert(member->user(), false);
 			else
-			{
-				_mentions.insert(new QDiscordUser(i.toObject()), true);
-			}
+				_mentions.insert(new QDiscordUser(item.toObject()), true);
 		}
 		else
-		{
-			_mentions.insert(new QDiscordUser(i.toObject()), true);
-		}
+			_mentions.insert(new QDiscordUser(item.toObject()), true);
 	}
 
 	if(QDiscordUtilities::debugMode)
@@ -76,26 +76,21 @@ QDiscordMessage::QDiscordMessage(const QDiscordMessage& other)
 	_tts = other.tts();
 	_timestamp = other.timestamp();
 	QMap<QDiscordUser*, bool> otherMentions = other.mentionsWithOwnership();
-	for(auto& i : otherMentions.keys())
+	for(QDiscordUser* item : otherMentions.keys())
 	{
-		if(otherMentions.value(i))
-		{
-			QDiscordUser* newUser = new QDiscordUser(*i);
-			_mentions.insert(newUser, true);
-		}
+		if(otherMentions.value(item))
+			_mentions.insert(new QDiscordUser(*item), true);
 		else
-		{
-			_mentions.insert(i, false);
-		}
+			_mentions.insert(item, false);
 	}
 }
 
 QDiscordMessage::~QDiscordMessage()
 {
 	delete _author;
-	for(auto& i : _mentions.keys())
-		if(_mentions.value(i))
-			delete i;
+	for(QDiscordUser* item : _mentions.keys())
+		if(_mentions.value(item))
+			delete item;
 }
 
 QDiscordGuild*QDiscordMessage::guild() const

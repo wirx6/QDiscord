@@ -19,7 +19,8 @@
 #include "qdiscordguild.hpp"
 #include "qdiscordchannel.hpp"
 
-QDiscordChannel::QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild)
+QDiscordChannel::QDiscordChannel(const QJsonObject& object,
+								 QDiscordGuild* guild)
 {
 	_id = object["id"].toString("");
 	_isPrivate = object["is_private"].toBool(false);
@@ -35,7 +36,8 @@ QDiscordChannel::QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild
 	else
 		_type = ChannelType::UnknownType;
 	_guild = guild;
-	_recipient = _isPrivate ? new QDiscordUser(object["recipient"].toObject()) : nullptr;
+	_recipient = _isPrivate ?
+				new QDiscordUser(object["recipient"].toObject()) : nullptr;
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordChannel("<<this<<") constructed";
@@ -67,7 +69,8 @@ QDiscordChannel::QDiscordChannel(const QDiscordChannel& other)
 	_topic = other.topic();
 	_type = other.type();
 	_guild = other.guild();
-	_recipient = other.recipient() ? new QDiscordUser(*other.recipient()) : nullptr;
+	_recipient = other.recipient() ?
+				new QDiscordUser(*other.recipient()) : nullptr;
 }
 
 QDiscordChannel::~QDiscordChannel()
