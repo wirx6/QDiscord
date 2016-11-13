@@ -18,7 +18,8 @@
 
 #include "qdiscordstatecomponent.hpp"
 
-QDiscordStateComponent::QDiscordStateComponent(QObject* parent) : QObject(parent)
+QDiscordStateComponent::QDiscordStateComponent(QObject* parent)
+	: QObject(parent)
 {
 	_self = nullptr;
 
@@ -35,16 +36,17 @@ QDiscordChannel* QDiscordStateComponent::channel(const QString& id)
 {
 	if(_privateChannels.contains(id))
 		return _privateChannels.value(id);
-	for(int i = 0; i < _guilds.values().length(); i++)
-		if(_guilds.values()[i]->channels().keys().contains(id))
-			return _guilds.values()[i]->channels().value(id);
+	for(QDiscordGuild* item : _guilds)
+	{
+		if(item->channels().keys().contains(id))
+			return item->channels().value(id);
+	}
 	return nullptr;
 }
 
 void QDiscordStateComponent::clear()
 {
-	if(_self)
-		delete _self;
+	delete _self;
 	_self = nullptr;
 	qDeleteAll(_guilds.values());
 	_guilds.clear();
@@ -54,19 +56,13 @@ void QDiscordStateComponent::clear()
 
 void QDiscordStateComponent::readyReceived(const QJsonObject& object)
 {
-	if(_self)
-	{
-		delete _self;
-		_self = nullptr;
-	}
+	delete _self;
 	_self = new QDiscordUser(object["user"].toObject());
 	emit selfCreated(*_self);
-	QJsonArray guildArray = object["guilds"].toArray();
-	for(int i = 0; i < guildArray.count(); i++)
-		guildCreateReceived(guildArray[i].toObject());
-	QJsonArray privateMessageArray = object["private_channels"].toArray();
-	for(int i = 0; i < privateMessageArray.count(); i++)
-		channelCreateReceived(privateMessageArray[i].toObject());
+	for(QJsonValue item : object["guilds"].toArray())
+		guildCreateReceived(item.toObject());
+	for(QJsonValue item : object["private_channels"].toArray())
+		channelCreateReceived(item.toObject());
 }
 
 void QDiscordStateComponent::guildCreateReceived(const QJsonObject& object)
@@ -124,7 +120,8 @@ void QDiscordStateComponent::guildMemberRemoveReceived(const QJsonObject& object
 	QDiscordMember* member;
 	if(guildPtr)
 	{
-		QDiscordMember* tmpMember = guildPtr->member(object["user"].toObject()["id"].toString(""));
+		QDiscordMember* tmpMember =
+				guildPtr->member(object["user"].toObject()["id"].toString(""));
 		if(tmpMember)
 		{
 			member = new QDiscordMember(*tmpMember);
@@ -145,7 +142,8 @@ void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object
 	QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
 	if(guildPtr)
 	{
-		QDiscordMember* memberPtr = guildPtr->member(object["user"].toObject()["id"].toString(""));
+		QDiscordMember* memberPtr =
+				guildPtr->member(object["user"].toObject()["id"].toString(""));
 		if(memberPtr)
 		{
 			memberPtr->update(object, guildPtr);
@@ -153,14 +151,18 @@ void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object
 		}
 		else
 			if(QDiscordUtilities::debugMode)
-				qDebug()<<this<<"DESYNC: Member update received but member is not stored in guild.\n"
-								"Member ID: "+object["user"].toObject()["id"].toString("")+"\n"
-								"Guild ID: "+guildPtr->id();
+			{
+				qDebug()<<this<<
+				"DESYNC: Member update received but member is not stored in guild.\n"
+				"Member ID: "+object["user"].toObject()["id"].toString("")+"\n"
+				"Guild ID: "+guildPtr->id();
+			}
 	}
 	else
 		if(QDiscordUtilities::debugMode)
-			qDebug()<<this<<"DESYNC: Member update received but guild is not stored in state.\n"
-							"Guild ID: "+object["guild_id"].toString("");
+			qDebug()<<this<<
+			"DESYNC: Member update received but guild is not stored in state.\n"
+			"Guild ID: "+object["guild_id"].toString("");
 }
 
 void QDiscordStateComponent::guildRoleCreateReceived(const QJsonObject& object)
@@ -198,7 +200,11 @@ void QDiscordStateComponent::messageDeleteReceived(const QJsonObject& object)
 void QDiscordStateComponent::messageUpdateReceived(const QJsonObject& object)
 {
 	QDiscordMessage message(object, channel(object["channel_id"].toString("")));
-	emit messageUpdated(message, QDateTime::fromString(object["edited_timestamp"].toString(), Qt::ISODate));
+	emit messageUpdated(message,
+						QDateTime::fromString(
+							object["edited_timestamp"].toString(),
+							Qt::ISODate)
+			);
 }
 
 void QDiscordStateComponent::presenceUpdateReceived(const QJsonObject& object)
@@ -223,7 +229,8 @@ void QDiscordStateComponent::voiceStateUpdateReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::channelCreateReceived(const QJsonObject& object)
 {
-	QDiscordChannel* channel = new QDiscordChannel(object, guild(object["guild_id"].toString("")));
+	QDiscordChannel* channel =
+			new QDiscordChannel(object, guild(object["guild_id"].toString("")));
 	if(channel->isPrivate())
 	{
 		if(_privateChannels.keys().contains(channel->id()))
@@ -268,7 +275,8 @@ void QDiscordStateComponent::channelDeleteReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::channelUpdateReceived(const QJsonObject& object)
 {
-	QDiscordChannel* channel = new QDiscordChannel(object, guild(object["guild_id"].toString("")));
+	QDiscordChannel* channel =
+			new QDiscordChannel(object, guild(object["guild_id"].toString("")));
 	if(channel->isPrivate())
 	{
 		if(_privateChannels.keys().contains(channel->id()))

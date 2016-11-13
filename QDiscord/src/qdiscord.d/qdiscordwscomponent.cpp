@@ -20,13 +20,19 @@
 
 QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
 {
-	connect(&_socket, &QWebSocket::connected, this, &QDiscordWsComponent::connected_);
-	connect(&_socket, &QWebSocket::disconnected, this, &QDiscordWsComponent::disconnected_);
-	connect(&_socket, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketError)>(&QWebSocket::error), this, &QDiscordWsComponent::error_);
-	connect(&_socket, &QWebSocket::textMessageReceived, this, &QDiscordWsComponent::textMessageReceived);
-	connect(&_heartbeatTimer, &QTimer::timeout, this, &QDiscordWsComponent::heartbeat);
+	connect(&_socket, &QWebSocket::connected,
+			this, &QDiscordWsComponent::connected_);
+	connect(&_socket, &QWebSocket::disconnected,
+			this, &QDiscordWsComponent::disconnected_);
+	connect(&_socket, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketError)>(&QWebSocket::error),
+			this, &QDiscordWsComponent::error_);
+	connect(&_socket, &QWebSocket::textMessageReceived,
+			this, &QDiscordWsComponent::textMessageReceived);
+	connect(&_heartbeatTimer, &QTimer::timeout,
+			this, &QDiscordWsComponent::heartbeat);
 	_reconnectTimer.setSingleShot(true);
-	connect(&_reconnectTimer, &QTimer::timeout, this, &QDiscordWsComponent::reconnect);
+	connect(&_reconnectTimer, &QTimer::timeout,
+			this, &QDiscordWsComponent::reconnect);
 	_tryReconnecting = false;
 	_useDumpfile = false;
 	_reconnectAttempts = 0;
@@ -36,7 +42,8 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
 		qDebug()<<this<<"constructed";
 }
 
-void QDiscordWsComponent::connectToEndpoint(const QString& endpoint, const QString& token)
+void QDiscordWsComponent::connectToEndpoint(const QString& endpoint,
+											const QString& token)
 {
 	if(_reconnectTimer.isActive())
 		_reconnectTimer.stop();
@@ -69,7 +76,8 @@ void QDiscordWsComponent::setStatus(bool idle, QDiscordGame game)
 	QJsonObject object;
 	object["op"] = 3;
 	QJsonObject presenceObject;
-	presenceObject["idle_since"] = idle?QDateTime::currentMSecsSinceEpoch():QJsonValue();
+	presenceObject["idle_since"] = idle ?
+				QDateTime::currentMSecsSinceEpoch() : QJsonValue();
 	if(game.name() != "")
 	{
 		QJsonObject gameObject;
@@ -122,7 +130,8 @@ void QDiscordWsComponent::reconnect()
 	if (QDiscordUtilities::debugMode)
 		qDebug()<<this<<"reconnecting";
 
-	if(_reconnectAttempts > _maxReconnectAttempts && _maxReconnectAttempts != -1)
+	if(_reconnectAttempts > _maxReconnectAttempts &&
+			_maxReconnectAttempts != -1)
 	{
 		if(QDiscordUtilities::debugMode)
 			qDebug()<<"maximum reconnect attempts reached, stopping";
@@ -156,7 +165,10 @@ void QDiscordWsComponent::disconnected_()
 	emit disconnected(_socket.closeReason(), _socket.closeCode());
 
 	if(QDiscordUtilities::debugMode)
-		qDebug()<<this<<"disconnected: \""<<_socket.closeReason()<<"\":"<<_socket.closeCode();
+	{
+		qDebug()<<this<<"disconnected: \""<<
+				  _socket.closeReason()<<"\":"<<_socket.closeCode();
+	}
 
 	_heartbeatTimer.stop();
 	if(_tryReconnecting)
@@ -172,7 +184,10 @@ void QDiscordWsComponent::error_(QAbstractSocket::SocketError err)
 {
 	emit error(err);
 	if(_tryReconnecting)
-		QTimer::singleShot(_reconnectTime, this, &QDiscordWsComponent::reconnect);
+	{
+		QTimer::singleShot(_reconnectTime,
+						   this, &QDiscordWsComponent::reconnect);
+	}
 	else
 	{
 		_token = "";
