@@ -23,32 +23,26 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object, QDiscordChannel* cha
 	_id = object["id"].toString("");
 	_mentionEveryone = object["mention_everyone"].toBool(false);
 	_content = object["content"].toString("");
-	_author = nullptr;
 	_channel = channel;
 	_channelId = object["channel_id"].toString("");
-	if(object.contains("author"))
-		_author = new QDiscordUser(object["author"].toObject());
+	_author = object.contains("author") ? new QDiscordUser(object["author"].toObject()) : nullptr;
 	_tts = object["tts"].toBool(false);
 	_timestamp = QDateTime::fromString(object["timestamp"].toString(""), Qt::ISODate);;
-	QJsonArray mentionArray = object["mentions"].toArray();
-	for(int i = 0; i < mentionArray.count(); i++)
+	for(auto i : object["mentions"].toArray())
 	{
 		if(guild())
 		{
-			QString id = mentionArray[i].toObject()["id"].toString("");
-			QDiscordMember* member = guild()->member(id);
+			QDiscordMember* member = guild()->member(i.toObject()["id"].toString(""));
 			if(member && member->user())
 				_mentions.insert(member->user(), false);
 			else
 			{
-				_mentions.insert(new QDiscordUser(mentionArray[i].toObject()),
-								 true);
+				_mentions.insert(new QDiscordUser(i.toObject()), true);
 			}
 		}
 		else
 		{
-			_mentions.insert(new QDiscordUser(mentionArray[i].toObject()),
-							 true);
+			_mentions.insert(new QDiscordUser(i.toObject()), true);
 		}
 	}
 
@@ -76,43 +70,35 @@ QDiscordMessage::QDiscordMessage(const QDiscordMessage& other)
 	_id = other.id();
 	_mentionEveryone = other.mentionEveryone();
 	_content = other.content();
-	if(other.author())
-		_author = new QDiscordUser(*other.author());
-	else
-		_author = nullptr;
+	_author = other.author() ? new QDiscordUser(*other.author()) : nullptr;
 	_channel = other.channel();
 	_channelId = other.channelId();
 	_tts = other.tts();
 	_timestamp = other.timestamp();
 	QMap<QDiscordUser*, bool> otherMentions = other.mentionsWithOwnership();
-	for(int i = 0; i < otherMentions.keys().length(); i++)
+	for(auto& i : otherMentions.keys())
 	{
-		if(otherMentions.values()[i])
+		if(otherMentions.value(i))
 		{
-			QDiscordUser* newUser = new QDiscordUser(*otherMentions.keys()[i]);
+			QDiscordUser* newUser = new QDiscordUser(*i);
 			_mentions.insert(newUser, true);
 		}
 		else
 		{
-			_mentions.insert(otherMentions.keys()[i],
-							 false);
+			_mentions.insert(i, false);
 		}
 	}
 }
 
 QDiscordMessage::~QDiscordMessage()
 {
-	if(_author)
-		delete _author;
-	for(int i = 0; i < _mentions.keys().length(); i++)
-		if(_mentions.values()[i])
-			delete _mentions.keys()[i];
+	delete _author;
+	for(auto& i : _mentions.keys())
+		if(_mentions.value(i))
+			delete i;
 }
 
 QDiscordGuild*QDiscordMessage::guild() const
 {
-	if(_channel)
-		return _channel->guild();
-	else
-		return nullptr;
+	return _channel ? _channel->guild() : nullptr;
 }

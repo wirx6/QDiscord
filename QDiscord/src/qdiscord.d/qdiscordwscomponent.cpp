@@ -69,7 +69,7 @@ void QDiscordWsComponent::setStatus(bool idle, QDiscordGame game)
 	QJsonObject object;
 	object["op"] = 3;
 	QJsonObject presenceObject;
-	presenceObject["idle_since"] = idle?QDateTime::currentMSecsSinceEpoch():QJsonValue();
+	presenceObject["idle_since"] = idle ? QDateTime::currentMSecsSinceEpoch() : QJsonValue();
 	if(game.name() != "")
 	{
 		QJsonObject gameObject;

@@ -28,10 +28,8 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 	_afkTimeout = object["afk_timeout"].toInt(0);
 	_memberCount = object["member_count"].toInt(1);
 	_joinedAt = QDateTime::fromString(object["joined_at"].toString(""), Qt::ISODate);
-	QJsonArray memberArray = object["members"].toArray();
-	for(int i = 0; i < memberArray.count(); i++)
-	{
-		QDiscordMember* member = new QDiscordMember(memberArray[i].toObject(), this);
+	for(auto i : object["members"].toArray()){
+		QDiscordMember* member = new QDiscordMember(i.toObject(), this);
 		if(_members.keys().contains(member->user()->id()))
 		{
 			delete _members.value(member->user()->id());
@@ -40,10 +38,9 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 		else
 			_members.insert(member->user()->id(), member);
 	}
-	QJsonArray channelArray = object["channels"].toArray();
-	for(int i = 0; i < channelArray.count(); i++)
+	for(auto i : object["channels"].toArray())
 	{
-		QDiscordChannel* channel = new QDiscordChannel(channelArray[i].toObject(), this);
+		QDiscordChannel* channel = new QDiscordChannel(i.toObject(), this);
 		if(_channels.keys().contains(channel->id()))
 		{
 			delete _channels.value(channel->id());
@@ -66,11 +63,11 @@ QDiscordGuild::QDiscordGuild(const QDiscordGuild& other)
 	_afkTimeout = other.afkTimeout();
 	_memberCount = other.memberCount();
 	_joinedAt = other.joinedAt();
-	for(int i = 0; i < other.channels().values().length(); i++)
+    for(auto& i : other.channels())
 	{
-		QDiscordChannel* newChannel = new QDiscordChannel(*other.channels().values()[i]);
+		QDiscordChannel* newChannel = new QDiscordChannel(*i);
 		newChannel->setGuild(this);
-		_channels.insert(other.channels().keys()[i], newChannel);
+		_channels.insert(other.channels().key(i), newChannel);
 	}
 }
 
@@ -90,12 +87,8 @@ QDiscordGuild::QDiscordGuild()
 
 QDiscordGuild::~QDiscordGuild()
 {
-	for(int i = 0; i < _channels.values().length(); i++)
-		delete _channels.values()[i];
-	_channels.clear();
-	for(int i = 0; i < _members.values().length(); i++)
-		delete _members.values()[i];
-	_members.clear();
+	qDeleteAll(_channels);
+	qDeleteAll(_members);
 }
 
 void QDiscordGuild::addChannel(QDiscordChannel* channel)

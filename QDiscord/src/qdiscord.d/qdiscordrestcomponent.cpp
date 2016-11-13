@@ -29,8 +29,7 @@ QDiscordRestComponent::QDiscordRestComponent(QObject* parent) : QObject(parent)
 
 QDiscordRestComponent::~QDiscordRestComponent()
 {
-	if(_self)
-		delete _self;
+	delete _self;
 }
 
 void QDiscordRestComponent::login(const QString& email, const QString& password)
@@ -165,8 +164,7 @@ void QDiscordRestComponent::logout()
 {
 	if(_authentication.isEmpty())
 		return;
-	if(_self)
-		delete _self;
+	delete _self;
 	_self = nullptr;
 	QJsonObject object;
 	object["token"] = _authentication;
@@ -200,8 +198,7 @@ void QDiscordRestComponent::getEndpoint()
 
 void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
 {
-	if(_self)
-		delete _self;
+	delete _self;
 	_self = new QDiscordUser(self);
 }
 

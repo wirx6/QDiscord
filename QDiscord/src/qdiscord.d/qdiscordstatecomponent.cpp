@@ -35,16 +35,16 @@ QDiscordChannel* QDiscordStateComponent::channel(const QString& id)
 {
 	if(_privateChannels.contains(id))
 		return _privateChannels.value(id);
-	for(int i = 0; i < _guilds.values().length(); i++)
-		if(_guilds.values()[i]->channels().keys().contains(id))
-			return _guilds.values()[i]->channels().value(id);
+    for(auto& i : _guilds.values()){
+		if(i->channels().keys().contains(id))
+			return i->channels().value(id);
+	}
 	return nullptr;
 }
 
 void QDiscordStateComponent::clear()
 {
-	if(_self)
-		delete _self;
+	delete _self;
 	_self = nullptr;
 	qDeleteAll(_guilds.values());
 	_guilds.clear();
@@ -54,19 +54,13 @@ void QDiscordStateComponent::clear()
 
 void QDiscordStateComponent::readyReceived(const QJsonObject& object)
 {
-	if(_self)
-	{
-		delete _self;
-		_self = nullptr;
-	}
+	delete _self;
 	_self = new QDiscordUser(object["user"].toObject());
 	emit selfCreated(*_self);
-	QJsonArray guildArray = object["guilds"].toArray();
-	for(int i = 0; i < guildArray.count(); i++)
-		guildCreateReceived(guildArray[i].toObject());
-	QJsonArray privateMessageArray = object["private_channels"].toArray();
-	for(int i = 0; i < privateMessageArray.count(); i++)
-		channelCreateReceived(privateMessageArray[i].toObject());
+	for(auto i : object["guilds"].toArray())
+		guildCreateReceived(i.toObject());
+	for(auto i : object["private_channels"].toArray())
+		channelCreateReceived(i.toObject());
 }
 
 void QDiscordStateComponent::guildCreateReceived(const QJsonObject& object)
