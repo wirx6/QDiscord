@@ -37,6 +37,7 @@ QDiscordWsComponent::QDiscordWsComponent(QObject* parent) : QObject(parent)
 	_useDumpfile = false;
 	_reconnectAttempts = 0;
 	_maxReconnectAttempts = -1;
+	initDispatchTable();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"constructed";
@@ -215,128 +216,21 @@ void QDiscordWsComponent::textMessageReceived(const QString& message)
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"op:"<<object["op"].toInt()<<" t:"<<object["t"].toString();
 
-	if(object["op"].toInt() == 0 && object["t"].toString() == "READY")
+	switch(object["op"].toInt(-1))
 	{
-		QJsonObject dataObject = object["d"].toObject();
-		_heartbeatTimer.start(dataObject["heartbeat_interval"].toInt());
-
-		if (QDiscordUtilities::debugMode)
-			qDebug()<<this<<"beating every "<<_heartbeatTimer.interval()/1000.<<" seconds";
-
-		_tryReconnecting = true;
-		_reconnectAttempts = 0;
-		emit loginSuccess();
-		emit readyReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_CREATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildCreateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "MESSAGE_CREATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit messageCreateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "MESSAGE_DELETE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit messageDeleteReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "MESSAGE_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit messageUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "TYPING_START")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit typingStartReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "VOICE_STATE_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit voiceStateUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "CHANNEL_CREATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit channelCreateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "CHANNEL_DELETE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit channelDeleteReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "CHANNEL_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit channelUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_DELETE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildDeleteReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_BAN_ADD")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildBanAddReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_BAN_REMOVE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildBanRemoveReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_INTEGRATIONS_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildIntegrationsUpdateRecevied(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_MEMBER_ADD")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildMemberAddReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_MEMBER_REMOVE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildMemberRemoveReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_MEMBER_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildMemberUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_ROLE_CREATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildRoleCreateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_ROLE_DELETE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildRoleDeleteReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_ROLE_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildRoleUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "GUILD_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit guildUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "PRESENCE_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit presenceUpdateReceived(dataObject);
-	}
-	else if(object["op"].toInt() == 0 && object["t"].toString() == "USER_SETTINGS_UPDATE")
-	{
-		QJsonObject dataObject = object["d"].toObject();
-		emit userSettingsUpdateReceived(dataObject);
+	case 0:
+		if(_eventDispatchTable.keys().contains(object["t"].toString()))
+			_eventDispatchTable[object["t"].toString()](object["d"].toObject());
+		else if(QDiscordUtilities::debugMode)
+			qDebug()<<this<<"encountered an event not in the dispatch table";
+		break;
+	case -1:
+		if(QDiscordUtilities::debugMode)
+			qDebug()<<this<<"error while parsing operation code";
+		break;
+	default:
+		if(QDiscordUtilities::debugMode)
+			qDebug()<<this<<"encountered an unhandled operation";
 	}
 }
 
@@ -351,4 +245,88 @@ void QDiscordWsComponent::heartbeat()
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"heartbeat sent";
+}
+
+void QDiscordWsComponent::initDispatchTable()
+{
+	_eventDispatchTable = {
+		{"READY", [&](const QJsonObject& dataObject){
+			 _heartbeatTimer.start(dataObject["heartbeat_interval"].toInt());
+
+			 if (QDiscordUtilities::debugMode)
+				 qDebug()<<this<<"beating every "<<
+			 _heartbeatTimer.interval()/1000.<<" seconds";
+
+			 _tryReconnecting = true;
+			 _reconnectAttempts = 0;
+			 emit loginSuccess();
+			 emit readyReceived(dataObject);
+		 }},
+		{"GUILD_CREATE", [this](const QJsonObject& dataObject){
+			 emit guildCreateReceived(dataObject);
+		 }},
+		{"MESSAGE_CREATE", [this](const QJsonObject& dataObject){
+			 emit messageCreateReceived(dataObject);
+		 }},
+		{"MESSAGE_DELETE", [this](const QJsonObject& dataObject){
+			 emit messageDeleteReceived(dataObject);
+		 }},
+		{"MESSAGE_UPDATE", [this](const QJsonObject& dataObject){
+			 emit messageUpdateReceived(dataObject);
+		 }},
+		{"TYPING_START", [this](const QJsonObject& dataObject){
+			 emit typingStartReceived(dataObject);
+		 }},
+		{"VOICE_STATE_UPDATE", [this](const QJsonObject& dataObject){
+			 emit voiceStateUpdateReceived(dataObject);
+		 }},
+		{"CHANNEL_CREATE", [this](const QJsonObject& dataObject){
+			 emit channelCreateReceived(dataObject);
+		 }},
+		{"CHANNEL_DELETE", [this](const QJsonObject& dataObject){
+			 emit channelDeleteReceived(dataObject);
+		 }},
+		{"CHANNEL_UPDATE", [this](const QJsonObject& dataObject){
+			 emit channelUpdateReceived(dataObject);
+		 }},
+		{"GUILD_DELETE", [this](const QJsonObject& dataObject){
+			 emit guildDeleteReceived(dataObject);
+		 }},
+		{"GUILD_BAN_ADD", [this](const QJsonObject& dataObject){
+			 emit guildBanAddReceived(dataObject);
+		 }},
+		{"GUILD_BAN_REMOVE", [this](const QJsonObject& dataObject){
+			 emit guildBanRemoveReceived(dataObject);
+		 }},
+		{"GUILD_INTEGRATIONS_UPDATE", [this](const QJsonObject& dataObject){
+			 emit guildIntegrationsUpdateRecevied(dataObject);
+		 }},
+		{"GUILD_MEMBER_ADD", [this](const QJsonObject& dataObject){
+			 emit guildMemberAddReceived(dataObject);
+		 }},
+		{"GUILD_MEMBER_REMOVE", [this](const QJsonObject& dataObject){
+			 emit guildMemberRemoveReceived(dataObject);
+		 }},
+		{"GUILD_MEMBER_UPDATE", [this](const QJsonObject& dataObject){
+			 emit guildMemberUpdateReceived(dataObject);
+		 }},
+		{"GUILD_ROLE_CREATE", [this](const QJsonObject& dataObject){
+			 emit guildRoleCreateReceived(dataObject);
+		 }},
+		{"GUILD_ROLE_DELETE", [this](const QJsonObject& dataObject){
+			 emit guildRoleDeleteReceived(dataObject);
+		 }},
+		{"GUILD_ROLE_UPDATE", [this](const QJsonObject& dataObject){
+			 emit guildRoleUpdateReceived(dataObject);
+		 }},
+		{"GUILD_UPDATE", [this](const QJsonObject& dataObject){
+			 emit guildUpdateReceived(dataObject);
+		 }},
+		{"PRESENCE_UPDATE", [this](const QJsonObject& dataObject){
+			 emit presenceUpdateReceived(dataObject);
+		 }},
+		{"USER_SETTINGS_UPDATE", [this](const QJsonObject& dataObject){
+			 emit userSettingsUpdateReceived(dataObject);
+		 }}
+	};
 }

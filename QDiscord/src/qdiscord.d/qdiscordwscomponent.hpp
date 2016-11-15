@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QTimer>
 #include <QFile>
+#include <functional>
 #include "qdiscordgame.hpp"
 #include "qdiscordutilities.hpp"
 
@@ -136,6 +137,7 @@ private:
 	void error_(QAbstractSocket::SocketError error);
 	void textMessageReceived(const QString& message);
 	void heartbeat();
+	void initDispatchTable();
 	bool _tryReconnecting;
 	int _reconnectTime = 20*1000;
 	int _reconnectAttempts;
@@ -145,6 +147,8 @@ private:
 	QTimer _reconnectTimer;
 	QString _gateway;
 	QString _token;
+	//   Type   , Handler function
+	QMap<QString, std::function<void (const QJsonObject&)>> _eventDispatchTable;
 	QWebSocket _socket;
 };
 
