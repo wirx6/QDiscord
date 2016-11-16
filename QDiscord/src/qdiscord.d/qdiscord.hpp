@@ -32,7 +32,7 @@
  * It also handles communication between the components, allowing each
  * component to not be coupled to any other component.
  */
-class QDiscord : public QObject
+class QDISCORD_API QDiscord : public QObject
 {
 	Q_OBJECT
 public:

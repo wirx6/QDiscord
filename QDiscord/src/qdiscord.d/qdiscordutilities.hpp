@@ -23,8 +23,16 @@
 #include <QNetworkReply>
 #include <stdlib.h>
 
+#ifndef QDISCORD_STATIC
+#    ifdef QDISCORD_LIBRARY
+#        define QDISCORD_API Q_DECL_EXPORT
+#    else
+#        define QDISCORD_API Q_DECL_IMPORT
+#    endif
+#endif
+
 ///\brief A class containing configuration variables and static functions used in QDiscord.
-class QDiscordUtilities
+class QDISCORD_API QDiscordUtilities
 {
 public:
 	///\brief A struct used for storing the Discord API endpoints.

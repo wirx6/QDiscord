@@ -17,7 +17,6 @@
  */
 
 #include "qdiscorduser.hpp"
-#include "qdiscordutilities.hpp"
 
 QDiscordUser::QDiscordUser(const QJsonObject& object)
 {
