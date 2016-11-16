@@ -88,6 +88,27 @@ public:
 	void logout();
 	///\brief Sends a request to receive an endpoint for connecting using a WebSocket.
 	void getEndpoint();
+    ///\brief Changes a name of specified channel.
+    void setChannelName(const QString& name, QDiscordChannel* channel);
+    ///\brief Changes a name of channel with specified ID.
+    void setChannelName(const QString& name, const QString& channelId);
+    ///\brief Changes a position of specified text channel on the list.
+    void setChannelPosition(const int& position, QDiscordChannel* channel);
+    ///\brief Changes a position of text channel with specified ID on the list.
+    void setChannelPosition(const int& position, const QString& channelId);
+    ///\brief Changes a topic of specified text channel.
+    void setChannelTopic(const QString& topic, QDiscordChannel* channel);
+    ///\brief Changes a topic of text channel with specified ID.
+    void setChannelTopic(const QString& topic, const QString& channelId);
+    ///\brief Changes a bitrate of specified voice channel.
+    void setChannelBitrate(const int& bitrate, QDiscordChannel* channel);
+    ///\brief Changes a bitrate of voice channel with specified ID.
+    void setChannelBitrate(const int& bitrate, const QString& channelId);
+    ///\brief Changes a user limit on specified voice channel.
+    void setChannelUserLimit(const int& limit, QDiscordChannel* channel);
+    ///\brief Changes a user limit of voice channel with specified ID.
+    void setChannelUserLimit(const int& limit, const QString& channelId);
+
 signals:
 	/*!
 	 * \brief Emitted when a WebSocket endpoint has successfully been acquired.
@@ -130,9 +151,23 @@ signals:
 	 * may return a more useful string in the context of the Discord API.
 	 */
 	void messageDeleteFailed(QNetworkReply::NetworkError error);
+    /*!
+     * \brief Emitted when a channel has been updated.
+     * \param channel A reference to the channel that was updated.
+     */
+    void channelUpdated(QDiscordChannel& channel);
+    /*!
+     * \brief Emitted when channel update has failed.
+     * \param error A QNetworkReply::NetworkError enum containing more
+     * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+     * may return a more useful string in the context of the Discord API.
+     */
+    void channelUpdateFailed(QNetworkReply::NetworkError error);
 private:
 	void selfCreated(const QDiscordUser& self);
 	void deleteResource(const QUrl& url, std::function<void()> function);
+    void patch(const QJsonObject& object, const QUrl& url, std::function<void()> function);
+    void patch(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
 	void post(const QJsonObject& object, const QUrl& url, std::function<void()> function);
 	void post(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
 	void get(const QUrl& url, std::function<void ()> function);

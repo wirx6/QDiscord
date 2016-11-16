@@ -17,6 +17,7 @@
  */
 
 #include "qdiscordrestcomponent.hpp"
+#include <QBuffer>
 
 QDiscordRestComponent::QDiscordRestComponent(QObject* parent) : QObject(parent)
 {
@@ -220,7 +221,344 @@ void QDiscordRestComponent::getEndpoint()
 						);
 		}
 		reply->deleteLater();
-	});
+    });
+}
+
+void QDiscordRestComponent::setChannelName(const QString &name, QDiscordChannel *channel)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    QJsonObject object;
+    object["name"] = name;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channel->id()
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelName(const QString &name, const QString &channelId)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    QJsonObject object;
+    object["name"] = name;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channelId
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelPosition(const int &position, QDiscordChannel *channel)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    QJsonObject object;
+    object["position"] = position;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channel->id()
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelPosition(const int &position, const QString &channelId)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    QJsonObject object;
+    object["position"] = position;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channelId
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelTopic(const QString &topic, QDiscordChannel *channel)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    if(channel->type() != QDiscordChannel::ChannelType::Text){
+        return;
+    }
+
+    QJsonObject object;
+    object["topic"] = topic;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channel->id()
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelTopic(const QString &topic, const QString &channelId)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    //TODO Channel type checking
+    /*if(channel->type() != QDiscordChannel::ChannelType::Text){
+        return;
+    }*/
+
+    QJsonObject object;
+    object["topic"] = topic;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channelId
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelBitrate(const int &bitrate, QDiscordChannel *channel)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    if(channel->type() != QDiscordChannel::ChannelType::Voice){
+        return;
+    }
+
+    QJsonObject object;
+    object["bitrate"] = bitrate;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channel->id()
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelBitrate(const int &bitrate, const QString &channelId)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    //TODO Channel type checking
+    /*if(channel->type() != QDiscordChannel::ChannelType::Voice){
+        return;
+    }*/
+
+    QJsonObject object;
+    object["bitrate"] = bitrate;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channelId
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelUserLimit(const int &limit, QDiscordChannel *channel)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    if(channel->type() != QDiscordChannel::ChannelType::Voice){
+        return;
+    }
+
+    QJsonObject object;
+    object["user_limit"] = limit;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channel->id()
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
+}
+
+void QDiscordRestComponent::setChannelUserLimit(const int &limit, const QString &channelId)
+{
+    if(_authentication.isEmpty())
+        return;
+
+    //TODO Channel type checking
+    /*if(channel->type() != QDiscordChannel::ChannelType::Voice){
+        return;
+    }*/
+
+    QJsonObject object;
+    object["user_limit"] = limit;
+
+    patch(object, QUrl(QString(
+                      QDiscordUtilities::endPoints.channels + "/" + channelId
+                  )),
+    [=]()
+    {
+        QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+
+        if(!reply)
+            return;
+
+        if(reply->error() != QNetworkReply::NoError)
+            emit channelUpdateFailed(reply->error());
+        else
+        {
+            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject object = document.object();
+            QDiscordChannel ch(object);
+            emit channelUpdated(ch);
+        }
+        reply->deleteLater();
+    });
 }
 
 void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
@@ -244,6 +582,58 @@ void QDiscordRestComponent::deleteResource(const QUrl& url,
 			this, function);
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"DELETE to "<<url;
+}
+
+void QDiscordRestComponent::patch(const QJsonObject &object, const QUrl &url, std::function<void ()> function)
+{
+    QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+                        ", v" + QDiscordUtilities::libMajor + ":" +
+                        QDiscordUtilities::libMinor + ")" +
+                        "; " + QDiscordUtilities::botName;
+    QJsonDocument document;
+    document.setObject(object);
+    QNetworkRequest request(url);
+    if(_authentication != "")
+        request.setRawHeader("Authorization", _authentication.toUtf8());
+    request.setRawHeader("User-Agent", userAgent.toUtf8());
+    request.setRawHeader("content-type", "application/json");
+    QBuffer *buffer = new QBuffer();
+    buffer->open(QBuffer::ReadWrite);
+    buffer->write(document.toJson(QJsonDocument::Compact));
+    buffer->seek(0);
+    QNetworkReply* reply =
+            _manager.sendCustomRequest(request, "PATCH", buffer);
+    buffer->deleteLater();
+    connect(reply, &QNetworkReply::finished, this, function);
+
+    if(QDiscordUtilities::debugMode)
+        qDebug()<<this<<"patch: "<<object<<" to "<<url;
+}
+
+void QDiscordRestComponent::patch(const QJsonArray &array, const QUrl &url, std::function<void ()> function)
+{
+    QString userAgent = "DiscordBot (" + QDiscordUtilities::libLink +
+                        ", v" + QDiscordUtilities::libMajor + ":" +
+                        QDiscordUtilities::libMinor + ")" +
+                        "; " + QDiscordUtilities::botName;
+    QJsonDocument document;
+    document.setArray(array);
+    QNetworkRequest request(url);
+    if(_authentication != "")
+        request.setRawHeader("Authorization", _authentication.toUtf8());
+    request.setRawHeader("User-Agent", userAgent.toUtf8());
+    request.setRawHeader("content-type", "application/json");
+    QBuffer *buffer = new QBuffer();
+    buffer->open(QBuffer::ReadWrite);
+    buffer->write(document.toJson(QJsonDocument::Compact));
+    buffer->seek(0);
+    QNetworkReply* reply =
+            _manager.sendCustomRequest(request, "PATCH", buffer);
+    buffer->deleteLater();
+    connect(reply, &QNetworkReply::finished, this, function);
+
+    if(QDiscordUtilities::debugMode)
+        qDebug()<<this<<"patch: "<<array<<" to "<<url;
 }
 
 void QDiscordRestComponent::post(const QJsonObject& object,
@@ -289,7 +679,7 @@ void QDiscordRestComponent::post(const QJsonArray& array,
 	connect(reply, &QNetworkReply::finished, this, function);
 
 	if(QDiscordUtilities::debugMode)
-		qDebug()<<this<<"posted: "<<array<<" to "<<url;
+        qDebug()<<this<<"posted: "<<array<<" to "<<url;
 }
 
 void QDiscordRestComponent::get(const QUrl& url,

@@ -91,17 +91,17 @@ void QDiscordStateComponent::guildDeleteReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::guildBanAddReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildBanRemoveReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildIntegrationsUpdateRecevied(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildMemberAddReceived(const QJsonObject& object)
@@ -167,22 +167,22 @@ void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object
 
 void QDiscordStateComponent::guildRoleCreateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildRoleDeleteReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildRoleUpdateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::guildUpdateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::messageCreateReceived(const QJsonObject& object)
@@ -209,22 +209,22 @@ void QDiscordStateComponent::messageUpdateReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::presenceUpdateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::typingStartReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::userSettingsUpdateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::voiceStateUpdateReceived(const QJsonObject& object)
 {
-
+    //TODO Implement
 }
 
 void QDiscordStateComponent::channelCreateReceived(const QJsonObject& object)
