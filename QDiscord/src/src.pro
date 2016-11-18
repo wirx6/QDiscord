@@ -6,9 +6,8 @@ TEMPLATE = lib
 CONFIG += c++11
 
 DEFINES += QDISCORD_LIBRARY
-CONFIG(static) {
+CONFIG(staticlib) {
     DEFINES += QDISCORD_STATIC
-    CONFIG += staticlib
 }
 
 SOURCES += qdiscord.d/qdiscord.cpp \
