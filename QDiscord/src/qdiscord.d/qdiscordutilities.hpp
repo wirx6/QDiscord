@@ -29,6 +29,8 @@
 #    else
 #        define QDISCORD_API Q_DECL_IMPORT
 #    endif
+#else
+#    define QDISCORD_API
 #endif
 
 ///\brief A class containing configuration variables and static functions used in QDiscord.
