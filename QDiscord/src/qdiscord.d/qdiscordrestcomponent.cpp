@@ -195,7 +195,7 @@ void QDiscordRestComponent::bulkDeleteMessages(const QList<QDiscordMessage> mess
 			toDelete[channel] = QStringList(id);
 		}
 	}
-	for(auto i = toDelete.begin(); i != toDelete.end(); i++){
+	for(QMap<QString, QStringList>::const_iterator i = toDelete.begin(); i != toDelete.end(); i++){
 		bulkDeleteMessages(i.value(),i.key());
 	}
 }
