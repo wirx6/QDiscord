@@ -84,6 +84,10 @@ public:
 	void deleteMessage(QDiscordMessage message);
 	///\brief Deletes the specified message by ID and channel ID.
 	void deleteMessage(const QString& messageId, const QString& channelId);
+	///\brief Deletes the specified messages(multi-channel).
+	void bulkDeleteMessages(QList<QDiscordMessage> messages);
+	///\brief Deletes the specified messages by ID and channel ID.
+	void bulkDeleteMessages(const QStringList& messageIds, const QString& channelId);
 	///\brief Logs out using the stored token.
 	void logout();
 	///\brief Sends a request to receive an endpoint for connecting using a WebSocket.
@@ -151,6 +155,15 @@ signals:
 	 * may return a more useful string in the context of the Discord API.
 	 */
 	void messageDeleteFailed(QNetworkReply::NetworkError error);
+	/*!
+	 * \brief Emitted when messages deleting has failed.
+	 * \param error A QNetworkReply::NetworkError enum containing more
+	 * information about the reason why this request failed. QDiscordUtilities::networkErrorToString
+	 * may return a more useful string in the context of the Discord API.
+	 */
+	void bulkDeleteFailed(QNetworkReply::NetworkError error);
+	///\brief Emitted when a messages have been successfully deleted.
+	void bulkDeleteSuccess(const QStringList& messageIds);
 	/*!
 	 * \brief Emitted when a channel has been updated.
 	 * \param channel A reference to the channel that was updated.

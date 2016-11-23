@@ -18,6 +18,7 @@
 
 #include "qdiscordrestcomponent.hpp"
 #include <QBuffer>
+#include <QMap>
 
 QDiscordRestComponent::QDiscordRestComponent(QObject* parent) : QObject(parent)
 {
@@ -182,6 +183,43 @@ void QDiscordRestComponent::deleteMessage(const QString& messageId,
 	});
 }
 
+void QDiscordRestComponent::bulkDeleteMessages(const QList<QDiscordMessage> messages)
+{
+	QMap<QString,QStringList> toDelete;
+	for(QDiscordMessage message : messages){
+		QString channel = message.channelId();
+		QString id = message.id();
+		if(toDelete.contains(channel)){
+			toDelete[channel] << message.id();
+		}else{
+			toDelete[channel] = QStringList(id);
+		}
+	}
+	for(auto i = toDelete.begin(); i != toDelete.end(); i++){
+		bulkDeleteMessages(i.value(),i.key());
+	}
+}
+
+void QDiscordRestComponent::bulkDeleteMessages(const QStringList &messageIds, const QString &channelId)
+{
+	QJsonObject toDelete;
+	toDelete["messages"] = QJsonArray::fromStringList(messageIds);
+	post(toDelete,QUrl(QString(
+						   QDiscordUtilities::endPoints.channels + "/" +
+						   channelId + "/messages/bulk-delete"
+					   )),
+	[=](){
+		QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
+		if(!reply)
+			return;
+		if(reply->error() != QNetworkReply::NoError)
+			emit bulkDeleteFailed(reply->error());
+		else
+			emit bulkDeleteSuccess(messageIds);
+		reply->deleteLater();
+	});
+}
+
 void QDiscordRestComponent::logout()
 {
 	if(_authentication.isEmpty())
@@ -221,7 +259,7 @@ void QDiscordRestComponent::getEndpoint()
 						);
 		}
 		reply->deleteLater();
-    });
+	});
 }
 
 void QDiscordRestComponent::setChannelName(const QString& name,
