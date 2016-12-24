@@ -1,7 +1,5 @@
 #include <QtTest>
-#include "qdiscord.d/qdiscordmember.hpp"
-#include "qdiscord.d/qdiscorduser.hpp"
-#include "qdiscord.d/qdiscordguild.hpp"
+#include <QDiscord>
 
 class tst_QDiscordMember : public QObject
 {
@@ -21,7 +19,7 @@ private:
 	QJsonObject _userlessMember;
 	QJsonObject _testMember;
 	QDiscordUser _testUser;
-	QDiscordGuild _guild;
+	QSharedPointer<QDiscordGuild> _guild;
 };
 
 tst_QDiscordMember::tst_QDiscordMember():
@@ -51,9 +49,9 @@ tst_QDiscordMember::tst_QDiscordMember():
 			{"id", "111264179623531612"}
 		})
 		),
-	_guild({
+	_guild(new QDiscordGuild({
 			{"id", "111264349623531632"}
-		})
+		}))
 {
 
 }
@@ -106,7 +104,7 @@ void tst_QDiscordMember::testConstructor()
 	QFETCH(QDateTime, output_joinedAt);
 	QFETCH(QString, output_nickname);
 
-	QDiscordMember member(input_object, nullptr);
+	QDiscordMember member(input_object, QSharedPointer<QDiscordGuild>());
 
 	if(!user_is_null)
 		QVERIFY(*member.user() == output_user);
@@ -124,10 +122,10 @@ void tst_QDiscordMember::testMentions_data()
 	QTest::addColumn<QString>("output_nickname");
 	QTest::addColumn<QString>("output_username");
 
-	QTest::newRow("testMember") << QDiscordMember(_testMember, nullptr) <<
+	QTest::newRow("testMember") << QDiscordMember(_testMember, QSharedPointer<QDiscordGuild>()) <<
 								   "<@!111264179623531612>" <<
 								   "<@111264179623531612>";
-	QTest::newRow("nullMember") << QDiscordMember(_nullMember, nullptr) <<
+	QTest::newRow("nullMember") << QDiscordMember(_nullMember, QSharedPointer<QDiscordGuild>()) <<
 								   "<@!nullptr>" <<
 								   "<@nullptr>";
 }
@@ -147,8 +145,8 @@ void tst_QDiscordMember::testOperatorEquals_data()
 	QTest::addColumn<QDiscordMember>("null_member");
 	QTest::addColumn<QDiscordMember>("test_member");
 
-	QTest::newRow("test1") << QDiscordMember(_nullMember, &_guild) <<
-							  QDiscordMember(_testMember, &_guild);
+	QTest::newRow("test1") << QDiscordMember(_nullMember, _guild) <<
+							  QDiscordMember(_testMember, _guild);
 }
 
 void tst_QDiscordMember::testOperatorEquals()

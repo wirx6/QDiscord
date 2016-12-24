@@ -31,32 +31,27 @@ QDiscordGuild::QDiscordGuild(const QJsonObject& object)
 			Qt::ISODate);
 	for(QJsonValue item : object["members"].toArray())
 	{
-		QDiscordMember* member = new QDiscordMember(item.toObject(), this);
-		if(_members.keys().contains(member->user()->id()))
-		{
-			delete _members.value(member->user()->id());
-			_members.insert(member->user()->id(), member);
-		}
-		else
-			_members.insert(member->user()->id(), member);
+		QSharedPointer<QDiscordMember> member =
+				QSharedPointer<QDiscordMember>(
+						new QDiscordMember(item.toObject(), sharedFromThis())
+					);
+		_members.insert(member->user()->id(), member);
 	}
 	for(QJsonValue item : object["channels"].toArray())
 	{
-		QDiscordChannel* channel = new QDiscordChannel(item.toObject(), this);
-		if(_channels.keys().contains(channel->id()))
-		{
-			delete _channels.value(channel->id());
-			_channels.insert(channel->id(), channel);
-		}
-		else
-			_channels.insert(channel->id(), channel);
+		QSharedPointer<QDiscordChannel> channel =
+				QSharedPointer<QDiscordChannel>(
+						new QDiscordChannel(item.toObject(), sharedFromThis())
+					);
+		_channels.insert(channel->id(), channel);
 	}
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordGuild("<<this<<") constructed";
 }
 
-QDiscordGuild::QDiscordGuild(const QDiscordGuild& other)
+QDiscordGuild::QDiscordGuild(const QDiscordGuild& other):
+	QEnableSharedFromThis<QDiscordGuild>()
 {
 	_id = other.id();
 	_unavailable = other.unavailable();
@@ -65,10 +60,13 @@ QDiscordGuild::QDiscordGuild(const QDiscordGuild& other)
 	_afkTimeout = other.afkTimeout();
 	_memberCount = other.memberCount();
 	_joinedAt = other.joinedAt();
-	for(QDiscordChannel* item : other.channels())
+	for(QSharedPointer<QDiscordChannel> item : other.channels())
 	{
-		QDiscordChannel* newChannel = new QDiscordChannel(*item);
-		newChannel->setGuild(this);
+		QSharedPointer<QDiscordChannel> newChannel =
+				QSharedPointer<QDiscordChannel>(
+						new QDiscordChannel(*item)
+					);
+		newChannel->setGuild(sharedFromThis());
 		_channels.insert(other.channels().key(item), newChannel);
 	}
 }
@@ -87,48 +85,36 @@ QDiscordGuild::QDiscordGuild()
 		qDebug()<<"QDiscordGuild("<<this<<") constructed";
 }
 
-QDiscordGuild::~QDiscordGuild()
-{
-	qDeleteAll(_channels);
-	qDeleteAll(_members);
-}
-
-void QDiscordGuild::addChannel(QDiscordChannel* channel)
+void QDiscordGuild::addChannel(QSharedPointer<QDiscordChannel> channel)
 {
 	if(!channel)
 		return;
-	if(_channels.keys().contains(channel->id()))
-		delete _channels.value(channel->id());
 	 _channels.insert(channel->id(), channel);
 }
 
-bool QDiscordGuild::removeChannel(QDiscordChannel* channel)
+bool QDiscordGuild::removeChannel(QSharedPointer<QDiscordChannel> channel)
 {
 	if(!channel)
 		return false;
 	if(!_channels.keys().contains(channel->id()))
 		return false;
 	_channels.remove(channel->id());
-	delete channel;
 	return true;
 }
 
-void QDiscordGuild::addMember(QDiscordMember* member)
+void QDiscordGuild::addMember(QSharedPointer<QDiscordMember> member)
 {
 	if(!member)
 		return;
-	if(_members.keys().contains(member->user()->id()))
-		delete _members.value(member->user()->id());
 	_members.insert(member->user()->id(), member);
 }
 
-bool QDiscordGuild::removeMember(QDiscordMember* member)
+bool QDiscordGuild::removeMember(QSharedPointer<QDiscordMember> member)
 {
 	if(!member)
 		return false;
 	if(!_members.keys().contains(member->user()->id()))
 		return false;
 	_members.remove(member->user()->id());
-	delete member;
 	return true;
 }

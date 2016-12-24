@@ -19,7 +19,7 @@
 #include "qdiscordmessage.hpp"
 
 QDiscordMessage::QDiscordMessage(const QJsonObject& object,
-								 QDiscordChannel* channel)
+								 QSharedPointer<QDiscordChannel> channel)
 {
 	_id = object["id"].toString("");
 	_mentionEveryone = object["mention_everyone"].toBool(false);
@@ -27,7 +27,9 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object,
 	_channel = channel;
 	_channelId = object["channel_id"].toString("");
 	_author = object.contains("author") ?
-				new QDiscordUser(object["author"].toObject()) : nullptr;
+				QSharedPointer<QDiscordUser>(
+					new QDiscordUser(object["author"].toObject())
+				) : QSharedPointer<QDiscordUser>();
 	_tts = object["tts"].toBool(false);
 	_timestamp = QDateTime::fromString(object["timestamp"].toString(""),
 			Qt::ISODate);;
@@ -35,15 +37,26 @@ QDiscordMessage::QDiscordMessage(const QJsonObject& object,
 	{
 		if(guild())
 		{
-			QDiscordMember* member =
+			QSharedPointer<QDiscordMember> member =
 					guild()->member(item.toObject()["id"].toString(""));
 			if(member && member->user())
-				_mentions.insert(member->user(), false);
+			{
+				_mentions.removeAll(member->user());
+				_mentions.append(member->user());
+			}
 			else
-				_mentions.insert(new QDiscordUser(item.toObject()), true);
+			{
+				_mentions.append(QSharedPointer<QDiscordUser>(
+									 new QDiscordUser(item.toObject())
+									 ));
+			}
 		}
 		else
-			_mentions.insert(new QDiscordUser(item.toObject()), true);
+		{
+			_mentions.append(QSharedPointer<QDiscordUser>(
+								 new QDiscordUser(item.toObject())
+								 ));
+		}
 	}
 
 	if(QDiscordUtilities::debugMode)
@@ -55,8 +68,8 @@ QDiscordMessage::QDiscordMessage()
 	_id = "";
 	_mentionEveryone = false;
 	_content = "";
-	_author = nullptr;
-	_channel = nullptr;
+	_author = QSharedPointer<QDiscordUser>();
+	_channel = QSharedPointer<QDiscordChannel>();
 	_channelId = "";
 	_tts = false;
 	_timestamp = QDateTime();
@@ -70,30 +83,17 @@ QDiscordMessage::QDiscordMessage(const QDiscordMessage& other)
 	_id = other.id();
 	_mentionEveryone = other.mentionEveryone();
 	_content = other.content();
-	_author = other.author() ? new QDiscordUser(*other.author()) : nullptr;
+	_author = other.author();
 	_channel = other.channel();
 	_channelId = other.channelId();
 	_tts = other.tts();
 	_timestamp = other.timestamp();
-	QMap<QDiscordUser*, bool> otherMentions = other.mentionsWithOwnership();
-	for(QDiscordUser* item : otherMentions.keys())
-	{
-		if(otherMentions.value(item))
-			_mentions.insert(new QDiscordUser(*item), true);
-		else
-			_mentions.insert(item, false);
-	}
+	QList<QSharedPointer<QDiscordUser>> otherMentions = other.mentions();
+	for(QSharedPointer<QDiscordUser> item : otherMentions)
+		_mentions.append(item);
 }
 
-QDiscordMessage::~QDiscordMessage()
+QSharedPointer<QDiscordGuild> QDiscordMessage::guild() const
 {
-	delete _author;
-	for(QDiscordUser* item : _mentions.keys())
-		if(_mentions.value(item))
-			delete item;
-}
-
-QDiscordGuild*QDiscordMessage::guild() const
-{
-	return _channel ? _channel->guild() : nullptr;
+	return _channel ? _channel->guild() : QSharedPointer<QDiscordGuild>();
 }

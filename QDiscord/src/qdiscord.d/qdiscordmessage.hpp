@@ -35,12 +35,15 @@ public:
 	 * \param object A JSON object of a Discord message.
 	 * \param channel A pointer to the channel the message was sent to.
 	 */
-	QDiscordMessage(const QJsonObject& object, QDiscordChannel* channel = nullptr);
+	QDiscordMessage(
+			const QJsonObject& object,
+			QSharedPointer<QDiscordChannel> channel =
+				QSharedPointer<QDiscordChannel>()
+			);
 	///\brief Default public constructor.
 	QDiscordMessage();
 	///\brief Deep copies the provided object.
 	QDiscordMessage(const QDiscordMessage& other);
-	~QDiscordMessage();
 	///\brief Returns the message's ID.
 	QString id() const {return _id;}
 	///\brief Returns the message's contents.
@@ -54,26 +57,19 @@ public:
 	///\brief Returns the ID of the channel this message was sent in.
 	QString channelId() const {return _channelId;}
 	///\brief Returns a pointer to the channel this message was sent in.
-	QDiscordChannel* channel() const {return _channel;}
+	QSharedPointer<QDiscordChannel> channel() const {return _channel;}
 	///\brief Returns a pointer to the user that sent this message.
-	QDiscordUser* author() const {return _author;}
+	QSharedPointer<QDiscordUser> author() const {return _author;}
 	/*!
 	 * \brief Returns a pointer to the guild this message was sent in using
 	 * the channel parameter provided in the class' constructor.
 	 * \returns `nullptr` if the message was sent in a private channel and thus the
 	 * channel has no guild or if a channel was not provided in the class' constructor
 	 */
-	QDiscordGuild* guild() const;
+	QSharedPointer<QDiscordGuild> guild() const;
 	///\brief Returns a list of users mentioned in this message.
-	QList<QDiscordUser*> mentions() const { return _mentions.keys();}
-	/*!
-	 * \brief Returns a list of users mentioned in this message and whether
-	 * this class owns the user object.
-	 *
-	 * This is only really useful if you want to determine whether you should
-	 * deep-copy the user object, which is why this method exists.
-	 */
-	QMap<QDiscordUser*, bool> mentionsWithOwnership() const { return _mentions;}
+	QList<QSharedPointer<QDiscordUser> >
+	mentions() const {return _mentions;}
 private:
 	QString _id;
 	QString _content;
@@ -81,11 +77,9 @@ private:
 	bool _tts;
 	bool _mentionEveryone;
 	QString _channelId;
-	QDiscordChannel* _channel;
-	QDiscordUser* _author;
-	//The value stores whether we own the user object and whether we're
-	//responsible for deleting it.
-	QMap<QDiscordUser*, bool> _mentions;
+	QSharedPointer<QDiscordChannel> _channel;
+	QSharedPointer<QDiscordUser> _author;
+	QList<QSharedPointer<QDiscordUser> > _mentions;
 };
 
 Q_DECLARE_METATYPE(QDiscordMessage)

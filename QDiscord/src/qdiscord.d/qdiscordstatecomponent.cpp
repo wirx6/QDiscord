@@ -21,7 +21,7 @@
 QDiscordStateComponent::QDiscordStateComponent(QObject* parent)
 	: QObject(parent)
 {
-	_self = nullptr;
+	_self = QSharedPointer<QDiscordUser>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"constructed";
@@ -32,33 +32,32 @@ QDiscordStateComponent::~QDiscordStateComponent()
 	clear();
 }
 
-QDiscordChannel* QDiscordStateComponent::channel(const QString& id)
+QSharedPointer<QDiscordChannel>
+QDiscordStateComponent::channel(const QString& id)
 {
 	if(_privateChannels.contains(id))
 		return _privateChannels.value(id);
-	for(QDiscordGuild* item : _guilds)
+	for(const QSharedPointer<QDiscordGuild>& item : _guilds)
 	{
 		if(item->channels().keys().contains(id))
 			return item->channels().value(id);
 	}
-	return nullptr;
+	return QSharedPointer<QDiscordChannel>();
 }
 
 void QDiscordStateComponent::clear()
 {
-	delete _self;
-	_self = nullptr;
-	qDeleteAll(_guilds.values());
+	_self.reset();
 	_guilds.clear();
-	qDeleteAll(_privateChannels.values());
 	_privateChannels.clear();
 }
 
 void QDiscordStateComponent::readyReceived(const QJsonObject& object)
 {
-	delete _self;
-	_self = new QDiscordUser(object["user"].toObject());
-	emit selfCreated(*_self);
+	_self = QSharedPointer<QDiscordUser>(
+				new QDiscordUser(object["user"].toObject())
+			);
+	emit selfCreated(_self);
 	for(QJsonValue item : object["guilds"].toArray())
 		guildCreateReceived(item.toObject());
 	for(QJsonValue item : object["private_channels"].toArray())
@@ -67,14 +66,9 @@ void QDiscordStateComponent::readyReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::guildCreateReceived(const QJsonObject& object)
 {
-	QDiscordGuild* guild = new QDiscordGuild(object);
-	if(_guilds.keys().contains(guild->id()))
-	{
-		delete _guilds.value(guild->id());
-		_guilds.insert(guild->id(), guild);
-	}
-	else
-		_guilds.insert(guild->id(), guild);
+	QSharedPointer<QDiscordGuild> guild =
+			QSharedPointer<QDiscordGuild>(new QDiscordGuild(object));
+	_guilds.insert(guild->id(), guild);
 	emit guildCreated(guild);
 	if(!guild->unavailable())
 		emit guildAvailable(guild);
@@ -83,8 +77,6 @@ void QDiscordStateComponent::guildCreateReceived(const QJsonObject& object)
 void QDiscordStateComponent::guildDeleteReceived(const QJsonObject& object)
 {
 	QDiscordGuild guild(object);
-	if(_guilds.keys().contains(guild.id()))
-		delete _guilds.value(guild.id());
 	_guilds.remove(guild.id());
 	emit guildDeleted(guild);
 }
@@ -109,8 +101,10 @@ void QDiscordStateComponent::guildIntegrationsUpdateRecevied(const QJsonObject& 
 
 void QDiscordStateComponent::guildMemberAddReceived(const QJsonObject& object)
 {
-	QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
-	QDiscordMember* member = new QDiscordMember(object, guildPtr);
+	QSharedPointer<QDiscordGuild> guildPtr =
+			guild(object["guild_id"].toString(""));
+	QSharedPointer<QDiscordMember> member =
+			QSharedPointer<QDiscordMember>(new QDiscordMember(object, guildPtr));
 	if(guildPtr)
 		guildPtr->addMember(member);
 	emit guildMemberAdded(member);
@@ -119,33 +113,45 @@ void QDiscordStateComponent::guildMemberAddReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::guildMemberRemoveReceived(const QJsonObject& object)
 {
-	QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
-	QDiscordMember* member;
+	QSharedPointer<QDiscordGuild> guildPtr =
+			guild(object["guild_id"].toString(""));
+	QSharedPointer<QDiscordMember> member;
 	if(guildPtr)
 	{
-		QDiscordMember* tmpMember =
+		QSharedPointer<QDiscordMember> tmpMember =
 				guildPtr->member(object["user"].toObject()["id"].toString(""));
 		if(tmpMember)
 		{
-			member = new QDiscordMember(*tmpMember);
+			member = QSharedPointer<QDiscordMember>(
+						new QDiscordMember(*tmpMember)
+						);
 			guildPtr->removeMember(tmpMember);
 		}
 		else
-			member = new QDiscordMember(object, nullptr);
+		{
+			member =QSharedPointer<QDiscordMember>(
+						new QDiscordMember(object,
+										   QSharedPointer<QDiscordGuild>())
+						);
+		}
 	}
 	else
-		member = new QDiscordMember(object, nullptr);
+	{
+		member = QSharedPointer<QDiscordMember>(
+					new QDiscordMember(object, QSharedPointer<QDiscordGuild>())
+					);
+	}
 	QDiscordMember newMember(*member);
 	emit guildMemberRemoved(newMember);
-	delete member;
 }
 
 void QDiscordStateComponent::guildMemberUpdateReceived(const QJsonObject& object)
 {
-	QDiscordGuild* guildPtr = guild(object["guild_id"].toString(""));
+	QSharedPointer<QDiscordGuild> guildPtr =
+			guild(object["guild_id"].toString(""));
 	if(guildPtr)
 	{
-		QDiscordMember* memberPtr =
+		QSharedPointer<QDiscordMember> memberPtr =
 				guildPtr->member(object["user"].toObject()["id"].toString(""));
 		if(memberPtr)
 		{
@@ -240,26 +246,19 @@ void QDiscordStateComponent::voiceStateUpdateReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::channelCreateReceived(const QJsonObject& object)
 {
-	QDiscordChannel* channel =
-			new QDiscordChannel(object, guild(object["guild_id"].toString("")));
+	QSharedPointer<QDiscordChannel> channel =
+		QSharedPointer<QDiscordChannel>(
+			new QDiscordChannel(object, guild(object["guild_id"].toString("")))
+		);
 	if(channel->isPrivate())
 	{
-		if(_privateChannels.keys().contains(channel->id()))
-		{
-			delete _privateChannels.value(channel->id());
-			_privateChannels.insert(channel->id(), channel);
-		}
-		else
-			_privateChannels.insert(channel->id(), channel);
+		_privateChannels.insert(channel->id(), channel);
 		emit privateChannelCreated(channel);
 	}
 	else
 	{
 		if(!channel->guild())
-		{
-			delete channel;
 			return;
-		}
 		channel->guild()->addChannel(channel);
 		emit channelCreated(channel);
 	}
@@ -270,8 +269,6 @@ void QDiscordStateComponent::channelDeleteReceived(const QJsonObject& object)
 	QDiscordChannel channel(object, guild(object["guild_id"].toString("")));
 	if(channel.isPrivate())
 	{
-		if(_privateChannels.keys().contains(channel.id()))
-			delete _privateChannels.value(channel.id());
 		_privateChannels.remove(channel.id());
 		emit privateChannelDeleted(channel);
 	}
@@ -286,26 +283,22 @@ void QDiscordStateComponent::channelDeleteReceived(const QJsonObject& object)
 
 void QDiscordStateComponent::channelUpdateReceived(const QJsonObject& object)
 {
-	QDiscordChannel* channel =
-			new QDiscordChannel(object, guild(object["guild_id"].toString("")));
+	QSharedPointer<QDiscordChannel> channel =
+			QSharedPointer<QDiscordChannel>(
+				new QDiscordChannel(
+					object,
+					guild(object["guild_id"].toString(""))
+				)
+			);
 	if(channel->isPrivate())
 	{
-		if(_privateChannels.keys().contains(channel->id()))
-		{
-			delete _privateChannels.value(channel->id());
-			_privateChannels.insert(channel->id(), channel);
-		}
-		else
-			_privateChannels.insert(channel->id(), channel);
+		_privateChannels.insert(channel->id(), channel);
 		emit privateChannelUpdated(channel);
 	}
 	else
 	{
 		if(!channel->guild())
-		{
-			delete channel;
 			return;
-		}
 		channel->guild()->addChannel(channel);
 		emit channelUpdated(channel);
 	}

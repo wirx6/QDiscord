@@ -34,12 +34,15 @@ public:
 	 * \param guild A pointer to the parent guild of the channel, if any.
 	 * \note Some properties may be defaul, not accessible or `nullptr`, depending on what type() and isPrivate() return.
 	 */
-	QDiscordChannel(const QJsonObject& object, QDiscordGuild* guild = nullptr);
+	QDiscordChannel(
+			const QJsonObject& object,
+			QSharedPointer<QDiscordGuild> guild =
+				QSharedPointer<QDiscordGuild>()
+			);
 	///\brief Default public constructor.
 	QDiscordChannel();
 	///\brief Deep copies the provided object.
 	QDiscordChannel(const QDiscordChannel& other);
-	~QDiscordChannel();
 	/*!
 	 * \brief An enumerator holding all possible types of channels.
 	 *
@@ -72,18 +75,18 @@ public:
 	///\brief Returns the ID of the last sent message.
 	QString lastMessageId() const {return _lastMessageId;}
 	///\brief Returns a pointer to this channel's parent guild.
-	QDiscordGuild* guild() const {return _guild;}
+	QSharedPointer<QDiscordGuild> guild() const {return _guild;}
 	/*!
 	 * \brief Returns a pointer to this channel's recipient, if this is a private channel.
 	 *
 	 * The recipient object will be deleted when this object is deleted.
 	 */
-	QDiscordUser* recipient() const {return _recipient;}
+	QSharedPointer<QDiscordUser> recipient() const {return _recipient;}
 	/*!
 	 * \brief Sets this object's parent guild.
 	 * \param guild A pointer to this object's new parent guild.
 	 */
-	void setGuild(QDiscordGuild* guild) {_guild = guild;}
+	void setGuild(QSharedPointer<QDiscordGuild> guild) {_guild = guild;}
 	///\brief Returns a string which allows you to mention this channel.
 	QString mention() const {return QString("<#"+_id+">");}
 private:
@@ -94,8 +97,8 @@ private:
 	ChannelType _type;
 	bool _isPrivate;
 	QString _lastMessageId;
-	QDiscordUser* _recipient;
-	QDiscordGuild* _guild;
+	QSharedPointer<QDiscordUser> _recipient;
+	QSharedPointer<QDiscordGuild> _guild;
 };
 
 Q_DECLARE_METATYPE(QDiscordChannel)

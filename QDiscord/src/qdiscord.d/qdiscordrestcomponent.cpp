@@ -23,15 +23,10 @@
 QDiscordRestComponent::QDiscordRestComponent(QObject* parent) : QObject(parent)
 {
 	_authentication = "";
-	_self = nullptr;
+	_self = QSharedPointer<QDiscordUser>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<this<<"constructed";
-}
-
-QDiscordRestComponent::~QDiscordRestComponent()
-{
-	delete _self;
 }
 
 void QDiscordRestComponent::login(const QString& email, const QString& password)
@@ -78,7 +73,7 @@ void QDiscordRestComponent::login(const QString& token)
 }
 
 void QDiscordRestComponent::sendMessage(const QString& content,
-										QDiscordChannel* channel,
+										QSharedPointer<QDiscordChannel> channel,
 										bool tts)
 {
 	if(_authentication.isEmpty())
@@ -150,7 +145,7 @@ void QDiscordRestComponent::sendMessage(const QString& content,
 		{
 			QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 			QJsonObject object = document.object();
-			QDiscordMessage message(object, nullptr);
+			QDiscordMessage message(object, QSharedPointer<QDiscordChannel>());
 			emit messageSent(message);
 		}
 		reply->deleteLater();
@@ -224,8 +219,7 @@ void QDiscordRestComponent::logout()
 {
 	if(_authentication.isEmpty())
 		return;
-	delete _self;
-	_self = nullptr;
+	_self.reset();
 	QJsonObject object;
 	object["token"] = _authentication;
 	_authentication = "";
@@ -262,8 +256,9 @@ void QDiscordRestComponent::getEndpoint()
 	});
 }
 
-void QDiscordRestComponent::setChannelName(const QString& name,
-										   QDiscordChannel* channel)
+void
+QDiscordRestComponent::setChannelName(const QString& name,
+										QSharedPointer<QDiscordChannel> channel)
 {
 	if(_authentication.isEmpty())
 		return;
@@ -329,8 +324,10 @@ void QDiscordRestComponent::setChannelName(const QString& name,
 	});
 }
 
-void QDiscordRestComponent::setChannelPosition(int position,
-											   QDiscordChannel* channel)
+void QDiscordRestComponent::setChannelPosition(
+			int position,
+			QSharedPointer<QDiscordChannel> channel
+		)
 {
 	if(_authentication.isEmpty())
 		return;
@@ -396,8 +393,10 @@ void QDiscordRestComponent::setChannelPosition(int position,
 	});
 }
 
-void QDiscordRestComponent::setChannelTopic(const QString& topic,
-											QDiscordChannel* channel)
+void QDiscordRestComponent::setChannelTopic(
+			const QString& topic,
+			QSharedPointer<QDiscordChannel> channel
+		)
 {
 	if(_authentication.isEmpty())
 		return;
@@ -466,8 +465,10 @@ void QDiscordRestComponent::setChannelTopic(const QString& topic,
 	});
 }
 
-void QDiscordRestComponent::setChannelBitrate(int bitrate,
-											  QDiscordChannel* channel)
+void QDiscordRestComponent::setChannelBitrate(
+			int bitrate,
+			QSharedPointer<QDiscordChannel> channel
+		)
 {
 	if(_authentication.isEmpty())
 		return;
@@ -536,8 +537,10 @@ void QDiscordRestComponent::setChannelBitrate(int bitrate,
 	});
 }
 
-void QDiscordRestComponent::setChannelUserLimit(int limit,
-												QDiscordChannel* channel)
+void QDiscordRestComponent::setChannelUserLimit(
+		int limit,
+		QSharedPointer<QDiscordChannel> channel
+		)
 {
 	if(_authentication.isEmpty())
 		return;
@@ -606,10 +609,9 @@ void QDiscordRestComponent::setChannelUserLimit(int limit,
 	});
 }
 
-void QDiscordRestComponent::selfCreated(const QDiscordUser& self)
+void QDiscordRestComponent::selfCreated(QSharedPointer<QDiscordUser> self)
 {
-	delete _self;
-	_self = new QDiscordUser(self);
+	_self = self;
 }
 
 void QDiscordRestComponent::deleteResource(const QUrl& url,

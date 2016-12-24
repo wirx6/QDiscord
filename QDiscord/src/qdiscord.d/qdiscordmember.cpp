@@ -19,7 +19,8 @@
 #include "qdiscordmember.hpp"
 #include "qdiscordguild.hpp"
 
-QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
+QDiscordMember::QDiscordMember(const QJsonObject& object,
+							   QSharedPointer<QDiscordGuild> guild)
 {
 	_deaf = object["deaf"].toBool(false);
 	_mute = object["mute"].toBool(false);
@@ -28,7 +29,10 @@ QDiscordMember::QDiscordMember(const QJsonObject& object, QDiscordGuild* guild)
 			Qt::ISODate);
 	_guild = guild;
 	_user = object["user"].isObject() ?
-				new QDiscordUser(object["user"].toObject()) : nullptr;
+				QSharedPointer<QDiscordUser>(
+					new QDiscordUser(object["user"].toObject())
+				) :
+				QSharedPointer<QDiscordUser>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordMember("<<this<<") constructed";
@@ -40,8 +44,8 @@ QDiscordMember::QDiscordMember()
 	_mute = false;
 	_nickname = "";
 	_joinedAt = QDateTime();
-	_user = nullptr;
-	_guild = nullptr;
+	_user = QSharedPointer<QDiscordUser>();
+	_guild = QSharedPointer<QDiscordGuild>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordMember("<<this<<") constructed";
@@ -52,16 +56,14 @@ QDiscordMember::QDiscordMember(const QDiscordMember& other)
 	_deaf = other.deaf();
 	_mute = other.mute();
 	_joinedAt = other.joinedAt();
-	_user = other.user() ? new QDiscordUser(*other.user()) : nullptr;
+	_user = other.user() ?
+				QSharedPointer<QDiscordUser>(new QDiscordUser(*other.user())) :
+				QSharedPointer<QDiscordUser>();
 	_guild = other.guild();
 }
 
-QDiscordMember::~QDiscordMember()
-{
-	delete _user;
-}
-
-void QDiscordMember::update(const QJsonObject& object, QDiscordGuild* guild)
+void QDiscordMember::update(const QJsonObject& object,
+							QSharedPointer<QDiscordGuild> guild)
 {
 	if(object.contains("deaf"))
 		_deaf = object["deaf"].toBool(false);

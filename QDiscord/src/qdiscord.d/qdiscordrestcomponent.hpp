@@ -44,7 +44,6 @@ class QDISCORD_API QDiscordRestComponent : public QObject
 public:
 	///\brief Standard QObject constructor.
 	explicit QDiscordRestComponent(QObject* parent = 0);
-	~QDiscordRestComponent();
 	/*!
 	 * \brief Acquires a token for use in all other methods using a standard Discord account.
 	 *
@@ -72,7 +71,9 @@ public:
 	 * \param channel The channel to send the message in. This may be a private or a guild channel.
 	 * \param tts Whether to use text to speech when sending the message.
 	 */
-	void sendMessage(const QString& content, QDiscordChannel* channel, bool tts = false);
+	void sendMessage(const QString& content,
+					 QSharedPointer<QDiscordChannel> channel,
+					 bool tts = false);
 	/*!
 	 * \brief Sends a message to the specified channel ID.
 	 * \param content The message's contents.
@@ -93,23 +94,27 @@ public:
 	///\brief Sends a request to receive an endpoint for connecting using a WebSocket.
 	void getEndpoint();
 	///\brief Changes the name of the specified channel.
-	void setChannelName(const QString& name, QDiscordChannel* channel);
+	void setChannelName(const QString& name, QSharedPointer<QDiscordChannel> channel);
 	///\brief Changes the name of the channel with specified ID.
 	void setChannelName(const QString& name, const QString& channelId);
 	///\brief Changes the position of the specified text channel on the channel list.
-	void setChannelPosition(int position, QDiscordChannel* channel);
+	void setChannelPosition(int position,
+							QSharedPointer<QDiscordChannel> channel);
 	///\brief Changes the position of the text channel with the specified ID on the channel list.
 	void setChannelPosition(int position, const QString& channelId);
 	///\brief Changes the topic of the specified text channel.
-	void setChannelTopic(const QString& topic, QDiscordChannel* channel);
+	void setChannelTopic(const QString& topic,
+						 QSharedPointer<QDiscordChannel> channel);
 	///\brief Changes the topic of the text channel with the specified ID.
 	void setChannelTopic(const QString& topic, const QString& channelId);
 	///\brief Changes the bitrate of the specified voice channel.
-	void setChannelBitrate(int bitrate, QDiscordChannel* channel);
+	void setChannelBitrate(int bitrate,
+						   QSharedPointer<QDiscordChannel> channel);
 	///\brief Changes the bitrate of the voice channel with the specified ID.
 	void setChannelBitrate(int bitrate, const QString& channelId);
 	///\brief Changes the user limit on the specified voice channel.
-	void setChannelUserLimit(int limit, QDiscordChannel* channel);
+	void setChannelUserLimit(int limit,
+							 QSharedPointer<QDiscordChannel> channel);
 	///\brief Changes the user limit of the voice channel with the specified ID.
 	void setChannelUserLimit(int limit, const QString& channelId);
 
@@ -177,14 +182,14 @@ signals:
 	 */
 	void channelUpdateFailed(QNetworkReply::NetworkError error);
 private:
-	void selfCreated(const QDiscordUser& self);
+	void selfCreated(QSharedPointer<QDiscordUser> self);
 	void deleteResource(const QUrl& url, std::function<void()> function);
 	void patch(const QJsonObject& object, const QUrl& url, std::function<void()> function);
 	void patch(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
 	void post(const QJsonObject& object, const QUrl& url, std::function<void()> function);
 	void post(const QJsonArray& array, const QUrl& url, std::function<void ()> function);
 	void get(const QUrl& url, std::function<void ()> function);
-	QDiscordUser* _self;
+	QSharedPointer<QDiscordUser> _self;
 	QString _authentication;
 	QNetworkAccessManager _manager;
 };

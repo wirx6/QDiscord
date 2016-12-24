@@ -44,19 +44,23 @@ public:
 	 * May return `nullptr` if nothing was found.
 	 * \returns `nullptr` if nothing was found.
 	 */
-	QDiscordGuild* guild(const QString& id) {return _guilds.value(id, nullptr);}
+	QSharedPointer<QDiscordGuild> guild(const QString& id) {
+		return _guilds.value(id, QSharedPointer<QDiscordGuild>());
+	}
 	///\brief Returns a map of pointers to all guilds and their IDs.
-	QMap<QString, QDiscordGuild*> guilds() {return _guilds;}
+	QMap<QString, QSharedPointer<QDiscordGuild>> guilds() {return _guilds;}
 	/*!
 	 * \brief Returns a pointer to the channel that has the provided ID.
 	 * May return `nullptr` if nothing was found.
 	 * \returns A private channel, a guild channel or `nullptr` if nothing was found.
 	 */
-	QDiscordChannel* channel(const QString& id);
+	QSharedPointer<QDiscordChannel> channel(const QString& id);
 	///\brief Returns a map of pointers to all private channels and their IDs.
-	QMap<QString, QDiscordChannel*> privateChannels() {return _privateChannels;}
+	QMap<QString, QSharedPointer<QDiscordChannel>> privateChannels() {
+		return _privateChannels;
+	}
 	///\brief Returns a pointer to this client's information.
-	QDiscordUser* self() {return _self;}
+	QSharedPointer<QDiscordUser> self() {return _self;}
 signals:
 	/*!
 	 * \brief Emitted when a guild has been created.
@@ -65,14 +69,14 @@ signals:
 	 * Explicit checks will be required due to this.
 	 * \param guild A pointer to the guild that has been created.
 	 */
-	void guildCreated(QDiscordGuild* guild);
+	void guildCreated(QSharedPointer<QDiscordGuild> guild);
 	/*!
 	 * \brief Emitted when a guild has become available.
 	 *
 	 * It should be safe to assume that all guilds provided by this signal will be available.
 	 * \param guild A pointer to the guild that has become available.
 	 */
-	void guildAvailable(QDiscordGuild* guild);
+	void guildAvailable(QSharedPointer<QDiscordGuild> guild);
 	/*!
 	 * \brief Emitted when a guild has been deleted.
 	 * \param guild An object containing information about the guild that was deleted.
@@ -82,7 +86,7 @@ signals:
 	 * \brief Emitted when a member has been added to a guild.
 	 * \param member A pointer to the guild member that has been added.
 	 */
-	void guildMemberAdded(QDiscordMember* member);
+	void guildMemberAdded(QSharedPointer<QDiscordMember> member);
 	/*!
 	 * \brief Emitted when a member has been removed from a guild.
 	 * \param member An object containing information ab out the member that was deleted.
@@ -92,19 +96,19 @@ signals:
 	 * \brief Emitted when a member in a guild has received an update.
 	 * \param member A pointer to the guild member that has been updated.
 	 */
-	void guildMemberUpdated(QDiscordMember* member);
+	void guildMemberUpdated(QSharedPointer<QDiscordMember> member);
 	/*!
 	 * \brief Emitted when information about the current client has been collected.
 	 *
 	 * This usually gets emitted whenever the READY event gets processed.
 	 * \param self An object of this client's user.
 	 */
-	void selfCreated(QDiscordUser self);
+	void selfCreated(QSharedPointer<QDiscordUser> self);
 	/*!
 	 * \brief Emitted when a channel has been created.
 	 * \param channel A pointer to the channel that was created.
 	 */
-	void channelCreated(QDiscordChannel* channel);
+	void channelCreated(QSharedPointer<QDiscordChannel> channel);
 	/*!
 	 * \brief Emitted when a channel has been deleted.
 	 * \param channel An object containing information about the channel that was deleted.
@@ -114,12 +118,12 @@ signals:
 	 * \brief Emitted when a channel has updated.
 	 * \param channel A pointer to the channel that was updated.
 	 */
-	void channelUpdated(QDiscordChannel* channel);
+	void channelUpdated(QSharedPointer<QDiscordChannel> channel);
 	/*!
 	 * \brief Emitted when a private channel is created.
 	 * \param channel A pointer to the private channel that was created.
 	 */
-	void privateChannelCreated(QDiscordChannel* channel);
+	void privateChannelCreated(QSharedPointer<QDiscordChannel> channel);
 	/*!
 	 * \brief Emitted when a private channel has been deleted.
 	 * \param channel A pointer to the pirvate channel that was deleted.
@@ -129,7 +133,7 @@ signals:
 	 * \brief Emitted when a private channel has been updated.
 	 * \param channel A pointer to the channel that was updated.
 	 */
-	void privateChannelUpdated(QDiscordChannel* channel);
+	void privateChannelUpdated(QSharedPointer<QDiscordChannel> channel);
 	/*!
 	 * \brief Emitted when a message has been created.
 	 * \param message An object containing information about the sent message.
@@ -172,9 +176,9 @@ private:
 	void channelCreateReceived(const QJsonObject& object);
 	void channelDeleteReceived(const QJsonObject& object);
 	void channelUpdateReceived(const QJsonObject& object);
-	QMap<QString, QDiscordGuild*> _guilds;
-	QMap<QString, QDiscordChannel*> _privateChannels;
-	QDiscordUser* _self;
+	QMap<QString, QSharedPointer<QDiscordGuild> > _guilds;
+	QMap<QString, QSharedPointer<QDiscordChannel> > _privateChannels;
+	QSharedPointer<QDiscordUser> _self;
 };
 
 #endif // QDISCORDSTATECOMPONENT_HPP

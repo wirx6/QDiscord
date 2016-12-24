@@ -21,6 +21,7 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QSharedPointer>
 #include "qdiscorduser.hpp"
 
 class QDiscordGuild;
@@ -39,14 +40,13 @@ public:
 	 * \param object A JSON object of a Discord guild member.
 	 * \param guild A pointer to the member's parent guild.
 	 */
-	QDiscordMember(const QJsonObject& object, QDiscordGuild* guild);
+	QDiscordMember(const QJsonObject& object, QSharedPointer<QDiscordGuild> guild);
 	///\brief Default public constructor.
 	QDiscordMember();
 	///\brief Deep copies the provided object.
 	QDiscordMember(const QDiscordMember& other);
-	~QDiscordMember();
 	///\brief Updates the current instance from the provided parameters.
-	void update(const QJsonObject& object, QDiscordGuild* guild);
+	void update(const QJsonObject& object, QSharedPointer<QDiscordGuild> guild);
 	///\brief Returns whether the member has disabled their speakers.
 	bool deaf() const {return _deaf;}
 	///\brief Returns whether the member has muted their microphone.
@@ -54,9 +54,9 @@ public:
 	///\brief Returns the date at which the member has joined the guild.
 	QDateTime joinedAt() const {return _joinedAt;}
 	///\brief Returns a pointer to the user object contained by this object.
-	QDiscordUser* user() const {return _user;}
+	QSharedPointer<QDiscordUser> user() const {return _user;}
 	///\brief Returns a pointer to this object's parent guild.
-	QDiscordGuild* guild() const {return _guild;}
+	QSharedPointer<QDiscordGuild> guild() const {return _guild;}
 	///\brief Returns this member's nickname.
 	QString nickname() const {return _nickname;}
 	///\brief Returns a string which allows you to mention this member using their username.
@@ -82,8 +82,8 @@ private:
 	QDateTime _joinedAt;
 	bool _mute;
 	QString _nickname;
-	QDiscordUser* _user;
-	QDiscordGuild* _guild;
+	QSharedPointer<QDiscordUser> _user;
+	QSharedPointer<QDiscordGuild> _guild;
 };
 
 Q_DECLARE_METATYPE(QDiscordMember)

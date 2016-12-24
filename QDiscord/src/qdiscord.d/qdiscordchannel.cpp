@@ -20,7 +20,7 @@
 #include "qdiscordchannel.hpp"
 
 QDiscordChannel::QDiscordChannel(const QJsonObject& object,
-								 QDiscordGuild* guild)
+								 QSharedPointer<QDiscordGuild> guild)
 {
 	_id = object["id"].toString("");
 	_isPrivate = object["is_private"].toBool(false);
@@ -37,7 +37,9 @@ QDiscordChannel::QDiscordChannel(const QJsonObject& object,
 		_type = ChannelType::UnknownType;
 	_guild = guild;
 	_recipient = _isPrivate ?
-				new QDiscordUser(object["recipient"].toObject()) : nullptr;
+				QSharedPointer<QDiscordUser>(
+					new QDiscordUser(object["recipient"].toObject())
+				) : QSharedPointer<QDiscordUser>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordChannel("<<this<<") constructed";
@@ -52,8 +54,8 @@ QDiscordChannel::QDiscordChannel()
 	_position = 0;
 	_topic = "";
 	_type = ChannelType::UnknownType;
-	_guild = nullptr;
-	_recipient = nullptr;
+	_guild = QSharedPointer<QDiscordGuild>();
+	_recipient = QSharedPointer<QDiscordUser>();
 
 	if(QDiscordUtilities::debugMode)
 		qDebug()<<"QDiscordChannel("<<this<<") constructed";
@@ -69,11 +71,5 @@ QDiscordChannel::QDiscordChannel(const QDiscordChannel& other)
 	_topic = other.topic();
 	_type = other.type();
 	_guild = other.guild();
-	_recipient = other.recipient() ?
-				new QDiscordUser(*other.recipient()) : nullptr;
-}
-
-QDiscordChannel::~QDiscordChannel()
-{
-	delete _recipient;
+	_recipient = other.recipient();
 }

@@ -1,5 +1,5 @@
 #include <QtTest>
-#include "qdiscord.d/qdiscorduser.hpp"
+#include <QDiscord>
 
 class tst_QDiscordUser: public QObject
 {
